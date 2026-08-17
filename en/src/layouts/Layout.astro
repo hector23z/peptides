@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Research peptides and laboratory supplies. For research use only.' } = Astro.props;
+
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/peptides/', label: 'Peptides' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+const footer = [
+  { href: '/disclaimer/', label: 'Disclaimer' },
+  { href: '/shipping/', label: 'Shipping' },
+  { href: '/privacy/', label: 'Privacy' },
+  { href: '/terms/', label: 'Terms' },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-zinc-950 text-zinc-200 antialiased">
+    <div class="mx-auto flex min-h-screen max-w-5xl flex-col px-5 sm:px-8">
+      <header class="flex items-center justify-between border-b border-zinc-800 py-5">
+        <a href="/" class="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight text-zinc-100">
+          <span class="inline-block h-2 w-2 rounded-full bg-cyan-400"></span>
+          <span>PEPTIDE<span class="text-cyan-400">LAB</span></span>
+        </a>
+        <nav class="flex items-center gap-5 text-sm text-zinc-400">
+          {
+            nav.map((item) => (
+              <a href={item.href} class="transition-colors hover:text-cyan-300">{item.label}</a>
+            ))
+          }
+        </nav>
+      </header>
+
+      <main class="flex-1 py-12">
+        <slot />
+      </main>
+
+      <footer class="border-t border-zinc-800 py-8 text-sm text-zinc-500">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p class="font-mono text-xs uppercase tracking-widest text-zinc-600">
+            Research use only &middot; Not for human consumption
+          </p>
+          <nav class="flex flex-wrap gap-x-5 gap-y-2">
+            {
+              footer.map((item) => (
+                <a href={item.href} class="transition-colors hover:text-cyan-300">{item.label}</a>
+              ))
+            }
+          </nav>
+        </div>
+        <p class="mt-4 text-xs text-zinc-600">
+          &copy; {new Date().getFullYear()} PeptideLab. All products are for laboratory research use only.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
