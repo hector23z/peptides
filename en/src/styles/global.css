@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* Prose styles for rendered MDX content (product & category pages) */
+.md-content {
+  @apply text-base leading-relaxed text-zinc-400;
+}
+.md-content h1 {
+  @apply text-4xl font-semibold tracking-tight text-zinc-50;
+}
+.md-content h2 {
+  @apply mt-10 text-2xl font-semibold tracking-tight text-zinc-100;
+}
+.md-content h3 {
+  @apply mt-6 text-lg font-semibold text-zinc-100;
+}
+.md-content p {
+  @apply mt-4;
+}
+.md-content ul {
+  @apply mt-4 list-disc space-y-2 pl-5;
+}
+.md-content ol {
+  @apply mt-4 list-decimal space-y-2 pl-5;
+}
+.md-content li {
+  @apply text-zinc-400;
+}
+.md-content a {
+  @apply text-cyan-300 underline decoration-cyan-500/40 underline-offset-2 transition-colors hover:text-cyan-200;
+}
+.md-content strong {
+  @apply font-semibold text-zinc-200;
+}
+.md-content blockquote {
+  @apply mt-4 border-l-2 border-cyan-500/50 pl-4 italic text-zinc-400;
+}
+.md-content hr {
+  @apply my-8 border-zinc-800;
+}
+.md-content table {
+  @apply mt-4 w-full border-collapse text-sm;
+}
+.md-content th {
+  @apply border border-zinc-800 bg-zinc-900/60 px-3 py-2 text-left font-semibold text-zinc-200;
+}
+.md-content td {
+  @apply border border-zinc-800 px-3 py-2 text-zinc-400;
+}
