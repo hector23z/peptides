@@ -756,12 +756,12 @@ a {
   display: grid;
   gap: 0.9rem;
   padding: 1.5rem 0;
-  transition: background-color 180ms var(--ease-out), padding 180ms var(--ease-out);
+  transition: background-color 180ms var(--ease-out), transform 180ms var(--ease-out);
 }
 
 .journal-list a:hover,
 .journal-index a:hover {
-  padding-inline: 0.75rem;
+  transform: translateX(0.75rem);
   background: var(--color-lab-cyan-glow);
 }
 
