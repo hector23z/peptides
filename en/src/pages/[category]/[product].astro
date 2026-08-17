@@ -1,25 +1,39 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
-  return products.map((p) => ({
-    params: { category: p.data.category, product: p.id },
-    props: { product: p },
+  return products.map((product) => ({
+    params: { category: product.data.category, product: product.id },
+    props: { product },
   }));
 }
 
 const { product } = Astro.props;
 const { Content } = await render(product);
-const cat = product.data.category;
+const category = product.data.category;
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
+
+const categoryLabels: Record<string, string> = {
+  recovery: 'Recovery',
+  'glp-1': 'GLP-1 research',
+  longevity: 'Longevity',
+  hgh: 'HGH research',
+};
 
 const productJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: product.data.title,
   description: `${product.data.description} For laboratory research use only. Not for human or veterinary consumption.`,
-  category: cat,
+  category,
   ...(product.data.price ? { offers: { '@type': 'Offer', price: product.data.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' } } : {}),
   ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Purity', value: product.data.purity } } : {}),
   brand: { '@type': 'Brand', name: 'PeptideLab' },
@@ -27,17 +41,39 @@ const productJsonLd = {
 ---
 
 <Layout title={`${product.data.title} — PeptideLab`} description={product.data.description}>
-  <article class="max-w-3xl">
-    <div class="mb-6 flex flex-wrap items-center gap-3 text-sm">
-      <a href={`/${cat}/`} class="text-lab-cyan transition-colors hover:text-lab-cyan-pale">{cat}</a>
-      <span class="text-lab-faint">/</span>
-      <span class="rounded border border-lab-rule px-2 py-0.5 font-mono text-xs text-lab-muted">Purity {product.data.purity}</span>
-      {product.data.size && <span class="rounded border border-lab-rule px-2 py-0.5 font-mono text-xs text-lab-muted">{product.data.size}</span>}
-      {product.data.price && <span class="rounded border border-lab-cyan-deep px-2 py-0.5 font-mono text-xs text-lab-cyan">${product.data.price}</span>}
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>/</span><a href={`/${category}/`}>{categoryLabels[category] ?? category}</a><span>/</span><span>{product.data.title}</span>
+  </nav>
+
+  <section class="product-hero">
+    <figure>
+      <img src={categoryImages[category] ?? '/images/hero-home.png'} alt="" width="1254" height="1254" loading="eager" decoding="async" />
+    </figure>
+    <div class="product-hero__content">
+      <h1>{product.data.title}</h1>
+      <p>{product.data.description}</p>
+      <dl>
+        <div><dt>Purity</dt><dd>{product.data.purity ?? 'See batch documentation'}</dd></div>
+        <div><dt>Format</dt><dd>{product.data.size ?? 'See listing'}</dd></div>
+        <div><dt>Category</dt><dd>{categoryLabels[category] ?? category}</dd></div>
+        <div><dt>Use</dt><dd>Laboratory research only</dd></div>
+      </dl>
+      <div class="product-hero__purchase">
+        <div><span>Listed price</span><strong>{product.data.price ? `$${product.data.price}` : 'Enquire'}</strong></div>
+        <a href="/contact/" class="button button--primary">Request batch documentation</a>
+      </div>
+      <p class="product-hero__notice">Not for human or veterinary consumption.</p>
     </div>
-    <div class="md-content">
-      <Content />
-    </div>
+  </section>
+
+  <article class="product-article">
+    <aside>
+      <p>Product record</p>
+      <a href={`/${category}/`}>Back to {categoryLabels[category] ?? category}</a>
+      <a href="/peptide-purity-guide/">Purity guide</a>
+      <a href="/how-to-store-peptides/">Storage guide</a>
+    </aside>
+    <div class="md-content product-content"><Content /></div>
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
 </Layout>

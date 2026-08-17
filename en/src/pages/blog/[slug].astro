@@ -1,13 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
 }
 
 const { post } = Astro.props;
@@ -27,17 +24,15 @@ const articleJsonLd = {
 ---
 
 <Layout title={`${post.data.title} — PeptideLab`} description={post.data.description}>
-  <article class="max-w-3xl">
-    <div class="mb-6 flex flex-wrap items-center gap-3 text-sm">
-      <a href="/blog/" class="text-lab-cyan transition-colors hover:text-lab-cyan-pale">Blog</a>
-      <span class="text-lab-faint">/</span>
-      <time datetime={post.data.pubDate.toISOString()} class="font-mono text-xs text-lab-faint">{post.data.pubDate.toISOString().slice(0, 10)}</time>
-      <span class="text-lab-faint">&middot;</span>
-      <span class="font-mono text-xs text-lab-faint">{post.data.author}</span>
-    </div>
-    <div class="md-content">
-      <Content />
-    </div>
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Research journal</a></nav>
+  <header class="article-header">
+    <h1>{post.data.title}</h1>
+    <p>{post.data.description}</p>
+    <div><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time><span>{post.data.author}</span></div>
+  </header>
+  <article class="article-layout">
+    <aside><p>Research note</p><a href="/blog/">All journal entries</a></aside>
+    <div class="md-content article-content"><Content /></div>
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
 </Layout>

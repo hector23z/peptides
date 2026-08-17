@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { title, description = 'Research peptides and laboratory supplies. For research use only.' } = Astro.props;
-
 const canonical = new URL(Astro.url.pathname, Astro.site);
 
 const orgJsonLd = {
@@ -30,28 +29,36 @@ const webJsonLd = {
 };
 
 const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/peptides/', label: 'Peptides' },
-  { href: '/blog/', label: 'Blog' },
+  { href: '/research-peptides/', label: 'Compounds' },
+  { href: '/recovery/', label: 'Recovery' },
+  { href: '/glp-1/', label: 'GLP-1' },
+  { href: '/blog/', label: 'Research journal' },
   { href: '/about/', label: 'About' },
-  { href: '/contact/', label: 'Contact' },
 ];
 
-const footer = [
-  { href: '/disclaimer/', label: 'Disclaimer' },
+const footerResearch = [
+  { href: '/research-peptides/', label: 'All compounds' },
+  { href: '/peptide-purity-guide/', label: 'Purity guide' },
+  { href: '/peptide-reconstitution-guide/', label: 'Reconstitution guide' },
+  { href: '/how-to-store-peptides/', label: 'Storage guide' },
+];
+
+const footerCompany = [
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
   { href: '/shipping/', label: 'Shipping' },
-  { href: '/privacy/', label: 'Privacy' },
-  { href: '/terms/', label: 'Terms' },
+  { href: '/disclaimer/', label: 'Disclaimer' },
 ];
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#081014" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={canonical} />
@@ -59,43 +66,82 @@ const footer = [
     <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(webJsonLd)} />
   </head>
-  <body class="min-h-screen bg-lab-black text-lab-text antialiased">
-    <div class="mx-auto flex min-h-screen max-w-5xl flex-col px-5 sm:px-8">
-      <header class="flex items-center justify-between border-b border-lab-rule py-5">
-        <a href="/" class="flex items-center gap-2 font-display text-sm font-medium tracking-tight text-lab-heading">
-          <span class="inline-block h-2 w-2 rounded-full bg-lab-cyan"></span>
-          <span>PEPTIDE<span class="text-lab-cyan">LAB</span></span>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <div class="utility-bar">
+      <div class="site-shell utility-bar__inner">
+        <p><span aria-hidden="true"></span>Research use only</p>
+        <p>Not for human or veterinary consumption</p>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-shell site-header__inner">
+        <a href="/" class="wordmark" aria-label="PeptideLab home">
+          <span>PEPTIDE</span><span>LAB</span>
         </a>
-        <nav class="flex items-center gap-5 text-sm text-lab-muted">
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="nav-toggle__label">Menu</span>
+          <span class="nav-toggle__lines" aria-hidden="true"><i></i><i></i></span>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
           {
             nav.map((item) => (
-              <a href={item.href} class="transition-colors hover:text-lab-cyan">{item.label}</a>
+              <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>
             ))
           }
+          <a href="/contact/" class="nav-contact">Request documentation</a>
         </nav>
-      </header>
+      </div>
+    </header>
 
-      <main class="flex-1 py-12">
-        <slot />
-      </main>
+    <main id="main-content" class="site-main site-shell">
+      <slot />
+    </main>
 
-      <footer class="border-t border-lab-rule bg-lab-deep py-8 text-sm text-lab-muted">
-        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p class="font-mono text-xs uppercase tracking-widest text-lab-faint">
-            Research use only &middot; Not for human consumption
-          </p>
-          <nav class="flex flex-wrap gap-x-5 gap-y-2">
-            {
-              footer.map((item) => (
-                <a href={item.href} class="transition-colors hover:text-lab-cyan">{item.label}</a>
-              ))
-            }
-          </nav>
+    <footer class="site-footer">
+      <div class="site-shell site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="/" class="wordmark" aria-label="PeptideLab home">
+            <span>PEPTIDE</span><span>LAB</span>
+          </a>
+          <p>High-purity materials for controlled laboratory research, supplied with clear batch documentation.</p>
+          <p class="site-footer__restriction">Research use only. Not for human consumption.</p>
         </div>
-        <p class="mt-4 text-xs text-lab-faint">
-          &copy; {new Date().getFullYear()} PeptideLab. All products are for laboratory research use only.
-        </p>
-      </footer>
-    </div>
+        <nav aria-label="Research links">
+          <h2>Research</h2>
+          {footerResearch.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <nav aria-label="Company links">
+          <h2>Company</h2>
+          {footerCompany.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <div class="site-footer__contact">
+          <h2>Laboratory support</h2>
+          <p>Questions about products, orders or certificates of analysis?</p>
+          <a href="mailto:support@peptidelab.example">support@peptidelab.example</a>
+        </div>
+      </div>
+      <div class="site-shell site-footer__bottom">
+        <p>&copy; {new Date().getFullYear()} PeptideLab</p>
+        <nav aria-label="Legal links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('#primary-nav');
+      toggle?.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav?.classList.toggle('is-open', !expanded);
+      });
+    </script>
   </body>
 </html>

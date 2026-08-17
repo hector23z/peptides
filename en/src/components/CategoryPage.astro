@@ -1,40 +1,45 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProductCard from './ProductCard.astro';
 
 interface Props {
   slug: string;
 }
 
 const { slug } = Astro.props;
-
-const category = (await getCollection('categories')).find((c) => c.data.slug === slug);
+const category = (await getCollection('categories')).find((entry) => entry.data.slug === slug);
 const products = (await getCollection('products'))
-  .filter((p) => p.data.category === slug)
+  .filter((product) => product.data.category === slug)
   .sort((a, b) => a.data.order - b.data.order);
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
 ---
 
 <Layout title={`${category?.data.title ?? slug} — PeptideLab`} description={category?.data.description}>
-  <section class="max-w-3xl">
-    <h1 class="font-display text-4xl font-medium tracking-tight text-lab-heading">{category?.data.title ?? slug}</h1>
-    <p class="mt-6 text-base leading-relaxed text-lab-muted">{category?.data.description}</p>
+  <section class="category-hero">
+    <div>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><span>{category?.data.title ?? slug}</span></nav>
+      <h1>{category?.data.title ?? slug}</h1>
+      <p>{category?.data.description}</p>
+      <a href="#category-products" class="button button--primary">View available compounds</a>
+    </div>
+    <figure>
+      <img src={categoryImages[slug] ?? '/images/hero-home.png'} alt="" width="1254" height="1254" loading="eager" decoding="async" />
+    </figure>
   </section>
 
-  <section class="mt-12">
-    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Products in this category</h2>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        products.map((p) => (
-          <a href={`/${slug}/${p.id}/`} class="group rounded-[12px] border border-lab-rule bg-lab-panel p-6 transition-colors hover:border-lab-cyan/60 hover:bg-lab-panel-raised">
-            <h3 class="font-display text-lg font-medium text-lab-heading group-hover:text-lab-cyan">{p.data.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-lab-muted">{p.data.description}</p>
-            <div class="mt-4 flex items-center justify-between text-sm">
-              <span class="font-mono text-xs text-lab-faint">{p.data.purity}</span>
-              <span class="font-mono font-medium text-lab-cyan">{p.data.price ? `$${p.data.price}` : ''}</span>
-            </div>
-          </a>
-        ))
-      }
+  <section id="category-products" class="catalog-section">
+    <header class="section-heading">
+      <div><h2>Available compounds</h2><p>{products.length} research records in this category.</p></div>
+    </header>
+    <div class="product-grid">
+      {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
     </div>
   </section>
 </Layout>

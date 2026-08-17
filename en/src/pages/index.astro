@@ -1,75 +1,121 @@
 ---
-import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import CategoryCard from '../components/CategoryCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Layout from '../layouts/Layout.astro';
 
 const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
 const products = (await getCollection('products'))
-  .filter((p) => p.data.featured)
+  .filter((product) => product.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 ---
 
 <Layout title="PeptideLab — Research Peptides & Laboratory Supplies">
-  <!-- Hero -->
-  <section class="py-16 sm:py-24">
-    <h1 class="max-w-3xl font-display text-4xl font-medium leading-tight tracking-tight text-lab-heading sm:text-5xl">
-      High-purity research peptides for scientific study
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-lab-muted">
-      PeptideLab supplies lyophilized research peptides and laboratory materials to qualified
-      researchers. Every batch is tested for purity and supplied with a certificate of analysis.
-    </p>
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a href="/peptides/" class="rounded-md bg-lab-cyan px-6 py-3 text-sm font-semibold text-lab-black transition-colors hover:bg-lab-cyan-pale">
-        Browse Peptides
-      </a>
-      <a href="/about/" class="rounded-md border border-lab-cyan px-6 py-3 text-sm font-semibold text-lab-cyan transition-colors hover:bg-lab-cyan-glow">
-        About Us
-      </a>
+  <section class="home-hero">
+    <div class="home-hero__copy">
+      <h1>High-purity compounds for controlled research</h1>
+      <p>
+        Lyophilized research peptides for qualified laboratories, with independent purity testing and
+        clear batch documentation.
+      </p>
+      <div class="button-row">
+        <a href="#featured" class="button button--primary">Browse compounds</a>
+        <a href="/peptide-purity-guide/" class="button button--secondary">Review quality standards</a>
+      </div>
+      <dl class="home-hero__facts">
+        <div><dt>Purity</dt><dd>&gt;99% on listed compounds</dd></div>
+        <div><dt>Verification</dt><dd>Independent HPLC testing</dd></div>
+        <div><dt>Documentation</dt><dd>Batch CoA supplied</dd></div>
+      </dl>
+    </div>
+    <figure class="home-hero__media">
+      <img
+        src="/images/hero-home.png"
+        alt="Unlabelled laboratory vials arranged on a dark work surface"
+        width="1693"
+        height="929"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption><span>Controlled materials</span><span>Representative laboratory imagery</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="home-section" aria-labelledby="categories-title">
+    <SectionHeading
+      id="categories-title"
+      title="Research categories"
+      description="Browse compounds by the laboratory pathways and research areas they are commonly used to investigate."
+      href="/research-peptides/"
+      linkLabel="View research overview"
+    />
+    <div class="category-grid">
+      {categories.map((category, index) => <CategoryCard category={category} featured={index === 0 || index === 3} />)}
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="py-12">
-    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Research Categories</h2>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <section id="featured" class="home-section" aria-labelledby="featured-title">
+    <SectionHeading
+      id="featured-title"
+      title="Featured compounds"
+      description="Current research catalogue selections with key specifications visible before you open the full record."
+      href="/research-peptides/"
+      linkLabel="Browse all compounds"
+    />
+    <div class="product-grid">
+      {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
+    </div>
+  </section>
+
+  <section class="quality-ledger" aria-labelledby="quality-title">
+    <div>
+      <h2 id="quality-title">Documentation before decoration</h2>
+      <p>Every product record foregrounds the details researchers need to evaluate a material.</p>
+    </div>
+    <dl>
+      <div><dt>Identity</dt><dd>Batch-specific compound record</dd></div>
+      <div><dt>Purity</dt><dd>HPLC verification disclosed</dd></div>
+      <div><dt>Handling</dt><dd>Storage and reconstitution guidance</dd></div>
+      <div><dt>Restriction</dt><dd>Laboratory research use only</dd></div>
+    </dl>
+  </section>
+
+  <section class="home-section journal-preview" aria-labelledby="journal-title">
+    <SectionHeading
+      id="journal-title"
+      title="Research journal"
+      description="Practical notes on identity, storage, handling and compound comparison."
+      href="/blog/"
+      linkLabel="Read all notes"
+    />
+    <div class="journal-list">
       {
-        categories.map((c) => (
-          <a href={`/${c.data.slug}/`} class="group rounded-[12px] border border-lab-rule bg-lab-panel p-6 transition-colors hover:border-lab-cyan/60 hover:bg-lab-panel-raised">
-            <h3 class="font-display text-lg font-medium text-lab-heading group-hover:text-lab-cyan">{c.data.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-lab-muted">{c.data.description}</p>
-          </a>
+        posts.map((post) => (
+          <article>
+            <a href={`/blog/${post.id}/`}>
+              <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+              <div><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </article>
         ))
       }
     </div>
   </section>
 
-  <!-- Featured products -->
-  <section class="py-12">
-    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Featured Products</h2>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        products.map((p) => (
-          <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
-            <h3 class="font-display text-lg font-medium text-lab-heading">{p.data.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-lab-muted">{p.data.description}</p>
-            <div class="mt-4 flex items-center justify-between text-sm">
-              <span class="font-mono text-xs text-lab-faint">{p.data.purity}</span>
-              <span class="font-mono font-medium text-lab-cyan">{p.data.price ? `$${p.data.price}` : ''}</span>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Disclaimer -->
-  <section class="rounded-[12px] border border-lab-rule bg-lab-cyan-glow p-6">
-    <h2 class="font-display text-lg font-medium text-lab-cyan">Research Use Only</h2>
-    <p class="mt-2 text-sm leading-relaxed text-lab-muted">
-      All products on this site are sold for laboratory research use only. They are not intended for
-      human or veterinary consumption, and are not approved by any regulatory authority for medical use.
-      You must be 18 or older to browse this site.
+  <section class="research-notice">
+    <h2>For laboratory research use only</h2>
+    <p>
+      Products are not intended for human or veterinary consumption and are not approved for diagnostic,
+      therapeutic or clinical use. Purchasers must be at least 18 years old.
     </p>
+    <a href="/disclaimer/" class="text-link">Read the full disclaimer <span aria-hidden="true">&rarr;</span></a>
   </section>
 </Layout>
