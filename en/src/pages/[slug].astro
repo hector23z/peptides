@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  return pages.map((p) => ({
+    params: { slug: p.id },
+    props: { page: p },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<Layout title={`${page.data.title} — PeptideLab`} description={page.data.description}>
+  <article class="max-w-3xl">
+    <div class="md-content">
+      <Content />
+    </div>
+  </article>
+</Layout>
