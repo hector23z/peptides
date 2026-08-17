@@ -1,17 +1,66 @@
 @import "tailwindcss";
 
-/* Prose styles for rendered MDX content (product & category pages) */
+@theme {
+  /* Surfaces (dark lab) */
+  --color-lab-black: #0a0f14;
+  --color-lab-deep: #060a0e;
+  --color-lab-panel: #101820;
+  --color-lab-panel-raised: #16212c;
+  --color-lab-rule: #1e2c38;
+
+  /* Text */
+  --color-lab-text: #e8eef2;
+  --color-lab-heading: #f4f8fa;
+  --color-lab-muted: #8fa3b0;
+  --color-lab-faint: #5c6f7a;
+
+  /* Accent (scientific cyan/teal — the ONLY saturated color) */
+  --color-lab-cyan: #2dd4bf;
+  --color-lab-cyan-deep: #0f766e;
+  --color-lab-cyan-pale: #5eead4;
+  --color-lab-cyan-glow: rgba(45, 212, 191, 0.14);
+
+  /* State */
+  --color-lab-warning: #f59e0b;
+  --color-lab-success: #34d399;
+  --color-lab-error: #f87171;
+
+  /* Typography */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-lab-black);
+  color: var(--color-lab-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Focus rings: 2px lab-cyan, visible on all interactive elements */
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--color-lab-cyan);
+  outline-offset: 2px;
+}
+
+/* Prose styles for rendered MDX content (product, category & keyword pages) */
 .md-content {
-  @apply text-base leading-relaxed text-zinc-400;
+  @apply text-base leading-relaxed text-lab-muted;
 }
 .md-content h1 {
-  @apply text-4xl font-semibold tracking-tight text-zinc-50;
+  @apply mt-0 font-display text-4xl font-medium tracking-tight text-lab-heading;
 }
 .md-content h2 {
-  @apply mt-10 text-2xl font-semibold tracking-tight text-zinc-100;
+  @apply mt-10 font-display text-2xl font-medium tracking-tight text-lab-heading;
 }
 .md-content h3 {
-  @apply mt-6 text-lg font-semibold text-zinc-100;
+  @apply mt-6 font-display text-lg font-medium text-lab-heading;
 }
 .md-content p {
   @apply mt-4;
@@ -23,26 +72,30 @@
   @apply mt-4 list-decimal space-y-2 pl-5;
 }
 .md-content li {
-  @apply text-zinc-400;
+  @apply text-lab-muted;
 }
 .md-content a {
-  @apply text-cyan-300 underline decoration-cyan-500/40 underline-offset-2 transition-colors hover:text-cyan-200;
+  @apply text-lab-cyan underline decoration-lab-cyan/40 underline-offset-2 transition-colors hover:text-lab-cyan-pale;
 }
 .md-content strong {
-  @apply font-semibold text-zinc-200;
+  @apply font-semibold text-lab-text;
 }
 .md-content blockquote {
-  @apply mt-4 border-l-2 border-cyan-500/50 pl-4 italic text-zinc-400;
+  @apply mt-4 border-l-2 border-lab-cyan/50 pl-4 italic text-lab-muted;
 }
 .md-content hr {
-  @apply my-8 border-zinc-800;
+  @apply my-8 border-lab-rule;
 }
 .md-content table {
   @apply mt-4 w-full border-collapse text-sm;
 }
 .md-content th {
-  @apply border border-zinc-800 bg-zinc-900/60 px-3 py-2 text-left font-semibold text-zinc-200;
+  @apply border border-lab-rule bg-lab-panel px-3 py-2 text-left font-semibold text-lab-text;
 }
 .md-content td {
-  @apply border border-zinc-800 px-3 py-2 text-zinc-400;
+  @apply border border-lab-rule px-3 py-2 text-lab-muted;
+}
+.md-content th,
+.md-content td {
+  font-family: var(--font-mono);
 }

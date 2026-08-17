@@ -18,11 +18,11 @@ const cat = product.data.category;
 <Layout title={`${product.data.title} — PeptideLab`} description={product.data.description}>
   <article class="max-w-3xl">
     <div class="mb-6 flex flex-wrap items-center gap-3 text-sm">
-      <a href={`/${cat}/`} class="font-mono text-xs uppercase tracking-widest text-cyan-400 transition-colors hover:text-cyan-300">{cat}</a>
-      <span class="text-zinc-600">/</span>
-      <span class="rounded border border-zinc-700 px-2 py-0.5 font-mono text-xs text-zinc-400">Purity {product.data.purity}</span>
-      {product.data.size && <span class="rounded border border-zinc-700 px-2 py-0.5 font-mono text-xs text-zinc-400">{product.data.size}</span>}
-      {product.data.price && <span class="rounded border border-cyan-700 px-2 py-0.5 font-mono text-xs text-cyan-300">${product.data.price}</span>}
+      <a href={`/${cat}/`} class="text-lab-cyan transition-colors hover:text-lab-cyan-pale">{cat}</a>
+      <span class="text-lab-faint">/</span>
+      <span class="rounded border border-lab-rule px-2 py-0.5 font-mono text-xs text-lab-muted">Purity {product.data.purity}</span>
+      {product.data.size && <span class="rounded border border-lab-rule px-2 py-0.5 font-mono text-xs text-lab-muted">{product.data.size}</span>}
+      {product.data.price && <span class="rounded border border-lab-cyan-deep px-2 py-0.5 font-mono text-xs text-lab-cyan">${product.data.price}</span>}
     </div>
     <div class="md-content">
       <Content />
