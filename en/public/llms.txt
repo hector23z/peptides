@@ -1,0 +1,26 @@
+# PeptideLab
+
+PeptideLab is a supplier of high-purity research peptides and laboratory materials for the scientific community.
+
+## About
+
+- Research peptides and laboratory supplies.
+- Every batch is tested for purity and supplied with a certificate of analysis (CoA).
+- For laboratory research use only. Not for human or veterinary consumption.
+
+## Key pages
+
+- [Home](https://peptidelab.example/)
+- [Research Peptides](https://peptidelab.example/research-peptides/)
+- [GLP-1 Peptides](https://peptidelab.example/glp-1/)
+- [Recovery Peptides](https://peptidelab.example/recovery/)
+- [Longevity Peptides](https://peptidelab.example/longevity/)
+- [HGH & Secretagogues](https://peptidelab.example/hgh/)
+- [Research Blog](https://peptidelab.example/blog/)
+- [About](https://peptidelab.example/about/)
+- [Contact](https://peptidelab.example/contact/)
+- [Disclaimer](https://peptidelab.example/disclaimer/)
+
+## Research use only
+
+All products and content on this site are for laboratory research use only. They are not intended for human or veterinary consumption, and are not approved by any regulatory authority for medical use.

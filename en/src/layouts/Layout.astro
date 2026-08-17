@@ -8,9 +8,31 @@ interface Props {
 
 const { title, description = 'Research peptides and laboratory supplies. For research use only.' } = Astro.props;
 
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'PeptideLab',
+  url: Astro.site.href,
+  description: 'Supplier of high-purity research peptides and laboratory materials. For research use only.',
+  email: 'support@peptidelab.example',
+  slogan: 'Research use only. Not for human consumption.',
+};
+
+const webJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'PeptideLab',
+  url: Astro.site.href,
+  description: 'Research peptides and laboratory supplies. For research use only.',
+  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+};
+
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/peptides/', label: 'Peptides' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/about/', label: 'About' },
   { href: '/contact/', label: 'Contact' },
 ];
@@ -32,7 +54,10 @@ const footer = [
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonical} />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webJsonLd)} />
   </head>
   <body class="min-h-screen bg-lab-black text-lab-text antialiased">
     <div class="mx-auto flex min-h-screen max-w-5xl flex-col px-5 sm:px-8">

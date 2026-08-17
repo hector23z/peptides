@@ -13,6 +13,17 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 const { Content } = await render(product);
 const cat = product.data.category;
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.data.title,
+  description: `${product.data.description} For laboratory research use only. Not for human or veterinary consumption.`,
+  category: cat,
+  ...(product.data.price ? { offers: { '@type': 'Offer', price: product.data.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' } } : {}),
+  ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Purity', value: product.data.purity } } : {}),
+  brand: { '@type': 'Brand', name: 'PeptideLab' },
+};
 ---
 
 <Layout title={`${product.data.title} — PeptideLab`} description={product.data.description}>
@@ -28,4 +39,5 @@ const cat = product.data.category;
       <Content />
     </div>
   </article>
+  <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
 </Layout>

@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  author: { '@type': 'Organization', name: post.data.author },
+  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<Layout title={`${post.data.title} — PeptideLab`} description={post.data.description}>
+  <article class="max-w-3xl">
+    <div class="mb-6 flex flex-wrap items-center gap-3 text-sm">
+      <a href="/blog/" class="text-lab-cyan transition-colors hover:text-lab-cyan-pale">Blog</a>
+      <span class="text-lab-faint">/</span>
+      <time datetime={post.data.pubDate.toISOString()} class="font-mono text-xs text-lab-faint">{post.data.pubDate.toISOString().slice(0, 10)}</time>
+      <span class="text-lab-faint">&middot;</span>
+      <span class="font-mono text-xs text-lab-faint">{post.data.author}</span>
+    </div>
+    <div class="md-content">
+      <Content />
+    </div>
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+</Layout>
