@@ -3,11 +3,13 @@ import { adminToken } from '../../../lib/auth';
 
 export const prerender = false;
 
+const env = import.meta.env as Record<string, string | undefined>;
+
 export const POST: APIRoute = async ({ request }) => {
   let body: any;
   try { body = await request.json(); } catch { body = {}; }
   const password = body.password ?? '';
-  if (password === (process.env.ADMIN_PASSWORD ?? '')) {
+  if (password === (env.ADMIN_PASSWORD ?? '')) {
     const token = adminToken();
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,

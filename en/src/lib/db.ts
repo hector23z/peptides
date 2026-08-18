@@ -16,8 +16,9 @@ export interface Order {
   created_at: string;
 }
 
-const dataDir = process.env.DATA_DIR
-  ? path.resolve(process.env.DATA_DIR)
+const env = import.meta.env as Record<string, string | undefined>;
+const dataDir = env.DATA_DIR
+  ? path.resolve(env.DATA_DIR)
   : path.resolve(process.cwd(), 'data');
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
@@ -65,6 +66,14 @@ export function updateOrderStatus(id: string, status: string, txHash: string | n
 
 export function markShipped(id: string) {
   db.prepare("UPDATE orders SET status = 'shipped' WHERE id = ?").run(id);
+}
+
+export function submitTxHash(id: string, txHash: string) {
+  db.prepare("UPDATE orders SET tx_hash = ?, status = 'awaiting_verification' WHERE id = ?").run(txHash, id);
+}
+
+export function verifyPayment(id: string) {
+  db.prepare("UPDATE orders SET status = 'paid' WHERE id = ?").run(id);
 }
 
 export function listOrders(): Order[] {

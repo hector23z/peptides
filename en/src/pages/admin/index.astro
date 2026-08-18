@@ -50,10 +50,14 @@ const orders = authed ? listOrders() : [];
                   <td class="px-4 py-3 text-lab-text">{o.nombre}<br /><span class="text-xs text-lab-faint">{o.email}</span></td>
                   <td class="px-4 py-3 font-mono text-lab-cyan">${o.total.toFixed(2)}</td>
                   <td class="px-4 py-3 font-mono text-xs text-lab-muted">{o.crypto}</td>
-                  <td class="px-4 py-3"><span class="rounded px-2 py-0.5 text-xs {o.status === 'shipped' ? 'bg-lab-cyan-glow text-lab-cyan' : o.status === 'paid' ? 'bg-lab-cyan-glow text-lab-cyan' : 'bg-lab-panel text-lab-muted'}">{o.status}</span></td>
+                  <td class="px-4 py-3"><span class="rounded px-2 py-0.5 text-xs {o.status === 'shipped' ? 'bg-lab-cyan-glow text-lab-cyan' : o.status === 'paid' ? 'bg-lab-cyan-glow text-lab-cyan' : o.status === 'awaiting_verification' ? 'bg-lab-panel text-lab-warning' : 'bg-lab-panel text-lab-muted'}">{o.status}</span></td>
                   <td class="px-4 py-3 text-xs text-lab-faint">{new Date(o.created_at).toLocaleString()}</td>
                   <td class="px-4 py-3">
-                    {o.status !== 'shipped' && (
+                    {o.tx_hash && <div class="mb-1 font-mono text-[10px] text-lab-faint" title={o.tx_hash}>{o.tx_hash.slice(0, 16)}…</div>}
+                    {o.status === 'awaiting_verification' && (
+                      <button data-verify={o.id} class="mr-2 text-sm text-lab-cyan hover:text-lab-cyan-pale">Verify paid</button>
+                    )}
+                    {(o.status === 'paid' || o.status === 'awaiting_verification') && (
                       <button data-ship={o.id} class="text-sm text-lab-cyan hover:text-lab-cyan-pale">Mark shipped</button>
                     )}
                   </td>
@@ -88,6 +92,18 @@ const orders = authed ? listOrders() : [];
       btn.addEventListener('click', async () => {
         const id = (btn as HTMLElement).dataset.ship;
         const res = await fetch('/api/admin/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (res.ok) window.location.reload();
+      });
+    });
+
+    document.querySelectorAll('[data-verify]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = (btn as HTMLElement).dataset.verify;
+        const res = await fetch('/api/admin/orders/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),

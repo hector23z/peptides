@@ -1,11 +1,8 @@
 import type { APIRoute } from 'astro';
-import crypto from 'node:crypto';
 import { createOrder } from '../../lib/db';
-import { createInvoice } from '../../lib/nowpayments';
+import { getWallet } from '../../lib/wallets';
 
 export const prerender = false;
-
-const SITE_URL = process.env.SITE_URL ?? 'https://peptidelab.example';
 
 export const POST: APIRoute = async ({ request }) => {
   let body: any;
@@ -29,37 +26,35 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(JSON.stringify({ error: 'Unsupported crypto method' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
   }
 
-  const id = crypto.randomUUID();
-  const orderId = `PL-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
-
-  let invoice;
-  try {
-    invoice = await createInvoice({
-      price_amount: numericTotal,
-      price_currency: 'USD',
-      order_id: orderId,
-      order_description: `PeptideLab order ${orderId}`,
-      ipn_callback_url: `${SITE_URL}/api/webhooks/nowpayments`,
-      success_url: `${SITE_URL}/checkout/success`,
-      cancel_url: `${SITE_URL}/checkout`,
-    });
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: 'Payment provider error', detail: err?.message ?? 'unknown' }), { status: 502, headers: { 'Content-Type': 'application/json' } });
+  const wallet = getWallet(cryptoMethod);
+  if (!wallet) {
+    return new Response(JSON.stringify({ error: 'Payment method temporarily unavailable' }), { status: 503, headers: { 'Content-Type': 'application/json' } });
   }
 
+  const orderId = `PL-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+
   createOrder({
-    id,
+    id: orderId,
     email,
     nombre,
     direccion,
     items,
     total: numericTotal,
     crypto: cryptoMethod,
-    payment_id: invoice.id ?? null,
+    payment_id: null,
   });
 
   return new Response(
-    JSON.stringify({ orderId, payment_id: invoice.id ?? null, invoice_url: invoice.invoice_url ?? null }),
+    JSON.stringify({
+      orderId,
+      payment: {
+        method: cryptoMethod,
+        address: wallet.address,
+        network: wallet.network,
+        amountUsd: numericTotal,
+        confirmations: wallet.confirmations,
+      },
+    }),
     { status: 200, headers: { 'Content-Type': 'application/json' } }
   );
 };

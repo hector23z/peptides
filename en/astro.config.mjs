@@ -13,7 +13,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://peptidelab.example',
 
-  output: 'static',
+  output: 'server',
 
   adapter: node({ mode: 'standalone' }),
 
