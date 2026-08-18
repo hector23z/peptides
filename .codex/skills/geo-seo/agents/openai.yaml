@@ -1,0 +1,4 @@
+interface:
+  display_name: "GEO-SEO"
+  short_description: "Audita visibilidad GEO y SEO técnico"
+  default_prompt: "Use $geo-seo to audit a website for AI visibility, citability, llms.txt, crawlers, content, technical SEO, schema, and a prioritized action plan."
