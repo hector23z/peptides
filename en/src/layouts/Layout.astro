@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import persona from '../data/persona.json';
 
 interface Props {
   title: string;
@@ -36,6 +37,56 @@ const webJsonLd = {
   description: 'Research peptides and laboratory supplies. For research use only.',
   publisher: { '@type': 'Organization', name: 'PeptideLab' },
 };
+
+const personJsonLd = persona;
+
+const segLabels: Record<string, string> = {
+  'glp-1': 'GLP-1 Peptides',
+  recovery: 'Recovery Peptides',
+  longevity: 'Longevity Peptides',
+  hgh: 'HGH & Secretagogues',
+  steroids: 'Steroids',
+  metabolic: 'Metabolic Peptides',
+  misc: 'Miscellaneous Research Peptides',
+  blends: 'Research Blends',
+  supplies: 'Laboratory Supplies',
+  'cosmetic-research': 'Cosmetic Research',
+  blog: 'Research Blog',
+  cart: 'Cart',
+  checkout: 'Checkout',
+  admin: 'Administration',
+  about: 'About',
+  contact: 'Contact',
+  disclaimer: 'Disclaimer',
+  shipping: 'Shipping',
+  privacy: 'Privacy',
+  terms: 'Terms',
+  'research-peptides': 'Research Peptides',
+  'peptide-purity-guide': 'Peptide Purity Guide',
+  'peptide-reconstitution-guide': 'Peptide Reconstitution Guide',
+  'how-to-store-peptides': 'How to Store Peptides',
+};
+
+function buildBreadcrumb(pathname: string, pageTitle: string) {
+  const clean = pathname.replace(/\/$/, '');
+  const segments = clean === '' ? [] : clean.split('/').filter(Boolean);
+  const items: any[] = [{ '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site.href }];
+  let current = '';
+  segments.forEach((seg, i) => {
+    current += '/' + seg;
+    const isLast = i === segments.length - 1;
+    const name = isLast ? pageTitle : (segLabels[seg] ?? seg.replace(/-/g, ' '));
+    items.push({
+      '@type': 'ListItem',
+      position: items.length + 1,
+      name,
+      item: new URL(current + '/', Astro.site).href,
+    });
+  });
+  return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items };
+}
+
+const breadcrumbJsonLd = buildBreadcrumb(Astro.url.pathname, title);
 
 const nav = [
   { href: '/research-peptides/', label: 'Compounds' },
@@ -74,6 +125,8 @@ const footerCompany = [
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(webJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to content</a>

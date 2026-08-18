@@ -17,7 +17,7 @@ const articleJsonLd = {
   description: post.data.description,
   datePublished: post.data.pubDate.toISOString(),
   ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
-  author: { '@type': 'Organization', name: post.data.author },
+  author: { '@type': 'Person', name: post.data.author },
   publisher: { '@type': 'Organization', name: 'PeptideLab' },
   mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
 };

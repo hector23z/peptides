@@ -2,31 +2,77 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About Us — PeptideLab" description="PeptideLab is a supplier of high-purity research peptides and laboratory materials for the scientific community. For research use only.">
+<Layout title="About Us — PeptideLab" description="Meet Dr. Adrian Cole, PeptideLab research director, and learn about our HPLC and mass spectrometry purity verification and certificate of analysis process.">
   <section class="max-w-3xl">
-    <h1 class="font-display text-4xl font-medium tracking-tight text-lab-heading">Who we are</h1>
-    <div class="mt-8 space-y-6 text-base leading-relaxed text-lab-muted">
-      <p>
-        PeptideLab is a supplier of high-purity research peptides and laboratory materials for the
-        scientific community. We serve researchers, laboratories and academic institutions that require
-        reliable, well-documented research compounds.
+    <h1 class="font-display text-4xl font-medium tracking-tight text-lab-heading">About PeptideLab</h1>
+    <p class="mt-6 text-base leading-relaxed text-lab-muted">
+      PeptideLab supplies high-purity research peptides and laboratory materials to the scientific
+      community. We serve researchers, laboratories and academic institutions that require reliable,
+      well-documented research compounds.
+    </p>
+    <p class="mt-4 text-base leading-relaxed text-lab-muted">
+      Every product is manufactured under controlled conditions and independently verified for purity.
+      Each batch is accompanied by a certificate of analysis (CoA) so researchers can verify the quality
+      of the material they receive.
+    </p>
+  </section>
+
+  <section class="mt-12 max-w-3xl">
+    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Research Director</h2>
+    <div class="mt-6 rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+      <h3 class="font-display text-lg font-medium text-lab-heading">Dr. Adrian Cole</h3>
+      <p class="mt-1 font-mono text-xs uppercase tracking-widest text-lab-faint">Research Director</p>
+      <p class="mt-3 text-sm leading-relaxed text-lab-muted">
+        Dr. Adrian Cole is the Research Director at PeptideLab, with a background in analytical
+        biochemistry and peptide characterization. He coordinates third-party purity verification and
+        batch documentation for the research catalog.
       </p>
-      <p>
-        Every product we supply is manufactured under controlled conditions and independently tested
-        for purity. Each batch is accompanied by a certificate of analysis so researchers can verify
-        the quality of the material they receive.
-      </p>
-      <p>
-        Our mission is to make high-quality research materials accessible while maintaining the highest
-        standards of transparency, documentation and customer support.
+      <p class="mt-3 text-sm leading-relaxed text-lab-muted">
+        His expertise spans peptide chemistry, HPLC purity verification, mass spectrometry and
+        lyophilization — the analytical methods used to document every batch supplied to researchers.
       </p>
     </div>
-    <div class="mt-10 rounded-[12px] border border-lab-rule bg-lab-panel p-6">
-      <h2 class="font-display text-lg font-medium text-lab-heading">Research use only</h2>
-      <p class="mt-2 text-sm leading-relaxed text-lab-muted">
-        PeptideLab supplies products for laboratory research use only. We do not sell products for
-        human or veterinary consumption, and we do not provide medical advice.
-      </p>
+  </section>
+
+  <section class="mt-12 max-w-3xl">
+    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Verification Methodology</h2>
+    <p class="mt-4 text-base leading-relaxed text-lab-muted">
+      Purity and identity are verified using a two-tier analytical approach that follows laboratory best
+      practices consistent with methods reported in the peer-reviewed research literature.
+    </p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h3 class="font-display text-lg font-medium text-lab-heading">HPLC Purity</h3>
+        <p class="mt-2 text-sm leading-relaxed text-lab-muted">
+          High-performance liquid chromatography (HPLC) is used to determine the chromatographic purity
+          of each batch. Research-grade material is documented at &gt;99% purity.
+        </p>
+      </div>
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h3 class="font-display text-lg font-medium text-lab-heading">Mass Spectrometry</h3>
+        <p class="mt-2 text-sm leading-relaxed text-lab-muted">
+          Mass spectrometry (MS) is used as an orthogonal identity method to confirm molecular weight and
+          verify the correct molecular form of the peptide.
+        </p>
+      </div>
     </div>
+  </section>
+
+  <section class="mt-12 max-w-3xl">
+    <h2 class="font-display text-2xl font-medium tracking-tight text-lab-heading">Certificate of Analysis Process</h2>
+    <ol class="mt-6 space-y-4 text-base leading-relaxed text-lab-muted">
+      <li><strong class="text-lab-text">Batch sampling</strong> — a representative sample is taken from each produced batch.</li>
+      <li><strong class="text-lab-text">HPLC purity testing</strong> — chromatographic purity is measured and recorded.</li>
+      <li><strong class="text-lab-text">MS identity confirmation</strong> — molecular weight is confirmed by mass spectrometry.</li>
+      <li><strong class="text-lab-text">CoA issued</strong> — purity, content, molecular weight, batch number and test date are documented on the certificate of analysis supplied with the order.</li>
+    </ol>
+  </section>
+
+  <section class="mt-12 max-w-3xl rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+    <h2 class="font-display text-lg font-medium text-lab-heading">Research use only</h2>
+    <p class="mt-2 text-sm leading-relaxed text-lab-muted">
+      PeptideLab supplies products for laboratory research use only. We do not sell products for human
+      or veterinary consumption, and we do not provide medical or dosing guidance.
+    </p>
   </section>
 </Layout>
