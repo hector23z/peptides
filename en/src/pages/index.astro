@@ -102,7 +102,6 @@ const posts = (await getCollection('blog'))
             <a href={`/blog/${post.id}/`}>
               <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
               <div><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
-              <span aria-hidden="true">&rarr;</span>
             </a>
           </article>
         ))
@@ -116,6 +115,6 @@ const posts = (await getCollection('blog'))
       Products are not intended for human or veterinary consumption and are not approved for diagnostic,
       therapeutic or clinical use. Purchasers must be at least 18 years old.
     </p>
-    <a href="/disclaimer/" class="text-link">Read the full disclaimer <span aria-hidden="true">&rarr;</span></a>
+    <a href="/disclaimer/" class="text-link">Read the full disclaimer</a>
   </section>
 </Layout>

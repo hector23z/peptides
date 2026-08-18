@@ -84,11 +84,11 @@ const faqJsonLd = {
 ---
 
 <Layout title={`${product.data.title}: Research Data & Handling | PeptideLab`} description={product.data.description}>
-  <nav class="breadcrumbs" aria-label="Breadcrumb">
+  <nav class="breadcrumbs pt-8" aria-label="Breadcrumb">
     <a href="/">Home</a><span>/</span><a href={`/${category}/`}>{categoryLabels[category] ?? category}</a><span>/</span><span>{product.data.title}</span>
   </nav>
 
-  <section class="product-hero">
+  <section class="product-hero mt-6">
     <figure>
       <img src={categoryImages[category] ?? '/images/hero-home.png'} alt="" width="1254" height="1254" loading="eager" decoding="async" />
     </figure>
@@ -109,8 +109,8 @@ const faqJsonLd = {
     </div>
   </section>
 
-  <article class="product-article">
-    <aside>
+  <article class="product-article gap-10">
+    <aside class="pb-5">
       <p>Product record</p>
       <a href={`/${category}/`}>Back to {categoryLabels[category] ?? category}</a>
       <a href="/peptide-purity-guide/">Purity guide</a>
@@ -119,7 +119,7 @@ const faqJsonLd = {
     <div class="md-content product-content">
       <Content />
 
-      <section class="product-faq" aria-labelledby="product-faq-title">
+      <section class="product-faq mt-20" aria-labelledby="product-faq-title">
         <h2 id="product-faq-title">What Are Common Questions About {product.data.title}?</h2>
         {faqItems.map((item) => (
           <details>
@@ -129,7 +129,7 @@ const faqJsonLd = {
         ))}
       </section>
 
-      <section class="related-research" aria-labelledby="related-research-title">
+      <section class="related-research mt-24" aria-labelledby="related-research-title">
         <h2 id="related-research-title">Which {categoryLabels[category] ?? category} Research Records Are Related?</h2>
         <p>
           Continue with the <a href={`/${category}/`}>{categoryLabels[category] ?? category} category</a>

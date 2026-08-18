@@ -7,13 +7,13 @@ colors:
   lab-deep: "#050a0d"           # deepest inset (footer, code blocks)
   lab-panel: "#101a22"          # cards, panels
   lab-panel-raised: "#15232c"   # hover lift, active states
-  lab-rule: "#293b46"           # AA-visible hairlines, borders
+  lab-rule: "#506a76"           # 3:1-visible hairlines and control boundaries
 
   # Text
   lab-text: "#e7eef1"           # body — near-white, cool
   lab-heading: "#f5f8f9"        # headlines
   lab-muted: "#9aadb7"          # captions, meta
-  lab-faint: "#758995"          # subdued, but still AA on the page ground
+  lab-faint: "#8499a4"          # subdued; AA on black, panel and raised surfaces
 
   # Accent (scientific cyan/teal — the ONLY saturated color)
   lab-cyan: "#39cbbb"           # primary accent, links, active states
@@ -32,7 +32,7 @@ typography:
     fontSize: "clamp(2.55rem, 5.4vw, 5.25rem)"
     fontWeight: 400
     lineHeight: 0.98
-    letterSpacing: "-0.045em"
+    letterSpacing: "-0.04em"
   headline:
     fontFamily: "Geologica, system-ui, sans-serif"
     fontSize: "clamp(1.85rem, 4vw, 3.15rem)"
@@ -94,7 +94,7 @@ Neutrals (lab-black through lab-faint) + ONE accent (lab-cyan). Cyan is for link
 
 ## Typography
 - Geologica for display/headlines (self-hosted), Figtree for body, JetBrains Mono for data/measurements (purity %, molecular weights, prices).
-- Body measure 65-72ch. Display max 5.25rem only in split heroes; content headings remain smaller. Tracking floor -0.045em on display type.
+- Body measure 65-72ch. Display max 4.65rem in split heroes; content headings remain smaller. Tracking floor -0.04em on display type.
 - No gradient text. No italic serif display. No eyebrow/kicker labels above headings.
 
 ## Layout
@@ -109,6 +109,7 @@ Neutrals (lab-black through lab-faint) + ONE accent (lab-cyan). Cyan is for link
 - Buttons: primary = lab-cyan bg with lab-black text; secondary = transparent with lab-cyan border. Pills only for small controls (tags, badges).
 - Tables: JetBrains Mono numerals, lab-rule hairlines, no zebra stripes.
 - Focus rings: 2px lab-cyan, visible on all interactive elements.
+- Browser surfaces: dark color scheme, cyan caret and selection, themed thin scrollbars, 0.22em underline offset, and focus scroll margins that clear the sticky header.
 - Shadows: none on catalogue cards. Depth comes from borders, image contrast and small vertical movement.
 - Product cards always expose category, purity, format and price before the destination link. Never invent cart behaviour when no cart exists.
 - Navigation must have a keyboard-visible focus state and a real mobile disclosure button with `aria-expanded`.

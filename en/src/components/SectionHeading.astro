@@ -15,5 +15,5 @@ const { id, title, description, href, linkLabel } = Astro.props;
     <h2 id={id}>{title}</h2>
     {description && <p>{description}</p>}
   </div>
-  {href && linkLabel && <a href={href} class="text-link">{linkLabel}<span aria-hidden="true">&rarr;</span></a>}
+  {href && linkLabel && <a href={href} class="text-link">{linkLabel}</a>}
 </header>

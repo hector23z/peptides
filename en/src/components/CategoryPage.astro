@@ -38,8 +38,18 @@ const categoryImages: Record<string, string> = {
     <header class="section-heading">
       <div><h2>Available compounds</h2><p>{products.length} research records in this category.</p></div>
     </header>
-    <div class="product-grid">
-      {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
-    </div>
+    {
+      products.length > 0 ? (
+        <div class="product-grid">
+          {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
+        </div>
+      ) : (
+        <div class="empty-state" role="status">
+          <h3>No current research records</h3>
+          <p>This category has no published compound records yet. Browse the complete catalogue or check again after the next documentation release.</p>
+          <a href="/research-peptides/" class="text-link">Browse all compounds</a>
+        </div>
+      )
+    }
   </section>
 </Layout>

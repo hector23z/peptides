@@ -20,7 +20,7 @@ const posts = (await getCollection('blog'))
           <a href={`/blog/${post.id}/`}>
             <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
             <div><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
-            <span>Read note <span aria-hidden="true">&rarr;</span></span>
+            <span>Read note</span>
           </a>
         </article>
       ))
