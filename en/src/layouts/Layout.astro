@@ -13,10 +13,19 @@ const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'PeptideLab',
+  alternateName: 'PeptideLab Research Peptides',
   url: Astro.site.href,
   description: 'Supplier of high-purity research peptides and laboratory materials. For research use only.',
   email: 'support@peptidelab.example',
   slogan: 'Research use only. Not for human consumption.',
+  areaServed: 'Worldwide',
+  knowsAbout: [
+    'research peptides',
+    'GLP-1 receptor agonists',
+    'peptide purity testing',
+    'certificates of analysis',
+    'peptide reconstitution',
+  ],
 };
 
 const webJsonLd = {

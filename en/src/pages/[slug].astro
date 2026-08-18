@@ -12,6 +12,45 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+
+// Parse FAQ items from the markdown body ("**Question**\nAnswer" blocks)
+function parseFaq(body) {
+  const faqSection = body.split(/##\s*Frequently Asked Questions/i)[1] ?? '';
+  const section = faqSection.split(/##\s*/)[0];
+  const qa = [];
+  const re = /\*\*(.+?)\*\*\s*\n([\s\S]*?)(?=\n\*\*|$)/g;
+  let m;
+  while ((m = re.exec(section)) !== null) {
+    const q = m[1].trim();
+    const a = m[2].trim().replace(/\n/g, ' ');
+    if (q && a) qa.push({ q, a });
+  }
+  return qa;
+}
+
+const faq = parseFaq(page.body ?? '');
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: page.data.title,
+  description: page.data.description,
+  author: { '@type': 'Organization', name: 'PeptideLab' },
+  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+
+const faqJsonLd = faq.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    }
+  : null;
 ---
 
 <Layout title={`${page.data.title} — PeptideLab`} description={page.data.description}>
@@ -20,4 +59,6 @@ const { Content } = await render(page);
       <Content />
     </div>
   </article>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+  {faqJsonLd && <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />}
 </Layout>
