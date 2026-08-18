@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import eligibleSlugs from '../config/commerceEligible.json';
 
 interface Props {
   product: CollectionEntry<'products'>;
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { product, priority = false } = Astro.props;
+const isEligible = eligibleSlugs.includes(product.id);
 
 const categoryImages: Record<string, string> = {
   recovery: '/images/recovery.png',
@@ -24,7 +26,7 @@ const categoryLabels: Record<string, string> = {
 ---
 
 <article class="product-card">
-  <a href={`/${product.data.category}/${product.id}/`} aria-label={`View ${product.data.title}`}>
+  <a href={`/${product.data.category}/${product.id}/`} aria-label={`View ${product.data.title}`} class="product-card__link">
     <div class="product-card__media">
       <img
         src={categoryImages[product.data.category] ?? '/images/hero-home.png'}
@@ -49,10 +51,39 @@ const categoryLabels: Record<string, string> = {
           <dd>{product.data.size ?? 'See listing'}</dd>
         </div>
       </dl>
-      <div class="product-card__footer">
-        <span class="product-card__price">{product.data.price ? `$${product.data.price}` : 'Enquire'}</span>
-        <span class="product-card__action">View compound</span>
-      </div>
     </div>
   </a>
+  <div class="product-card__footer">
+    <span class="product-card__price">{product.data.price ? `$${product.data.price}` : 'Enquire'}</span>
+    {isEligible ? (
+      <button
+        type="button"
+        class="product-card__add"
+        data-add-to-cart
+        data-slug={product.id}
+        data-title={product.data.title}
+        data-price={product.data.price}
+        data-size={product.data.size ?? ''}
+      >Add to cart</button>
+    ) : (
+      <a href={`/${product.data.category}/${product.id}/`} class="product-card__action">View compound</a>
+    )}
+  </div>
 </article>
+
+<script>
+  import { addToCart } from '../scripts/cart';
+  document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      addToCart({
+        slug: btn.dataset.slug,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        size: btn.dataset.size || undefined,
+      });
+      const original = btn.textContent;
+      btn.textContent = 'Added ✓';
+      setTimeout(() => { btn.textContent = original; }, 1400);
+    });
+  });
+</script>

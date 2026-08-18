@@ -619,13 +619,39 @@ a {
   gap: clamp(0.875rem, 2vw, 1.25rem);
 }
 
-.category-card,
-.product-card {
+.category-card {
   min-width: 0;
 }
 
-.category-card > a,
-.product-card > a {
+.product-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-lab-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-lab-panel);
+  transition: border-color 220ms var(--ease-out), background-color 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+.product-card:is(:hover, :focus-within) {
+  border-color: var(--color-lab-cyan-deep);
+  background: var(--color-lab-panel-raised);
+  transform: translateY(-2px);
+}
+
+.product-card:active {
+  transform: translateY(0);
+}
+
+.product-card__link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+}
+
+.category-card > a {
   display: flex;
   height: 100%;
   overflow: hidden;
@@ -639,15 +665,13 @@ a {
   flex-direction: column;
 }
 
-.category-card > a:is(:hover, :focus-visible),
-.product-card > a:is(:hover, :focus-visible) {
+.category-card > a:is(:hover, :focus-visible) {
   border-color: var(--color-lab-cyan-deep);
   background: var(--color-lab-panel-raised);
   transform: translateY(-2px);
 }
 
-.category-card > a:active,
-.product-card > a:active {
+.category-card > a:active {
   transform: translateY(0);
 }
 
@@ -780,11 +804,12 @@ a {
 
 .product-card__footer {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
   margin-top: auto;
-  padding-top: 1.2rem;
+  padding: 1.2rem 1.4rem 1.4rem;
+  border-top: 1px solid var(--color-lab-rule);
 }
 
 .product-card__price {
@@ -792,6 +817,31 @@ a {
   font-family: var(--font-mono);
   font-size: 1.15rem;
   font-weight: 500;
+}
+
+.product-card__add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--color-lab-cyan-deep);
+  border-radius: 8px;
+  background: var(--color-lab-cyan-deep);
+  color: var(--color-lab-deep);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background-color 180ms var(--ease-out), border-color 180ms var(--ease-out), color 180ms var(--ease-out);
+}
+
+.product-card__add:is(:hover, :focus-visible) {
+  background: var(--color-lab-cyan);
+  border-color: var(--color-lab-cyan);
+}
+
+.product-card__add:active {
+  transform: translateY(1px);
 }
 
 .product-card__action {
