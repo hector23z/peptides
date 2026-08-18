@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import fs from 'node:fs';
+import eligibleSlugs from '../../config/commerceEligible.json';
 
 const productImages = new Set(
   fs.existsSync('public/images/products')
@@ -26,6 +27,7 @@ export async function getStaticPaths() {
 const { product, relatedProducts } = Astro.props;
 const { Content } = await render(product);
 const category = product.data.category;
+const isEligible = eligibleSlugs.includes(product.id);
 
 const categoryImages: Record<string, string> = {
   recovery: '/images/recovery.png',
@@ -114,7 +116,20 @@ const faqJsonLd = {
       </dl>
       <div class="product-hero__purchase">
         <div><span>Listed price</span><strong>{product.data.price ? `$${product.data.price}` : 'Enquire'}</strong></div>
-        <a href="/contact/" class="button button--primary">Request batch documentation</a>
+        <div class="flex flex-wrap gap-3">
+          {isEligible && product.data.price && (
+            <button
+              type="button"
+              class="button button--primary"
+              data-add-to-cart
+              data-slug={product.id}
+              data-title={product.data.title}
+              data-price={product.data.price}
+              data-size={product.data.size ?? ''}
+            >Add to cart</button>
+          )}
+          <a href="/contact/" class="button button--secondary">Request batch documentation</a>
+        </div>
       </div>
       <p class="product-hero__notice">Not for human or veterinary consumption.</p>
     </div>
@@ -156,4 +171,20 @@ const faqJsonLd = {
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <script>
+    import { addToCart } from '../../scripts/cart';
+    document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        addToCart({
+          slug: btn.dataset.slug,
+          title: btn.dataset.title,
+          price: Number(btn.dataset.price),
+          size: btn.dataset.size || undefined,
+        });
+        const original = btn.textContent;
+        btn.textContent = 'Added to cart';
+        setTimeout(() => { btn.textContent = original; }, 1400);
+      });
+    });
+  </script>
 </Layout>

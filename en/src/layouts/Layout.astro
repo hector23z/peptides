@@ -102,6 +102,9 @@ const footerCompany = [
               <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>
             ))
           }
+          <a href="/cart/" class="nav-cart" aria-label="Cart">
+            Cart <span id="cart-count" class="nav-cart__count">0</span>
+          </a>
           <a href="/contact/" class="nav-contact">Request documentation</a>
         </nav>
       </div>
@@ -165,6 +168,14 @@ const footerCompany = [
         }
       });
       window.matchMedia('(min-width: 60rem)').addEventListener('change', closeNavigation);
+    </script>
+    <script>
+      import { cartCount } from '../scripts/cart';
+      const countEl = document.getElementById('cart-count');
+      const update = () => { if (countEl) countEl.textContent = String(cartCount()); };
+      update();
+      window.addEventListener('storage', update);
+      document.addEventListener('cart-updated', update);
     </script>
   </body>
 </html>

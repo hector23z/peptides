@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Checkout — PeptideLab" description="Checkout for research compounds. Crypto payment. For laboratory research use only.">
+  <section class="site-shell py-10">
+    <h1 class="font-display text-3xl font-medium tracking-tight text-lab-heading">Checkout</h1>
+    <p class="mt-2 text-lab-muted">Complete your research compound order. Payment is processed via crypto.</p>
+
+    <div id="checkout-empty" class="mt-8 hidden rounded-[12px] border border-lab-rule bg-lab-panel p-8 text-center">
+      <p class="text-lab-muted">Your cart is empty.</p>
+      <a href="/research-peptides/" class="button button--primary mt-4 inline-block">Browse compounds</a>
+    </div>
+
+    <div id="checkout-root" class="mt-8 hidden grid gap-8 lg:grid-cols-2">
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label for="email" class="mb-1 block text-sm text-lab-muted">Email</label>
+          <input id="email" name="email" type="email" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <div>
+          <label for="nombre" class="mb-1 block text-sm text-lab-muted">Full name</label>
+          <input id="nombre" name="nombre" type="text" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <div>
+          <label for="direccion" class="mb-1 block text-sm text-lab-muted">Shipping address</label>
+          <textarea id="direccion" name="direccion" rows="3" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan"></textarea>
+        </div>
+        <div>
+          <span class="mb-1 block text-sm text-lab-muted">Payment method (crypto)</span>
+          <div class="grid gap-2 sm:grid-cols-2">
+            {['USDT_TRC20','USDC','BTC','LTC','XMR'].map((m) => (
+              <label class="flex items-center gap-2 rounded-md border border-lab-rule bg-lab-panel px-3 py-2 text-sm text-lab-text">
+                <input type="radio" name="crypto" value={m} required class="accent-lab-cyan" />
+                {m.replace('_',' ')}
+              </label>
+            ))}
+          </div>
+        </div>
+        <button type="submit" class="button button--primary w-full">Place order</button>
+        <p id="checkout-error" class="hidden text-sm text-lab-error"></p>
+      </form>
+
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h2 class="font-display text-lg font-medium text-lab-heading">Order summary</h2>
+        <div id="summary-items" class="mt-4 space-y-2 text-sm text-lab-muted"></div>
+        <div class="mt-4 flex items-center justify-between border-t border-lab-rule pt-4">
+          <span class="text-lab-muted">Total</span>
+          <strong id="summary-total" class="font-mono text-lab-cyan">$0.00</strong>
+        </div>
+        <p class="mt-4 text-xs text-lab-faint">For laboratory research use only. Not for human or veterinary consumption.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { getCart, cartTotal, clearCart } from '../../scripts/cart';
+
+    const root = document.getElementById('checkout-root');
+    const empty = document.getElementById('checkout-empty');
+    const itemsEl = document.getElementById('summary-items');
+    const totalEl = document.getElementById('summary-total');
+    const form = document.getElementById('checkout-form') as HTMLFormElement;
+    const errorEl = document.getElementById('checkout-error');
+
+    function money(n: number) { return '$' + n.toFixed(2); }
+
+    function render() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        root?.classList.add('hidden');
+        empty?.classList.remove('hidden');
+        return;
+      }
+      root?.classList.remove('hidden');
+      empty?.classList.add('hidden');
+      itemsEl!.innerHTML = cart.map((i) => `
+        <div class="flex justify-between gap-4">
+          <span>${i.title} × ${i.qty}</span>
+          <span class="font-mono">${money(i.price * i.qty)}</span>
+        </div>
+      `).join('');
+      totalEl!.textContent = money(cartTotal());
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl?.classList.add('hidden');
+      const cart = getCart();
+      if (cart.length === 0) return;
+      const fd = new FormData(form);
+      const payload = {
+        email: fd.get('email'),
+        nombre: fd.get('nombre'),
+        direccion: fd.get('direccion'),
+        crypto: fd.get('crypto'),
+        items: cart,
+        total: cartTotal(),
+      };
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          errorEl!.textContent = data.error ?? 'Order could not be placed.';
+          errorEl?.classList.remove('hidden');
+          return;
+        }
+        clearCart();
+        if (data.invoice_url) {
+          window.location.href = data.invoice_url;
+        } else {
+          window.location.href = '/checkout/success';
+        }
+      } catch (err) {
+        errorEl!.textContent = 'Network error. Please try again.';
+        errorEl?.classList.remove('hidden');
+      }
+    });
+
+    render();
+  </script>
+</Layout>

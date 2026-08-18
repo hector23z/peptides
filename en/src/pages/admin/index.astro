@@ -1,0 +1,99 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { isAdmin } from '../../lib/auth';
+import { listOrders } from '../../lib/db';
+
+const authed = isAdmin(Astro.cookies.get('admin_session')?.value);
+const orders = authed ? listOrders() : [];
+---
+
+<Layout title="Admin — PeptideLab" description="Order administration.">
+  <section class="site-shell py-10">
+    <h1 class="font-display text-3xl font-medium tracking-tight text-lab-heading">Order Administration</h1>
+
+    {!authed && (
+      <form id="login-form" class="mt-8 max-w-sm space-y-4">
+        <div>
+          <label for="password" class="mb-1 block text-sm text-lab-muted">Admin password</label>
+          <input id="password" name="password" type="password" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <button type="submit" class="button button--primary w-full">Sign in</button>
+        <p id="login-error" class="hidden text-sm text-lab-error"></p>
+      </form>
+    )}
+
+    {authed && (
+      <div class="mt-8">
+        <div class="flex items-center justify-between">
+          <p class="text-lab-muted">{orders.length} order(s)</p>
+          <a href="/api/admin/logout" class="text-sm text-lab-faint hover:text-lab-cyan">Sign out</a>
+        </div>
+        {orders.length === 0 && <p class="mt-6 text-lab-muted">No orders yet.</p>}
+        <div class="mt-4 overflow-x-auto rounded-[12px] border border-lab-rule">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr class="bg-lab-panel text-left">
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Order</th>
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Customer</th>
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Total</th>
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Crypto</th>
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Status</th>
+                <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Date</th>
+                <th class="border-b border-lab-rule px-4 py-3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((o) => (
+                <tr class="border-b border-lab-rule last:border-0">
+                  <td class="px-4 py-3 font-mono text-xs text-lab-muted">{o.id.slice(0, 8)}</td>
+                  <td class="px-4 py-3 text-lab-text">{o.nombre}<br /><span class="text-xs text-lab-faint">{o.email}</span></td>
+                  <td class="px-4 py-3 font-mono text-lab-cyan">${o.total.toFixed(2)}</td>
+                  <td class="px-4 py-3 font-mono text-xs text-lab-muted">{o.crypto}</td>
+                  <td class="px-4 py-3"><span class="rounded px-2 py-0.5 text-xs {o.status === 'shipped' ? 'bg-lab-cyan-glow text-lab-cyan' : o.status === 'paid' ? 'bg-lab-cyan-glow text-lab-cyan' : 'bg-lab-panel text-lab-muted'}">{o.status}</span></td>
+                  <td class="px-4 py-3 text-xs text-lab-faint">{new Date(o.created_at).toLocaleString()}</td>
+                  <td class="px-4 py-3">
+                    {o.status !== 'shipped' && (
+                      <button data-ship={o.id} class="text-sm text-lab-cyan hover:text-lab-cyan-pale">Mark shipped</button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    )}
+  </section>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    loginForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('login-error');
+      const fd = new FormData(loginForm as HTMLFormElement);
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: fd.get('password') }),
+      });
+      if (res.ok) { window.location.reload(); }
+      else {
+        err!.textContent = 'Invalid password';
+        err?.classList.remove('hidden');
+      }
+    });
+
+    document.querySelectorAll('[data-ship]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = (btn as HTMLElement).dataset.ship;
+        const res = await fetch('/api/admin/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (res.ok) window.location.reload();
+      });
+    });
+  </script>
+</Layout>

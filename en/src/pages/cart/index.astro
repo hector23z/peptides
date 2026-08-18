@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Cart — PeptideLab" description="Your research compound cart. For laboratory research use only.">
+  <section class="site-shell py-10">
+    <h1 class="font-display text-3xl font-medium tracking-tight text-lab-heading">Your Cart</h1>
+    <p class="mt-2 text-lab-muted">Review your research compounds before checkout. For laboratory research use only.</p>
+
+    <div id="cart-empty" class="mt-8 hidden rounded-[12px] border border-lab-rule bg-lab-panel p-8 text-center">
+      <p class="text-lab-muted">Your cart is empty.</p>
+      <a href="/research-peptides/" class="button button--primary mt-4 inline-block">Browse compounds</a>
+    </div>
+
+    <div id="cart-root" class="mt-8 hidden">
+      <div class="overflow-x-auto rounded-[12px] border border-lab-rule">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="bg-lab-panel text-left">
+              <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Compound</th>
+              <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Format</th>
+              <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Price</th>
+              <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Qty</th>
+              <th class="border-b border-lab-rule px-4 py-3 font-semibold text-lab-text">Subtotal</th>
+              <th class="border-b border-lab-rule px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody id="cart-body"></tbody>
+        </table>
+      </div>
+
+      <div class="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-lab-muted">Total: <strong id="cart-total" class="font-mono text-lab-cyan">$0.00</strong></p>
+        <div class="flex gap-3">
+          <button id="clear-cart" class="button button--secondary">Clear cart</button>
+          <a href="/checkout/" class="button button--primary">Proceed to checkout</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { getCart, updateQty, removeItem, clearCart, cartTotal } from '../../scripts/cart';
+
+    const root = document.getElementById('cart-root');
+    const empty = document.getElementById('cart-empty');
+    const body = document.getElementById('cart-body');
+    const totalEl = document.getElementById('cart-total');
+
+    function money(n: number) {
+      return '$' + n.toFixed(2);
+    }
+
+    function render() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        root?.classList.add('hidden');
+        empty?.classList.remove('hidden');
+        return;
+      }
+      root?.classList.remove('hidden');
+      empty?.classList.add('hidden');
+      body!.innerHTML = cart.map((item) => `
+        <tr class="border-b border-lab-rule last:border-0">
+          <td class="px-4 py-3 text-lab-text">
+            <a href="/${item.slug}/" class="hover:text-lab-cyan">${item.title}</a>
+          </td>
+          <td class="px-4 py-3 font-mono text-xs text-lab-muted">${item.size ?? '—'}</td>
+          <td class="px-4 py-3 font-mono text-lab-muted">${money(item.price)}</td>
+          <td class="px-4 py-3">
+            <input type="number" min="1" value="${item.qty}" data-slug="${item.slug}" class="w-16 rounded border border-lab-rule bg-lab-panel px-2 py-1 text-lab-text" />
+          </td>
+          <td class="px-4 py-3 font-mono text-lab-cyan">${money(item.price * item.qty)}</td>
+          <td class="px-4 py-3">
+            <button data-remove="${item.slug}" class="text-lab-faint hover:text-lab-error">Remove</button>
+          </td>
+        </tr>
+      `).join('');
+      totalEl!.textContent = money(cartTotal());
+    }
+
+    body?.addEventListener('change', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.dataset.slug) {
+        updateQty(t.dataset.slug, Number(t.value));
+        render();
+      }
+    });
+    body?.addEventListener('click', (e) => {
+      const t = (e.target as HTMLElement).closest('[data-remove]') as HTMLElement | null;
+      if (t?.dataset.remove) {
+        removeItem(t.dataset.remove);
+        render();
+      }
+    });
+    document.getElementById('clear-cart')?.addEventListener('click', () => { clearCart(); render(); });
+
+    render();
+  </script>
+</Layout>
