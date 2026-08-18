@@ -6,11 +6,17 @@ export async function getStaticPaths() {
   const products = await getCollection('products');
   return products.map((product) => ({
     params: { category: product.data.category, product: product.id },
-    props: { product },
+    props: {
+      product,
+      relatedProducts: products
+        .filter((candidate) => candidate.data.category === product.data.category && candidate.id !== product.id)
+        .sort((a, b) => a.data.order - b.data.order)
+        .slice(0, 3),
+    },
   }));
 }
 
-const { product } = Astro.props;
+const { product, relatedProducts } = Astro.props;
 const { Content } = await render(product);
 const category = product.data.category;
 
@@ -38,9 +44,46 @@ const productJsonLd = {
   ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Purity', value: product.data.purity } } : {}),
   brand: { '@type': 'Brand', name: 'PeptideLab' },
 };
+
+const stripMarkdown = (value: string) => value
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  .replace(/[*_`>#]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const definition = product.body
+  .split(/\r?\n\r?\n/)
+  .map(stripMarkdown)
+  .find((block) => block && !block.startsWith('|') && !block.startsWith('import '))
+  ?? product.data.description;
+
+const faqItems = [
+  {
+    question: `What is ${product.data.title}?`,
+    answer: definition,
+  },
+  {
+    question: `How should researchers verify ${product.data.title}?`,
+    answer: `Confirm the exact molecular form on the lot certificate and pair chromatographic purity with an orthogonal identity method such as mass spectrometry or NMR. Use the molecular weight, counterion and content stated for that verified form when calculating molarity.`,
+  },
+  {
+    question: `Is ${product.data.title} intended for human use?`,
+    answer: `${product.data.title} is listed for controlled laboratory research only. It is not intended for human or veterinary use.`,
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
 ---
 
-<Layout title={`${product.data.title} — PeptideLab`} description={product.data.description}>
+<Layout title={`${product.data.title}: Research Data & Handling | PeptideLab`} description={product.data.description}>
   <nav class="breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span>/</span><a href={`/${category}/`}>{categoryLabels[category] ?? category}</a><span>/</span><span>{product.data.title}</span>
   </nav>
@@ -73,7 +116,33 @@ const productJsonLd = {
       <a href="/peptide-purity-guide/">Purity guide</a>
       <a href="/how-to-store-peptides/">Storage guide</a>
     </aside>
-    <div class="md-content product-content"><Content /></div>
+    <div class="md-content product-content">
+      <Content />
+
+      <section class="product-faq" aria-labelledby="product-faq-title">
+        <h2 id="product-faq-title">What Are Common Questions About {product.data.title}?</h2>
+        {faqItems.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </section>
+
+      <section class="related-research" aria-labelledby="related-research-title">
+        <h2 id="related-research-title">Which {categoryLabels[category] ?? category} Research Records Are Related?</h2>
+        <p>
+          Continue with the <a href={`/${category}/`}>{categoryLabels[category] ?? category} category</a>
+          {' '}or compare related research records:
+        </p>
+        <ul>
+          {relatedProducts.map((related) => (
+            <li><a href={`/${related.data.category}/${related.id}/`}>{related.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    </div>
   </article>
   <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
 </Layout>
