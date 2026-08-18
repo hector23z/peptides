@@ -9,6 +9,7 @@ const products = defineCollection({
     category: z.string(),
     purity: z.string().optional(),
     size: z.string().optional(),
+    molecularWeight: z.string().optional(),
     price: z.number().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(0),
