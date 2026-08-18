@@ -1,6 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import fs from 'node:fs';
+
+const productImages = new Set(
+  fs.existsSync('public/images/products')
+    ? fs.readdirSync('public/images/products').map((f) => f.replace(/\.(png|jpg|webp)$/, ''))
+    : []
+);
 
 export async function getStaticPaths() {
   const products = await getCollection('products');
@@ -26,6 +33,10 @@ const categoryImages: Record<string, string> = {
   longevity: '/images/longevity.png',
   hgh: '/images/hgh.png',
 };
+
+const productImage = productImages.has(product.id)
+  ? `/images/products/${product.id}.png`
+  : (categoryImages[category] ?? '/images/hero-home.png');
 
 const categoryLabels: Record<string, string> = {
   recovery: 'Recovery',
@@ -90,7 +101,7 @@ const faqJsonLd = {
 
   <section class="product-hero mt-6">
     <figure>
-      <img src={categoryImages[category] ?? '/images/hero-home.png'} alt="" width="1254" height="1254" loading="eager" decoding="async" />
+      <img src={productImage} alt={`${product.data.title} research vial`} width="1254" height="1254" loading="eager" decoding="async" />
     </figure>
     <div class="product-hero__content">
       <h1>{product.data.title}</h1>
