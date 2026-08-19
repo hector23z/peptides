@@ -1,0 +1,196 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import fs from 'node:fs';
+import eligibleSlugs from '../../config/commerceEligible.json';
+
+const productImages = new Set(
+  fs.existsSync('public/images/products')
+    ? fs.readdirSync('public/images/products').map((f) => f.replace(/\.(png|jpg|webp)$/, ''))
+    : []
+);
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { category: product.data.category, product: product.id },
+    props: {
+      product,
+      relatedProducts: products
+        .filter((candidate) => candidate.data.category === product.data.category && candidate.id !== product.id)
+        .sort((a, b) => a.data.order - b.data.order)
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { product, relatedProducts } = Astro.props;
+const { Content } = await render(product);
+const category = product.data.category;
+const isEligible = eligibleSlugs.includes(product.id);
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
+
+const productImage = productImages.has(product.id)
+  ? `/images/products/${product.id}.png`
+  : (categoryImages[category] ?? '/images/hero-home.png');
+
+const categoryLabels: Record<string, string> = {
+  recovery: 'Herstel',
+  'glp-1': 'GLP-1 onderzoek',
+  longevity: 'Longevity',
+  hgh: 'HGH-onderzoek',
+};
+
+const eur = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.data.title,
+  description: `${product.data.description} Uitsluitend voor laboratoriumonderzoek. Niet voor menselijke of diergeneeskundige consumptie.`,
+  category,
+  ...(product.data.price ? { offers: { '@type': 'Offer', price: product.data.price, priceCurrency: 'EUR', availability: 'https://schema.org/InStock' } } : {}),
+  ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Zuiverheid', value: product.data.purity } } : {}),
+  brand: { '@type': 'Brand', name: 'Peptidux' },
+};
+
+const stripMarkdown = (value: string) => value
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  .replace(/[*_`>#]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const definition = product.body
+  .split(/\r?\n\r?\n/)
+  .map(stripMarkdown)
+  .find((block) => block && !block.startsWith('|') && !block.startsWith('import '))
+  ?? product.data.description;
+
+const faqItems = [
+  {
+    question: `Wat is ${product.data.title}?`,
+    answer: definition,
+  },
+  {
+    question: `Hoe verifiëren onderzoekers ${product.data.title}?`,
+    answer: `Controleer de exacte molecuulvorm op het batchcertificaat en combineer de chromatografische zuiverheid met een orthogonale identiteitsmethode zoals massaspectrometrie of NMR. Gebruik het molecuulgewicht, het tegenion en de content van de geverifieerde vorm bij molaire berekeningen.`,
+  },
+  {
+    question: `Is ${product.data.title} bestemd voor menselijk gebruik?`,
+    answer: `${product.data.title} wordt uitsluitend vermeld voor gecontroleerd laboratoriumonderzoek. De stof is niet bestemd voor menselijk of diergeneeskundig gebruik.`,
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<Layout title={`${product.data.title}: onderzoeksgegevens & hantering | Peptidux`} description={product.data.description}>
+  <nav class="breadcrumbs pt-8" aria-label="Kruimelpad">
+    <a href="/">Home</a><span>/</span><a href={`/${category}/`}>{categoryLabels[category] ?? category}</a><span>/</span><span>{product.data.title}</span>
+  </nav>
+
+  <section class="product-hero mt-6">
+    <figure>
+      <img src={productImage} alt={`${product.data.title} researchflacon`} width="1254" height="1254" loading="eager" decoding="async" />
+    </figure>
+    <div class="product-hero__content">
+      <h1>{product.data.title}</h1>
+      <p>{product.data.description}</p>
+      <dl>
+        <div><dt>Zuiverheid</dt><dd>{product.data.purity ?? 'Zie batchdocumentatie'}</dd></div>
+        <div><dt>Vorm</dt><dd>{product.data.size ?? 'Zie vermelding'}</dd></div>
+        <div><dt>Categorie</dt><dd>{categoryLabels[category] ?? category}</dd></div>
+        <div><dt>Gebruik</dt><dd>Uitsluitend laboratoriumonderzoek</dd></div>
+      </dl>
+      <div class="product-hero__purchase">
+        <div><span>Vermelde prijs</span><strong>{product.data.price ? eur.format(product.data.price) : 'Op aanvraag'}</strong></div>
+        <div class="flex flex-wrap gap-3">
+          {isEligible && product.data.price && (
+            <button
+              type="button"
+              class="button button--primary"
+              data-add-to-cart
+              data-slug={product.id}
+              data-title={product.data.title}
+              data-price={product.data.price}
+              data-size={product.data.size ?? ''}
+              data-category={product.data.category}
+            >In winkelwagen</button>
+          )}
+          <a href="/contact/" class="button button--secondary">Batchdocumentatie aanvragen</a>
+        </div>
+      </div>
+      <p class="product-hero__notice">Niet voor menselijke of diergeneeskundige consumptie.</p>
+    </div>
+  </section>
+
+  <article class="product-article gap-10">
+    <aside class="pb-5">
+      <p>Productrecord</p>
+      <a href={`/${category}/`}>Terug naar {categoryLabels[category] ?? category}</a>
+      <a href="/purity/">Zuiverheidsgids</a>
+      <a href="/storage/">Bewaargids</a>
+    </aside>
+    <div class="md-content product-content">
+      <Content />
+
+      <section class="product-faq mt-20" aria-labelledby="product-faq-title">
+        <h2 id="product-faq-title">Veelgestelde vragen over {product.data.title}</h2>
+        {faqItems.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </section>
+
+      <section class="related-research mt-24" aria-labelledby="related-research-title">
+        <h2 id="related-research-title">Gerelateerde {categoryLabels[category] ?? category}-records</h2>
+        <p>
+          Ga verder met de <a href={`/${category}/`}>categorie {categoryLabels[category] ?? category}</a>
+          {' '}of vergelijk gerelateerde onderzoeksrecords:
+        </p>
+        <ul>
+          {relatedProducts.map((related) => (
+            <li><a href={`/${related.data.category}/${related.id}/`}>{related.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <script>
+    import { addToCart } from '../../scripts/cart';
+    document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        addToCart({
+          slug: btn.dataset.slug,
+          title: btn.dataset.title,
+          price: Number(btn.dataset.price),
+          size: btn.dataset.size || undefined,
+          category: btn.dataset.category || undefined,
+        });
+        const original = btn.textContent;
+        btn.textContent = 'Toegevoegd aan winkelwagen';
+        setTimeout(() => { btn.textContent = original; }, 1400);
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,308 @@
+---
+import '../styles/global.css';
+import persona from '../data/persona.json';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Researchpeptiden en laboratoriumbenodigdheden. Uitsluitend voor onderzoeksgebruik.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Peptidux',
+  alternateName: 'Peptidux Research Peptides',
+  url: Astro.site.href,
+  description: 'Leverancier van hoogzuivere researchpeptiden en laboratoriummaterialen. Uitsluitend voor onderzoeksgebruik.',
+  email: 'support@peptidux.example',
+  slogan: 'Alleen voor onderzoeksgebruik. Niet voor menselijke consumptie.',
+  areaServed: 'Nederland',
+  knowsAbout: [
+    'researchpeptiden',
+    'GLP-1 receptoragonisten',
+    'peptide zuiverheidstesten',
+    'certificaten van analyse',
+    'peptide reconstitutie',
+  ],
+};
+
+const webJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Peptidux',
+  url: Astro.site.href,
+  description: 'Researchpeptiden en laboratoriumbenodigdheden. Uitsluitend voor onderzoeksgebruik.',
+  publisher: { '@type': 'Organization', name: 'Peptidux' },
+  inLanguage: 'nl',
+};
+
+const personJsonLd = persona;
+
+const segLabels: Record<string, string> = {
+  'glp-1': 'GLP-1 peptiden',
+  recovery: 'Herstelpeptiden',
+  longevity: 'Longevity-peptiden',
+  hgh: 'HGH & secretagogen',
+  cart: 'Winkelwagen',
+  checkout: 'Afrekenen',
+  admin: 'Beheer',
+  about: 'Over ons',
+  contact: 'Contact',
+  disclaimer: 'Disclaimer',
+  shipping: 'Verzending',
+  privacy: 'Privacy',
+  terms: 'Voorwaarden',
+  'research-peptides': 'Researchpeptiden',
+  purity: 'Zuiverheidsgids',
+  reconstitution: 'Reconstitutiegids',
+  storage: 'Bewaargids',
+};
+
+function buildBreadcrumb(pathname: string, pageTitle: string) {
+  const clean = pathname.replace(/\/$/, '');
+  const segments = clean === '' ? [] : clean.split('/').filter(Boolean);
+  const items: any[] = [{ '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site.href }];
+  let current = '';
+  segments.forEach((seg, i) => {
+    current += '/' + seg;
+    const isLast = i === segments.length - 1;
+    const name = isLast ? pageTitle : (segLabels[seg] ?? seg.replace(/-/g, ' '));
+    items.push({
+      '@type': 'ListItem',
+      position: items.length + 1,
+      name,
+      item: new URL(current + '/', Astro.site).href,
+    });
+  });
+  return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items };
+}
+
+const breadcrumbJsonLd = buildBreadcrumb(Astro.url.pathname, title);
+
+const nav = [
+  { href: '/glp-1/', label: 'GLP-1' },
+  { href: '/recovery/', label: 'Herstel' },
+  { href: '/longevity/', label: 'Longevity' },
+  { href: '/hgh/', label: 'HGH' },
+  { href: '/about/', label: 'Over ons' },
+];
+
+const footerResearch = [
+  { href: '/research-peptides/', label: 'Alle stoffen' },
+  { href: '/purity/', label: 'Zuiverheidsgids' },
+  { href: '/reconstitution/', label: 'Reconstitutiegids' },
+  { href: '/storage/', label: 'Bewaargids' },
+];
+
+const footerCompany = [
+  { href: '/about/', label: 'Over ons' },
+  { href: '/contact/', label: 'Contact' },
+  { href: '/shipping/', label: 'Verzending' },
+  { href: '/disclaimer/', label: 'Disclaimer' },
+];
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fafaf8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(webJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Direct naar inhoud</a>
+
+    <div class="utility-bar">
+      <div class="site-shell utility-bar__inner">
+        <p><span aria-hidden="true"></span>Uitsluitend voor onderzoeksgebruik</p>
+        <p>Niet voor menselijke of diergeneeskundige consumptie</p>
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-shell site-header__inner">
+        <a href="/" class="wordmark" aria-label="Peptidux home">
+          <span>PEPTID</span><span>UX</span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span class="nav-toggle__label">Menu</span>
+          <span class="nav-toggle__lines" aria-hidden="true"><i></i><i></i></span>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" aria-label="Hoofdnavigatie">
+          {
+            nav.map((item) => (
+              <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>
+            ))
+          }
+          <a href="/cart/" class="nav-cart" aria-label="Winkelwagen">
+            Winkelwagen <span id="cart-count" class="nav-cart__count">0</span>
+          </a>
+          <a href="/contact/" class="nav-contact">Documentatie aanvragen</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content" class="site-main site-shell">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-shell site-footer__grid">
+        <div class="site-footer__brand">
+          <a href="/" class="wordmark" aria-label="Peptidux home">
+            <span>PEPTID</span><span>UX</span>
+          </a>
+          <p>Hoogzuivere materialen voor gecontroleerd laboratoriumonderzoek, geleverd met duidelijke batchdocumentatie.</p>
+          <p class="site-footer__restriction">Uitsluitend voor onderzoeksgebruik. Niet voor menselijke consumptie.</p>
+        </div>
+        <nav aria-label="Onderzoek links">
+          <h2>Onderzoek</h2>
+          {footerResearch.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <nav aria-label="Bedrijf links">
+          <h2>Bedrijf</h2>
+          {footerCompany.map((item) => <a href={item.href}>{item.label}</a>)}
+        </nav>
+        <div class="site-footer__contact">
+          <h2>Laboratoriumsupport</h2>
+          <p>Vragen over producten, bestellingen of certificaten van analyse?</p>
+          <a href="mailto:support@peptidux.example">support@peptidux.example</a>
+        </div>
+      </div>
+      <div class="site-shell site-footer__bottom">
+        <p>&copy; {new Date().getFullYear()} Peptidux &mdash; Alleen voor onderzoeksgebruik</p>
+        <nav aria-label="Juridische links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Voorwaarden</a>
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Mini-cart drawer -->
+    <div id="mini-cart-overlay" class="mini-cart-overlay" aria-hidden="true"></div>
+    <aside id="mini-cart" class="mini-cart" aria-label="Winkelwagen" aria-hidden="true">
+      <div class="mini-cart__header">
+        <h2>Uw winkelwagen</h2>
+        <button id="mini-cart-close" type="button" aria-label="Winkelwagen sluiten">&times;</button>
+      </div>
+      <div id="mini-cart-items" class="mini-cart__items"></div>
+      <div class="mini-cart__footer">
+        <div class="mini-cart__subtotal">
+          <span>Subtotaal</span>
+          <strong id="mini-cart-total">&euro; 0,00</strong>
+        </div>
+        <a href="/checkout/" class="button button--primary mini-cart__checkout">Verder naar afrekenen</a>
+        <a href="/cart/" class="mini-cart__view">Volledige winkelwagen bekijken</a>
+      </div>
+    </aside>
+
+    <script is:inline>
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('#primary-nav');
+      const closeNavigation = () => {
+        toggle?.setAttribute('aria-expanded', 'false');
+        nav?.classList.remove('is-open');
+      };
+
+      toggle?.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        nav?.classList.toggle('is-open', !expanded);
+      });
+
+      nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+          closeNavigation();
+          toggle.focus();
+        }
+      });
+      window.matchMedia('(min-width: 60rem)').addEventListener('change', closeNavigation);
+    </script>
+    <script>
+      import { cartCount, getCart, cartTotal } from '../scripts/cart';
+      const countEl = document.getElementById('cart-count');
+      const update = () => { if (countEl) countEl.textContent = String(cartCount()); };
+      update();
+      window.addEventListener('storage', update);
+      document.addEventListener('cart-updated', update);
+
+      // Mini-cart drawer
+      const miniCart = document.getElementById('mini-cart');
+      const miniOverlay = document.getElementById('mini-cart-overlay');
+      const miniItems = document.getElementById('mini-cart-items');
+      const miniTotal = document.getElementById('mini-cart-total');
+      const miniClose = document.getElementById('mini-cart-close');
+
+      const money = (n: number) =>
+        new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(n);
+
+      function renderMiniCart() {
+        const cart = getCart();
+        if (!miniItems) return;
+        if (cart.length === 0) {
+          miniItems.innerHTML = '<p class="mini-cart__empty">Uw winkelwagen is leeg.</p>';
+        } else {
+          miniItems.innerHTML = cart.map((i) => `
+            <div class="mini-cart__item">
+              <div class="mini-cart__item-info">
+                <strong>${i.title}</strong>
+                <span>${i.qty} \u00d7 ${money(i.price)}</span>
+              </div>
+              <span class="mini-cart__item-total">${money(i.price * i.qty)}</span>
+            </div>
+          `).join('');
+        }
+        if (miniTotal) miniTotal.textContent = money(cartTotal());
+      }
+
+      function openMiniCart() {
+        renderMiniCart();
+        miniCart?.classList.add('is-open');
+        miniOverlay?.classList.add('is-visible');
+        miniCart?.setAttribute('aria-hidden', 'false');
+        miniOverlay?.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeMiniCart() {
+        miniCart?.classList.remove('is-open');
+        miniOverlay?.classList.remove('is-visible');
+        miniCart?.setAttribute('aria-hidden', 'true');
+        miniOverlay?.setAttribute('aria-hidden', 'true');
+      }
+
+      miniClose?.addEventListener('click', closeMiniCart);
+      miniOverlay?.addEventListener('click', closeMiniCart);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMiniCart();
+      });
+
+      // Open mini-cart wanneer een product wordt toegevoegd
+      document.addEventListener('cart-updated', (e) => {
+        update();
+        const detail = (e as CustomEvent).detail;
+        if (detail?.openDrawer) openMiniCart();
+      });
+
+      // Winkelwagen-link in de nav opent de drawer
+      document.querySelector('.nav-cart')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMiniCart();
+      });
+    </script>
+  </body>
+</html>

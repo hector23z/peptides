@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Afrekenen — Peptidux" description="Afrekenen voor researchstoffen. Directe cryptobetaling. Uitsluitend voor laboratoriumonderzoek.">
+  <section class="site-shell py-10">
+    <h1 class="font-display text-3xl font-medium tracking-tight text-lab-heading">Afrekenen</h1>
+    <p class="mt-2 text-lab-muted">Rond uw bestelling van researchstoffen af. De betaling gaat rechtstreeks naar onze wallet — zonder externe betalingsverwerker.</p>
+
+    <div id="checkout-empty" class="mt-8 hidden rounded-[12px] border border-lab-rule bg-lab-panel p-8 text-center">
+      <p class="text-lab-muted">Uw winkelwagen is leeg.</p>
+      <a href="/research-peptides/" class="button button--primary mt-4 inline-block">Blader door de stoffen</a>
+    </div>
+
+    <div id="checkout-root" class="mt-8 hidden grid gap-8 lg:grid-cols-2">
+      <form id="checkout-form" class="space-y-4">
+        <div>
+          <label for="email" class="mb-1 block text-sm text-lab-muted">E-mailadres</label>
+          <input id="email" name="email" type="email" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <div>
+          <label for="nombre" class="mb-1 block text-sm text-lab-muted">Volledige naam</label>
+          <input id="nombre" name="nombre" type="text" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <div>
+          <label for="direccion" class="mb-1 block text-sm text-lab-muted">Verzendadres</label>
+          <textarea id="direccion" name="direccion" rows="3" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan"></textarea>
+        </div>
+        <div>
+          <span class="mb-1 block text-sm text-lab-muted">Betaalmethode (directe cryptobetaling)</span>
+          <div class="grid gap-2 sm:grid-cols-2">
+            {['USDT_TRC20','USDT_ERC20','USDC','BTC','LTC','XMR'].map((m) => (
+              <label class="flex items-center gap-2 rounded-md border border-lab-rule bg-lab-panel px-3 py-2 text-sm text-lab-text">
+                <input type="radio" name="crypto" value={m} required class="accent-lab-cyan" />
+                {m.replace('_',' ')}
+              </label>
+            ))}
+          </div>
+        </div>
+        <button type="submit" class="button button--primary w-full">Bestelling plaatsen</button>
+        <p id="checkout-error" class="hidden text-sm text-lab-error"></p>
+      </form>
+
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h2 class="font-display text-lg font-medium text-lab-heading">Besteloverzicht</h2>
+        <div id="summary-items" class="mt-4 space-y-2 text-sm text-lab-muted"></div>
+        <div class="mt-4 flex items-center justify-between border-t border-lab-rule pt-4">
+          <span class="text-lab-muted">Totaal</span>
+          <strong id="summary-total" class="font-mono text-lab-cyan">&euro; 0,00</strong>
+        </div>
+        <p class="mt-4 text-xs text-lab-faint">Uitsluitend voor laboratoriumonderzoek. Niet voor menselijke of diergeneeskundige consumptie.</p>
+      </div>
+    </div>
+
+    <!-- Betaalinstructies (zichtbaar na het plaatsen van de bestelling) -->
+    <div id="payment-panel" class="mt-8 hidden rounded-[12px] border border-lab-rule bg-lab-panel p-8">
+      <h2 class="font-display text-xl font-medium text-lab-heading">Rond uw betaling af</h2>
+      <p class="mt-2 text-sm text-lab-muted">Maak het exacte bedrag over naar onderstaand adres en dien daarna uw transactiehash in.</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <div>
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Bestelnummer</span>
+          <strong id="pay-order-id" class="font-mono text-lab-text"></strong>
+        </div>
+        <div>
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Netwerk</span>
+          <strong id="pay-network" class="font-mono text-lab-text"></strong>
+        </div>
+        <div class="sm:col-span-2">
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Walletadres</span>
+          <div class="flex items-center gap-2">
+            <code id="pay-address" class="flex-1 break-all rounded-md border border-lab-rule bg-lab-deep px-3 py-2 font-mono text-sm text-lab-cyan"></code>
+            <button id="copy-address" type="button" class="button button--secondary shrink-0">Kopiëren</button>
+          </div>
+        </div>
+        <div class="sm:col-span-2">
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Scan om te betalen</span>
+          <div id="pay-qr" class="inline-block rounded-md border border-lab-rule bg-white p-3"></div>
+        </div>
+        <div>
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Bedrag (EUR)</span>
+          <strong id="pay-amount" class="font-mono text-lab-cyan"></strong>
+        </div>
+        <div>
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Vereiste bevestigingen</span>
+          <strong id="pay-confirmations" class="font-mono text-lab-text"></strong>
+        </div>
+      </div>
+      <form id="tx-form" class="mt-6 space-y-4">
+        <div>
+          <label for="tx-hash" class="mb-1 block text-sm text-lab-muted">Transactiehash (na verzending)</label>
+          <input id="tx-hash" name="tx_hash" type="text" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 font-mono text-sm text-lab-text outline-none focus:border-lab-cyan" placeholder="0x..." />
+        </div>
+        <button type="submit" class="button button--primary">Betaalbewijs indienen</button>
+        <p id="tx-error" class="hidden text-sm text-lab-error"></p>
+        <p id="tx-success" class="hidden text-sm text-lab-success">Betaalbewijs ontvangen. Wij verifiëren de transactie en werken uw bestelstatus bij.</p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    import { getCart, cartTotal, clearCart } from '../../scripts/cart';
+    import qrcode from 'qrcode-generator';
+
+    const root = document.getElementById('checkout-root');
+    const empty = document.getElementById('checkout-empty');
+    const itemsEl = document.getElementById('summary-items');
+    const totalEl = document.getElementById('summary-total');
+    const form = document.getElementById('checkout-form') as HTMLFormElement;
+    const errorEl = document.getElementById('checkout-error');
+    const paymentPanel = document.getElementById('payment-panel');
+    const txForm = document.getElementById('tx-form') as HTMLFormElement;
+    const txError = document.getElementById('tx-error');
+    const txSuccess = document.getElementById('tx-success');
+    const copyBtn = document.getElementById('copy-address');
+
+    let currentOrderId: string | null = null;
+
+    function money(n: number) {
+      return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(n);
+    }
+
+    function render() {
+      const cart = getCart();
+      if (cart.length === 0) {
+        root?.classList.add('hidden');
+        empty?.classList.remove('hidden');
+        return;
+      }
+      root?.classList.remove('hidden');
+      empty?.classList.add('hidden');
+      itemsEl!.innerHTML = cart.map((i) => `
+        <div class="flex justify-between gap-4">
+          <span>${i.title} \u00d7 ${i.qty}</span>
+          <span class="font-mono">${money(i.price * i.qty)}</span>
+        </div>
+      `).join('');
+      totalEl!.textContent = money(cartTotal());
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl?.classList.add('hidden');
+      const cart = getCart();
+      if (cart.length === 0) return;
+      const fd = new FormData(form);
+      const payload = {
+        email: fd.get('email'),
+        nombre: fd.get('nombre'),
+        direccion: fd.get('direccion'),
+        crypto: fd.get('crypto'),
+        items: cart,
+        total: cartTotal(),
+      };
+      try {
+        const res = await fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          errorEl!.textContent = data.error ?? 'De bestelling kon niet worden geplaatst.';
+          errorEl?.classList.remove('hidden');
+          return;
+        }
+        clearCart();
+        currentOrderId = data.orderId;
+        // Formulier verbergen, betaalpaneel tonen
+        root?.classList.add('hidden');
+        paymentPanel?.classList.remove('hidden');
+        document.getElementById('pay-order-id')!.textContent = data.orderId;
+        document.getElementById('pay-network')!.textContent = data.payment.network;
+        document.getElementById('pay-address')!.textContent = data.payment.address;
+        document.getElementById('pay-amount')!.textContent = money(data.payment.amountEur);
+        document.getElementById('pay-confirmations')!.textContent = String(data.payment.confirmations);
+        // QR-code voor het walletadres genereren
+        const qrEl = document.getElementById('pay-qr');
+        if (qrEl) {
+          const qr = qrcode(0, 'M');
+          qr.addData(data.payment.address);
+          qr.make();
+          qrEl.innerHTML = qr.createSvgTag({ scalable: true, cellSize: 4, margin: 2 });
+          const svg = qrEl.querySelector('svg');
+          if (svg) { svg.setAttribute('width', '180'); svg.setAttribute('height', '180'); }
+        }
+        paymentPanel?.scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        errorEl!.textContent = 'Netwerkfout. Probeer het opnieuw.';
+        errorEl?.classList.remove('hidden');
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      const addr = document.getElementById('pay-address')?.textContent ?? '';
+      navigator.clipboard.writeText(addr).then(() => {
+        copyBtn.textContent = 'Gekopieerd';
+        setTimeout(() => { copyBtn.textContent = 'Kopiëren'; }, 2000);
+      });
+    });
+
+    txForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      txError?.classList.add('hidden');
+      txSuccess?.classList.add('hidden');
+      if (!currentOrderId) return;
+      const fd = new FormData(txForm);
+      try {
+        const res = await fetch('/api/orders/tx', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId: currentOrderId, tx_hash: fd.get('tx_hash') }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          txError!.textContent = data.error ?? 'Het betaalbewijs kon niet worden ingediend.';
+          txError?.classList.remove('hidden');
+          return;
+        }
+        txSuccess?.classList.remove('hidden');
+        txForm.querySelector('button')!.setAttribute('disabled', 'true');
+      } catch (err) {
+        txError!.textContent = 'Netwerkfout. Probeer het opnieuw.';
+        txError?.classList.remove('hidden');
+      }
+    });
+
+    render();
+  </script>
+</Layout>

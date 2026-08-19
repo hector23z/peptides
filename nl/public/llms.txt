@@ -1,0 +1,22 @@
+# Peptidux — Researchpeptiden van laboratoriumkwaliteit
+
+Peptidux levert hoogzuivere researchpeptiden en laboratoriummaterialen aan gekwalificeerde
+laboratoria. Elke batch wordt onafhankelijk op zuiverheid geverifieerd (HPLC en
+massaspectrometrie) en gaat vergezeld van een certificaat van analyse (CoA).
+
+Alle producten zijn uitsluitend bestemd voor laboratoriumonderzoek en niet voor menselijke
+of diergeneeskundige consumptie.
+
+## Categorieën
+
+- GLP-1 onderzoek: https://peptidux.example/glp-1/
+- Herstel: https://peptidux.example/recovery/
+- Longevity: https://peptidux.example/longevity/
+- HGH-onderzoek: https://peptidux.example/hgh/
+
+## Kennisbank
+
+- Researchpeptiden: https://peptidux.example/research-peptides/
+- Zuiverheid: https://peptidux.example/purity/
+- Reconstitutie: https://peptidux.example/reconstitution/
+- Bewaring: https://peptidux.example/storage/

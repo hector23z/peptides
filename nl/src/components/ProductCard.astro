@@ -1,0 +1,104 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import eligibleSlugs from '../config/commerceEligible.json';
+import fs from 'node:fs';
+
+interface Props {
+  product: CollectionEntry<'products'>;
+  priority?: boolean;
+}
+
+const { product, priority = false } = Astro.props;
+const isEligible = eligibleSlugs.includes(product.id);
+
+const productImages = new Set(
+  fs.existsSync('public/images/products')
+    ? fs.readdirSync('public/images/products').map((f) => f.replace(/\.(png|jpg|webp)$/, ''))
+    : []
+);
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
+
+const productImage = productImages.has(product.id)
+  ? `/images/products/${product.id}.png`
+  : (categoryImages[product.data.category] ?? '/images/hero-home.png');
+
+const categoryLabels: Record<string, string> = {
+  recovery: 'Herstel',
+  'glp-1': 'GLP-1 onderzoek',
+  longevity: 'Longevity',
+  hgh: 'HGH-onderzoek',
+};
+
+const eur = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+---
+
+<article class="product-card">
+  <a href={`/${product.data.category}/${product.id}/`} aria-label={`Bekijk ${product.data.title}`} class="product-card__link">
+    <div class="product-card__media">
+      <img
+        src={productImage}
+        alt={`${product.data.title} researchflacon`}
+        width="1254"
+        height="1254"
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+      <span>{categoryLabels[product.data.category] ?? product.data.category}</span>
+    </div>
+    <div class="product-card__body">
+      <h3>{product.data.title}</h3>
+      <p>{product.data.description}</p>
+      <dl class="product-card__specs">
+        <div>
+          <dt>Zuiverheid</dt>
+          <dd>{product.data.purity ?? 'Zie batch'}</dd>
+        </div>
+        <div>
+          <dt>Vorm</dt>
+          <dd>{product.data.size ?? 'Zie vermelding'}</dd>
+        </div>
+      </dl>
+    </div>
+  </a>
+  <div class="product-card__footer">
+    <span class="product-card__price">{product.data.price ? eur.format(product.data.price) : 'Op aanvraag'}</span>
+    {isEligible ? (
+      <button
+        type="button"
+        class="product-card__add"
+        data-add-to-cart
+        data-slug={product.id}
+        data-title={product.data.title}
+        data-price={product.data.price}
+        data-size={product.data.size ?? ''}
+        data-category={product.data.category}
+      >In winkelwagen</button>
+    ) : (
+      <a href={`/${product.data.category}/${product.id}/`} class="product-card__action">Bekijk de stof</a>
+    )}
+  </div>
+</article>
+
+<script>
+  import { addToCart } from '../scripts/cart';
+  document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      addToCart({
+        slug: btn.dataset.slug,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        size: btn.dataset.size || undefined,
+        category: btn.dataset.category || undefined,
+      });
+      const original = btn.textContent;
+      btn.textContent = 'Toegevoegd \u2713';
+      setTimeout(() => { btn.textContent = original; }, 1400);
+    });
+  });
+</script>

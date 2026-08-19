@@ -1,0 +1,139 @@
+---
+import { getCollection } from 'astro:content';
+import CategoryCard from '../components/CategoryCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Layout from '../layouts/Layout.astro';
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
+const products = (await getCollection('products'))
+  .filter((product) => product.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+
+const guides = [
+  {
+    href: '/research-peptides/',
+    title: 'Researchpeptiden',
+    text: 'Wat zijn researchpeptiden, welke klassen bestaan er en hoe werkt verantwoord onderzoek ermee?',
+  },
+  {
+    href: '/purity/',
+    title: 'Zuiverheid',
+    text: 'HPLC, massaspectrometrie en het lezen van een certificaat van analyse per batch.',
+  },
+  {
+    href: '/reconstitution/',
+    title: 'Reconstitutie',
+    text: 'Oplosmiddelen, werkwijze en concentratieberekeningen voor gelyofiliseerde peptiden.',
+  },
+  {
+    href: '/storage/',
+    title: 'Bewaring',
+    text: 'Gelyofiliseerd en gereconstitueerd materiaal correct bewaren: temperatuur, licht en vocht.',
+  },
+];
+---
+
+<Layout title="Peptidux — Researchpeptiden van laboratoriumkwaliteit">
+  <section class="home-hero">
+    <div class="home-hero__copy">
+      <p class="home-hero__eyebrow"><span aria-hidden="true"></span>Peptidux laboratoriumcatalogus</p>
+      <h1>Hoogzuivere stoffen voor gecontroleerd onderzoek</h1>
+      <p>
+        Gelyofiliseerde researchpeptiden voor gekwalificeerde laboratoria, met onafhankelijke
+        zuiverheidsverificatie en duidelijke batchdocumentatie.
+      </p>
+      <div class="button-row">
+        <a href="#featured" class="button button--primary">Bekijk de stoffen</a>
+        <a href="/purity/" class="button button--secondary">Lees de kwaliteitsnormen</a>
+      </div>
+      <dl class="home-hero__facts">
+        <div><dt>Zuiverheid</dt><dd>&gt;99% op vermelde stoffen</dd></div>
+        <div><dt>Verificatie</dt><dd>Onafhankelijke HPLC-testen</dd></div>
+        <div><dt>Documentatie</dt><dd>Batch-CoA meegeleverd</dd></div>
+      </dl>
+    </div>
+    <figure class="home-hero__media">
+      <img
+        src="/images/hero-home.png"
+        alt="Onge etiketteerde laboratoriumflacons op een werkoppervlak"
+        width="1693"
+        height="929"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption><span>Gecontroleerde materialen</span><span>Representatieve laboratoriumbeelden</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="home-section" aria-labelledby="categories-title">
+    <SectionHeading
+      id="categories-title"
+      title="Onderzoekscategorieën"
+      description="Blader door stoffen per onderzoeksrichting en het biologische systeem waarmee ze doorgaans worden bestudeerd."
+      href="/research-peptides/"
+      linkLabel="Bekijk het onderzoeksoverzicht"
+    />
+    <div class="category-grid">
+      {categories.map((category, index) => <CategoryCard category={category} featured={index === 0 || index === 3} />)}
+    </div>
+  </section>
+
+  <section id="featured" class="home-section" aria-labelledby="featured-title">
+    <SectionHeading
+      id="featured-title"
+      title="Uitgelichte stoffen"
+      description="Actuele selectie uit de researchcatalogus, met de belangrijkste specificaties zichtbaar vóórdat het volledige record wordt geopend."
+      href="/glp-1/"
+      linkLabel="Blader door alle categorieën"
+    />
+    <div class="product-grid">
+      {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
+    </div>
+  </section>
+
+  <section class="quality-ledger" aria-labelledby="quality-title">
+    <div>
+      <h2 id="quality-title">Documentatie vóór decoratie</h2>
+      <p>Elk productrecord plaatst de details die onderzoekers nodig hebben om een materiaal te beoordelen voorop.</p>
+    </div>
+    <dl>
+      <div><dt>Identiteit</dt><dd>Batchspecifiek stofrecord</dd></div>
+      <div><dt>Zuiverheid</dt><dd>HPLC-verificatie inzichtelijk</dd></div>
+      <div><dt>Hantering</dt><dd>Richtlijnen voor bewaring en reconstitutie</dd></div>
+      <div><dt>Beperking</dt><dd>Uitsluitend laboratoriumonderzoek</dd></div>
+    </dl>
+  </section>
+
+  <section class="home-section" aria-labelledby="guides-title">
+    <SectionHeading
+      id="guides-title"
+      title="Kennisbank"
+      description="Praktische gidsen over identiteit, zuiverheid, bewaring en reconstitutie van researchpeptiden."
+      href="/research-peptides/"
+      linkLabel="Begin met het overzicht"
+    />
+    <div class="guides-grid">
+      {guides.map((guide) => (
+        <article>
+          <a href={guide.href}>
+            <h3>{guide.title}</h3>
+            <p>{guide.text}</p>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="research-notice">
+    <h2>Uitsluitend voor laboratoriumonderzoek</h2>
+    <p>
+      Producten zijn niet bestemd voor menselijke of diergeneeskundige consumptie en zijn niet
+      goedgekeurd voor diagnostisch, therapeutisch of klinisch gebruik. Kopers dienen ten minste
+      18 jaar oud te zijn.
+    </p>
+    <a href="/disclaimer/" class="text-link">Lees de volledige disclaimer</a>
+  </section>
+</Layout>

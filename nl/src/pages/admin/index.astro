@@ -1,0 +1,198 @@
+---
+export const prerender = false;
+import Layout from '../../layouts/Layout.astro';
+import { isAdmin } from '../../lib/auth';
+import { listOrders } from '../../lib/db';
+
+const authed = isAdmin(Astro.cookies.get('admin_session')?.value);
+const orders = authed ? listOrders() : [];
+
+// Stats
+const totalRevenue = orders.filter((o) => o.status === 'paid' || o.status === 'shipped').reduce((s, o) => s + o.total, 0);
+const pendingCount = orders.filter((o) => o.status === 'pending' || o.status === 'awaiting_verification').length;
+const paidCount = orders.filter((o) => o.status === 'paid').length;
+const shippedCount = orders.filter((o) => o.status === 'shipped').length;
+
+// Parse items for display
+const parsedOrders = orders.map((o) => ({
+  ...o,
+  itemsParsed: (() => {
+    try {
+      const items = JSON.parse(o.items);
+      return Array.isArray(items) ? items : [];
+    } catch {
+      return [];
+    }
+  })(),
+}));
+
+const eur = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+
+const statusClass = (s: string) =>
+  s === 'shipped' ? 'bg-lab-cyan-glow text-lab-cyan'
+  : s === 'paid' ? 'bg-lab-cyan-glow text-lab-cyan'
+  : s === 'awaiting_verification' ? 'bg-lab-panel text-lab-warning'
+  : 'bg-lab-panel text-lab-muted';
+---
+
+<Layout title="Admin — Peptidux" description="Orderadministratie. Uitsluitend voor laboratoriumonderzoek.">
+  <section class="site-shell py-10">
+    <h1 class="font-display text-3xl font-medium tracking-tight text-lab-heading">Orderadministratie</h1>
+
+    {!authed && (
+      <form id="login-form" class="mt-8 max-w-sm space-y-4">
+        <div>
+          <label for="password" class="mb-1 block text-sm text-lab-muted">Adminwachtwoord</label>
+          <input id="password" name="password" type="password" required class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+        </div>
+        <button type="submit" class="button button--primary w-full">Inloggen</button>
+        <p id="login-error" class="hidden text-sm text-lab-error"></p>
+      </form>
+    )}
+
+    {authed && (
+      <div class="mt-8">
+        <!-- Stats dashboard -->
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-5">
+            <span class="text-xs uppercase tracking-wide text-lab-faint">Bestellingen totaal</span>
+            <strong class="mt-1 block font-mono text-2xl text-lab-heading">{orders.length}</strong>
+          </div>
+          <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-5">
+            <span class="text-xs uppercase tracking-wide text-lab-faint">Omzet (betaald)</span>
+            <strong class="mt-1 block font-mono text-2xl text-lab-cyan">{eur.format(totalRevenue)}</strong>
+          </div>
+          <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-5">
+            <span class="text-xs uppercase tracking-wide text-lab-faint">In afwachting</span>
+            <strong class="mt-1 block font-mono text-2xl text-lab-warning">{pendingCount}</strong>
+          </div>
+          <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-5">
+            <span class="text-xs uppercase tracking-wide text-lab-faint">Betaald / verzonden</span>
+            <strong class="mt-1 block font-mono text-2xl text-lab-heading">{paidCount} / {shippedCount}</strong>
+          </div>
+        </div>
+
+        <div class="mt-8 flex items-center justify-between">
+          <p class="text-lab-muted">{orders.length} bestelling(en)</p>
+          <a href="/api/admin/logout" class="text-sm text-lab-faint hover:text-lab-cyan">Uitloggen</a>
+        </div>
+        {orders.length === 0 && <p class="mt-6 text-lab-muted">Nog geen bestellingen.</p>}
+
+        <!-- Orders list with expandable details -->
+        <div class="mt-4 space-y-3">
+          {parsedOrders.map((o) => (
+            <details class="group rounded-[12px] border border-lab-rule bg-lab-panel">
+              <summary class="flex cursor-pointer flex-wrap items-center gap-3 px-4 py-3 text-sm">
+                <span class="font-mono text-xs text-lab-muted">{o.id}</span>
+                <span class="text-lab-text">{o.nombre}</span>
+                <span class="text-xs text-lab-faint">{o.email}</span>
+                <span class="font-mono text-lab-cyan">{eur.format(o.total)}</span>
+                <span class="font-mono text-xs text-lab-muted">{o.crypto}</span>
+                <span class={`rounded px-2 py-0.5 text-xs ${statusClass(o.status)}`}>{o.status}</span>
+                <span class="ml-auto text-xs text-lab-faint">{new Date(o.created_at).toLocaleString('nl-NL')}</span>
+              </summary>
+              <div class="border-t border-lab-rule px-4 py-4">
+                <div class="grid gap-4 lg:grid-cols-2">
+                  <div>
+                    <h3 class="text-xs uppercase tracking-wide text-lab-faint">Customer</h3>
+                    <dl class="mt-2 space-y-1 text-sm">
+                      <div class="flex gap-2"><dt class="text-lab-muted">Naam:</dt><dd class="text-lab-text">{o.nombre}</dd></div>
+                      <div class="flex gap-2"><dt class="text-lab-muted">E-mail:</dt><dd class="text-lab-text">{o.email}</dd></div>
+                      <div class="flex gap-2"><dt class="text-lab-muted">Adres:</dt><dd class="text-lab-text">{o.direccion}</dd></div>
+                    </dl>
+                  </div>
+                  <div>
+                    <h3 class="text-xs uppercase tracking-wide text-lab-faint">Payment</h3>
+                    <dl class="mt-2 space-y-1 text-sm">
+                      <div class="flex gap-2"><dt class="text-lab-muted">Methode:</dt><dd class="text-lab-text">{o.crypto}</dd></div>
+                      <div class="flex gap-2"><dt class="text-lab-muted">Totaal:</dt><dd class="font-mono text-lab-cyan">{eur.format(o.total)}</dd></div>
+                      <div class="flex gap-2"><dt class="text-lab-muted">Status:</dt><dd class="text-lab-text">{o.status}</dd></div>
+                      {o.tx_hash && <div class="flex gap-2"><dt class="text-lab-muted">Tx-hash:</dt><dd class="break-all font-mono text-xs text-lab-faint">{o.tx_hash}</dd></div>}
+                    </dl>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <h3 class="text-xs uppercase tracking-wide text-lab-faint">Items</h3>
+                  <table class="mt-2 w-full text-sm">
+                    <thead>
+                      <tr class="text-left text-xs text-lab-faint">
+                        <th class="py-1 pr-4">Stof</th>
+                        <th class="py-1 pr-4">Vorm</th>
+                        <th class="py-1 pr-4">Aantal</th>
+                        <th class="py-1">Prijs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {o.itemsParsed.map((item: any) => (
+                        <tr class="border-t border-lab-rule">
+                          <td class="py-2 pr-4 text-lab-text">{item.title}</td>
+                          <td class="py-2 pr-4 text-lab-muted">{item.size ?? '—'}</td>
+                          <td class="py-2 pr-4 font-mono text-lab-muted">{item.qty}</td>
+                          <td class="py-2 font-mono text-lab-text">{eur.format(item.price * item.qty)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div class="mt-4 flex gap-3">
+                  {o.status === 'awaiting_verification' && (
+                    <button data-verify={o.id} class="button button--primary">Betaling verifiëren</button>
+                  )}
+                  {(o.status === 'paid' || o.status === 'awaiting_verification') && (
+                    <button data-ship={o.id} class="button button--primary">Als verzonden markeren</button>
+                  )}
+                  {o.status === 'pending' && (
+                    <span class="text-sm text-lab-faint">Wachten op betaalbewijs van de klant…</span>
+                  )}
+                </div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    loginForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('login-error');
+      const fd = new FormData(loginForm as HTMLFormElement);
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: fd.get('password') }),
+      });
+      if (res.ok) { window.location.reload(); }
+      else {
+        err!.textContent = 'Ongeldig wachtwoord';
+        err?.classList.remove('hidden');
+      }
+    });
+
+    document.querySelectorAll('[data-ship]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = (btn as HTMLElement).dataset.ship;
+        const res = await fetch('/api/admin/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (res.ok) window.location.reload();
+      });
+    });
+
+    document.querySelectorAll('[data-verify]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        const id = (btn as HTMLElement).dataset.verify;
+        const res = await fetch('/api/admin/orders/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
+        if (res.ok) window.location.reload();
+      });
+    });
+  </script>
+</Layout>

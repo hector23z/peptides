@@ -1,0 +1,31 @@
+import type { APIRoute } from 'astro';
+import { isAdmin } from '../../../../lib/auth';
+import { getOrder, verifyPayment } from '../../../../lib/db';
+
+export const prerender = false;
+
+export const POST: APIRoute = async ({ request, cookies }) => {
+  if (!isAdmin(cookies.get('admin_session')?.value)) {
+    return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  let body: any;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Invalid JSON body' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { id } = body;
+  if (!id) {
+    return new Response(JSON.stringify({ error: 'Missing id' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const order = getOrder(id);
+  if (!order) {
+    return new Response(JSON.stringify({ error: 'Order not found' }), { status: 404, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  verifyPayment(id);
+  return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+};

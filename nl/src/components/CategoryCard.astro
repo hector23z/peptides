@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  category: CollectionEntry<'categories'>;
+  featured?: boolean;
+}
+
+const { category, featured = false } = Astro.props;
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
+---
+
+<article class:list={['category-card', { 'category-card--featured': featured }]}>
+  <a href={`/${category.data.slug}/`}>
+    <div class="category-card__media">
+      <img
+        src={categoryImages[category.data.slug] ?? '/images/hero-home.png'}
+        alt=""
+        width="1254"
+        height="1254"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <div class="category-card__body">
+      <h3>{category.data.title}</h3>
+      <p>{category.data.description}</p>
+      <span>Verken de categorie</span>
+    </div>
+  </a>
+</article>

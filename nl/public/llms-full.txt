@@ -1,0 +1,45 @@
+# Peptidux — Researchpeptiden van laboratoriumkwaliteit
+
+Peptidux levert hoogzuivere researchpeptiden en laboratoriummaterialen aan gekwalificeerde
+laboratoria. Elke batch wordt onafhankelijk op zuiverheid geverifieerd (HPLC en
+massaspectrometrie) en gaat vergezeld van een certificaat van analyse (CoA).
+
+Alle producten zijn uitsluitend bestemd voor laboratoriumonderzoek en niet voor menselijke
+of diergeneeskundige consumptie.
+
+## Categorieën
+
+- GLP-1 onderzoek: https://peptidux.example/glp-1/
+- Herstel: https://peptidux.example/recovery/
+- Longevity: https://peptidux.example/longevity/
+- HGH-onderzoek: https://peptidux.example/hgh/
+
+## Kennisbank
+
+- Researchpeptiden: https://peptidux.example/research-peptides/
+- Zuiverheid: https://peptidux.example/purity/
+- Reconstitutie: https://peptidux.example/reconstitution/
+- Bewaring: https://peptidux.example/storage/
+
+## Stoffencatalogus
+
+- Semaglutide — GLP-1 receptoragonist voor metabool onderzoek — /glp-1/semaglutide/
+- Tirzepatide — dual GLP-1/GIP receptoragonist — /glp-1/tirzepatide/
+- Retatrutide — triple agonist in preklinisch onderzoek — /glp-1/retatrutide/
+- BPC-157 — pentadecapeptide bestudeerd in weefselherstelmodellen — /recovery/bpc-157/
+- TB-500 — thymosine bèta-4-fragment in regeneratieonderzoek — /recovery/tb-500/
+- GHK-Cu — koperpeptide onderzocht in huidbiologie — /longevity/ghk-cu/
+- Melanotan 2 — melanocortineagonist in pigmentatiestudies — /recovery/melanotan-2/
+- PT-141 — melanocortineonderzoek — /recovery/pt-141/
+- NAD+ — co-enzym in verouderings- en celbiologie — /longevity/nad-plus/
+- Epitalon — onderzocht in telomerase- en verouderingsmodellen — /longevity/epitalon/
+- MOTS-c — mitochondriaal afgeleid peptide in metabool onderzoek — /longevity/mots-c/
+- HGH 10 IU / 24 IU — humaan groeihormoon voor laboratoriumonderzoek — /hgh/hgh-10iu/
+- Ipamorelin — groeihormoonsecretagoog — /hgh/ipamorelin/
+- CJC-1295 — GHRH-analoog — /hgh/cjc-1295/
+
+## Beperking
+
+Uitsluitend voor laboratoriumonderzoek. Niet voor menselijke of diergeneeskundige consumptie.
+Niet goedgekeurd voor diagnostisch, therapeutisch of klinisch gebruik. Kopers dienen ten minste
+18 jaar oud te zijn.
