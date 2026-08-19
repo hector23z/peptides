@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import eligibleSlugs from '../config/commerceEligible.json';
+import fs from 'node:fs';
 
 interface Props {
   product: CollectionEntry<'products'>;
@@ -10,12 +11,22 @@ interface Props {
 const { product, priority = false } = Astro.props;
 const isEligible = eligibleSlugs.includes(product.id);
 
+const productImages = new Set(
+  fs.existsSync('public/images/products')
+    ? fs.readdirSync('public/images/products').map((f) => f.replace(/\.(png|jpg|webp)$/, ''))
+    : []
+);
+
 const categoryImages: Record<string, string> = {
   recovery: '/images/recovery.png',
   'glp-1': '/images/glp1.png',
   longevity: '/images/longevity.png',
   hgh: '/images/hgh.png',
 };
+
+const productImage = productImages.has(product.id)
+  ? `/images/products/${product.id}.png`
+  : (categoryImages[product.data.category] ?? '/images/hero-home.png');
 
 const categoryLabels: Record<string, string> = {
   recovery: 'Recovery',
@@ -29,8 +40,8 @@ const categoryLabels: Record<string, string> = {
   <a href={`/${product.data.category}/${product.id}/`} aria-label={`View ${product.data.title}`} class="product-card__link">
     <div class="product-card__media">
       <img
-        src={categoryImages[product.data.category] ?? '/images/hero-home.png'}
-        alt=""
+        src={productImage}
+        alt={`${product.data.title} research vial`}
         width="1254"
         height="1254"
         loading={priority ? 'eager' : 'lazy'}

@@ -72,6 +72,10 @@ import Layout from '../../layouts/Layout.astro';
             <button id="copy-address" type="button" class="button button--secondary shrink-0">Copy</button>
           </div>
         </div>
+        <div class="sm:col-span-2">
+          <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Scan to pay</span>
+          <div id="pay-qr" class="inline-block rounded-md border border-lab-rule bg-white p-3"></div>
+        </div>
         <div>
           <span class="mb-1 block text-xs uppercase tracking-wide text-lab-faint">Amount (USD)</span>
           <strong id="pay-amount" class="font-mono text-lab-cyan"></strong>
@@ -95,6 +99,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <script>
     import { getCart, cartTotal, clearCart } from '../../scripts/cart';
+    import qrcode from 'qrcode-generator';
 
     const root = document.getElementById('checkout-root');
     const empty = document.getElementById('checkout-empty');
@@ -166,6 +171,16 @@ import Layout from '../../layouts/Layout.astro';
         document.getElementById('pay-address')!.textContent = data.payment.address;
         document.getElementById('pay-amount')!.textContent = money(data.payment.amountUsd);
         document.getElementById('pay-confirmations')!.textContent = String(data.payment.confirmations);
+        // Generate QR code for the wallet address
+        const qrEl = document.getElementById('pay-qr');
+        if (qrEl) {
+          const qr = qrcode(0, 'M');
+          qr.addData(data.payment.address);
+          qr.make();
+          qrEl.innerHTML = qr.createSvgTag({ scalable: true, cellSize: 4, margin: 2 });
+          const svg = qrEl.querySelector('svg');
+          if (svg) { svg.setAttribute('width', '180'); svg.setAttribute('height', '180'); }
+        }
         paymentPanel?.scrollIntoView({ behavior: 'smooth' });
       } catch (err) {
         errorEl!.textContent = 'Network error. Please try again.';

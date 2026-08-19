@@ -199,6 +199,24 @@ const footerCompany = [
       </div>
     </footer>
 
+    <!-- Mini-cart drawer (Flatsome style) -->
+    <div id="mini-cart-overlay" class="mini-cart-overlay" aria-hidden="true"></div>
+    <aside id="mini-cart" class="mini-cart" aria-label="Shopping cart" aria-hidden="true">
+      <div class="mini-cart__header">
+        <h2>Your cart</h2>
+        <button id="mini-cart-close" type="button" aria-label="Close cart">&times;</button>
+      </div>
+      <div id="mini-cart-items" class="mini-cart__items"></div>
+      <div class="mini-cart__footer">
+        <div class="mini-cart__subtotal">
+          <span>Subtotal</span>
+          <strong id="mini-cart-total">$0.00</strong>
+        </div>
+        <a href="/checkout/" class="button button--primary mini-cart__checkout">Proceed to checkout</a>
+        <a href="/cart/" class="mini-cart__view">View full cart</a>
+      </div>
+    </aside>
+
     <script is:inline>
       const toggle = document.querySelector('.nav-toggle');
       const nav = document.querySelector('#primary-nav');
@@ -223,12 +241,74 @@ const footerCompany = [
       window.matchMedia('(min-width: 60rem)').addEventListener('change', closeNavigation);
     </script>
     <script>
-      import { cartCount } from '../scripts/cart';
+      import { cartCount, getCart, cartTotal } from '../scripts/cart';
       const countEl = document.getElementById('cart-count');
       const update = () => { if (countEl) countEl.textContent = String(cartCount()); };
       update();
       window.addEventListener('storage', update);
       document.addEventListener('cart-updated', update);
+
+      // Mini-cart drawer
+      const miniCart = document.getElementById('mini-cart');
+      const miniOverlay = document.getElementById('mini-cart-overlay');
+      const miniItems = document.getElementById('mini-cart-items');
+      const miniTotal = document.getElementById('mini-cart-total');
+      const miniClose = document.getElementById('mini-cart-close');
+
+      const money = (n: number) => '$' + n.toFixed(2);
+
+      function renderMiniCart() {
+        const cart = getCart();
+        if (!miniItems) return;
+        if (cart.length === 0) {
+          miniItems.innerHTML = '<p class="mini-cart__empty">Your cart is empty.</p>';
+        } else {
+          miniItems.innerHTML = cart.map((i) => `
+            <div class="mini-cart__item">
+              <div class="mini-cart__item-info">
+                <strong>${i.title}</strong>
+                <span>${i.qty} × ${money(i.price)}</span>
+              </div>
+              <span class="mini-cart__item-total">${money(i.price * i.qty)}</span>
+            </div>
+          `).join('');
+        }
+        if (miniTotal) miniTotal.textContent = money(cartTotal());
+      }
+
+      function openMiniCart() {
+        renderMiniCart();
+        miniCart?.classList.add('is-open');
+        miniOverlay?.classList.add('is-visible');
+        miniCart?.setAttribute('aria-hidden', 'false');
+        miniOverlay?.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeMiniCart() {
+        miniCart?.classList.remove('is-open');
+        miniOverlay?.classList.remove('is-visible');
+        miniCart?.setAttribute('aria-hidden', 'true');
+        miniOverlay?.setAttribute('aria-hidden', 'true');
+      }
+
+      miniClose?.addEventListener('click', closeMiniCart);
+      miniOverlay?.addEventListener('click', closeMiniCart);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMiniCart();
+      });
+
+      // Open mini-cart when an item is added
+      document.addEventListener('cart-updated', (e) => {
+        update();
+        const detail = (e as CustomEvent).detail;
+        if (detail?.openDrawer) openMiniCart();
+      });
+
+      // Nav cart link opens the drawer instead of navigating
+      document.querySelector('.nav-cart')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        openMiniCart();
+      });
     </script>
   </body>
 </html>

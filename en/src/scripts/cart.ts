@@ -17,9 +17,9 @@ export function getCart(): CartItem[] {
   }
 }
 
-export function saveCart(items: CartItem[]) {
+export function saveCart(items: CartItem[], openDrawer = false) {
   localStorage.setItem(KEY, JSON.stringify(items));
-  window.dispatchEvent(new CustomEvent('cart-updated'));
+  document.dispatchEvent(new CustomEvent('cart-updated', { detail: { openDrawer } }));
 }
 
 export function addToCart(item: Omit<CartItem, 'qty'>) {
@@ -27,7 +27,7 @@ export function addToCart(item: Omit<CartItem, 'qty'>) {
   const existing = cart.find((i) => i.slug === item.slug);
   if (existing) existing.qty += 1;
   else cart.push({ ...item, qty: 1 });
-  saveCart(cart);
+  saveCart(cart, true);
   return cart;
 }
 
