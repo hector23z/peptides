@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Kontakt — PeptideLab" description="Kontaktieren Sie PeptideLab bei Fragen zu Bestellungen, Produkten oder Analysezertifikaten. Nur für Forschungszwecke.">
+  <section class="max-w-3xl">
+    <h1 class="font-display text-4xl font-medium tracking-tight text-lab-heading">Kontakt aufnehmen</h1>
+    <p class="mt-6 max-w-2xl text-base leading-relaxed text-lab-muted">
+      Fragen zu einer Bestellung, einem Produkt oder einem Analysezertifikat? Unser Team hilft Ihnen
+      gerne weiter. Wir antworten in der Regel innerhalb eines Werktages.
+    </p>
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-lab-muted">E-Mail</h2>
+        <p class="mt-2 font-mono text-lab-text">support@peptidelab.example</p>
+      </div>
+      <div class="rounded-[12px] border border-lab-rule bg-lab-panel p-6">
+        <h2 class="text-sm font-semibold uppercase tracking-widest text-lab-muted">Erreichbarkeit</h2>
+        <p class="mt-2 font-mono text-lab-text">Mo.&ndash;Fr., 9:00&ndash;18:00 Uhr (GMT)</p>
+      </div>
+    </div>
+    <form class="mt-10 space-y-4" method="post" action="/contact/">
+      <div>
+        <label for="name" class="mb-1 block text-sm text-lab-muted">Name</label>
+        <input id="name" name="name" type="text" class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+      </div>
+      <div>
+        <label for="email" class="mb-1 block text-sm text-lab-muted">E-Mail</label>
+        <input id="email" name="email" type="email" class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan" />
+      </div>
+      <div>
+        <label for="message" class="mb-1 block text-sm text-lab-muted">Nachricht</label>
+        <textarea id="message" name="message" rows="5" class="w-full rounded-md border border-lab-rule bg-lab-panel px-4 py-2 text-lab-text outline-none focus:border-lab-cyan"></textarea>
+      </div>
+      <button type="submit" class="rounded-md bg-lab-cyan px-6 py-3 text-sm font-semibold text-lab-black transition-colors hover:bg-lab-cyan-pale">
+        Nachricht senden
+      </button>
+    </form>
+  </section>
+</Layout>

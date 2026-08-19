@@ -1,0 +1,69 @@
+# PeptideLab
+
+> PeptideLab supplies high-purity lyophilized research peptides and laboratory materials to qualified researchers, with independent HPLC purity testing and batch certificates of analysis.
+
+## Products
+
+- [Semaglutide](https://peptidelab.example/glp-1/semaglutide/): GLP-1 receptor agonist research peptide (31-amino-acid analogue of GLP-1), >99% purity, 5mg presentation.
+- [Tirzepatide](https://peptidelab.example/glp-1/tirzepatide/): Dual GIP/GLP-1 receptor agonist research peptide, >99% purity, 5mg presentation.
+- [Retatrutide](https://peptidelab.example/glp-1/retatrutide/): Triple GIP/GLP-1/glucagon receptor agonist research peptide, >99% purity.
+- [BPC-157](https://peptidelab.example/recovery/bpc-157/): 15-amino-acid research peptide studied in tissue repair and recovery, >99% purity.
+- [TB-500](https://peptidelab.example/recovery/tb-500/): Synthetic thymosin beta-4 region peptide for tissue repair research, >99% purity.
+- [GHK-Cu](https://peptidelab.example/recovery/ghk-cu/): Copper-binding tripeptide for tissue and skin research, >99% purity.
+- [NAD+](https://peptidelab.example/longevity/nad-plus/): Coenzyme studied in cellular energy metabolism and aging research, >99% purity.
+- [Epitalon](https://peptidelab.example/longevity/epitalon/): Tetrapeptide studied in biological rhythm and aging research, >99% purity.
+- [MOTS-c](https://peptidelab.example/longevity/mots-c/): Mitochondrial-derived peptide studied in cellular metabolism research, >99% purity.
+- [HGH 10IU](https://peptidelab.example/hgh/hgh-10iu/): Human growth hormone research peptide, 10 IU presentation, >99% purity.
+- [Ipamorelin](https://peptidelab.example/hgh/ipamorelin/): Growth hormone secretagogue research peptide, >99% purity.
+- [CJC-1295](https://peptidelab.example/hgh/cjc-1295/): GHRH analogue research peptide, >99% purity.
+- [SS-31](https://peptidelab.example/longevity/ss-31/): Small synthetic peptide targeting the inner mitochondrial membrane, ~640 g/mol.
+- [Humanin](https://peptidelab.example/longevity/humanin/): 24-amino-acid mitochondrial-derived peptide, ~2.7 kDa.
+- [Testosterone Cypionate](https://peptidelab.example/steroids/testosterone-cypionate/): Long-chain ester of testosterone for androgen research, ~412.6 g/mol.
+
+## Categories
+
+- [GLP-1 Peptides](https://peptidelab.example/glp-1/): Semaglutide, tirzepatide, retatrutide and other GLP-1 receptor agonists for metabolic research.
+- [Recovery Peptides](https://peptidelab.example/recovery/): BPC-157, TB-500, GHK-Cu and related compounds for tissue repair research.
+- [Longevity Peptides](https://peptidelab.example/longevity/): NAD+, epitalon, MOTS-c and related compounds for aging and cellular health research.
+- [HGH & Secretagogues](https://peptidelab.example/hgh/): HGH, ipamorelin, CJC-1295 and related peptides for growth hormone research.
+- [Steroids](https://peptidelab.example/steroids/): Research anabolic-androgenic compounds for laboratory investigation.
+- [Metabolic Peptides](https://peptidelab.example/metabolic/): L-carnitine and other compounds for metabolic research.
+- [Laboratory Supplies](https://peptidelab.example/supplies/): Benzyl alcohol, bacteriostatic water, vitamins and research-grade reagents.
+
+## Guides
+
+- [Research Peptides](https://peptidelab.example/research-peptides/): Overview of research peptide classes and how they are used in the laboratory.
+- [Peptide Purity Guide](https://peptidelab.example/peptide-purity-guide/): How purity is measured by HPLC and how to read a certificate of analysis.
+- [Peptide Reconstitution Guide](https://peptidelab.example/peptide-reconstitution-guide/): Step-by-step reconstitution protocol for lyophilized peptides.
+- [How to Store Peptides](https://peptidelab.example/how-to-store-peptides/): Correct storage of lyophilized and reconstituted research peptides.
+
+## Blog
+
+- [What Is a Peptide? A Research Primer](https://peptidelab.example/blog/what-is-a-peptide/): Introduction to peptide structure and laboratory use.
+- [How to Verify Peptide Purity](https://peptidelab.example/blog/how-to-verify-peptide-purity/): Reading certificates of analysis and verifying purity.
+- [GLP-1 Peptides: Key Differences](https://peptidelab.example/blog/glp-1-peptide-differences/): Semaglutide, tirzepatide and retatrutide compared.
+- [Semaglutide vs Tirzepatide](https://peptidelab.example/blog/semaglutide-vs-tirzepatide/): Receptor profiles of two major GLP-1 research compounds.
+- [BPC-157 Research Guide](https://peptidelab.example/blog/bpc-157-research-guide/): What BPC-157 is and how it is studied.
+- [State of Peptide Research 2026](https://peptidelab.example/blog/peptide-research-2026/): Current landscape of peptide research.
+
+## Key Facts
+
+- Supplier of high-purity lyophilized research peptides and laboratory materials.
+- Every batch is independently tested by high-performance liquid chromatography (HPLC).
+- A certificate of analysis (CoA) is supplied with every batch, documenting purity and peptide content.
+- Products are for laboratory research use only; not for human or veterinary consumption.
+- Site is intended for adults aged 18 and over.
+
+## Contact
+
+- Website: https://peptidelab.example
+- Email: support@peptidelab.example
+- About: https://peptidelab.example/about/
+- Contact: https://peptidelab.example/contact/
+
+## Legal
+
+- [Disclaimer](https://peptidelab.example/disclaimer/): Research use only, no medical advice, 18+.
+- [Shipping](https://peptidelab.example/shipping/): Processing times, delivery, tracking and reshipment policy.
+- [Privacy](https://peptidelab.example/privacy/): Information collection, use and your rights.
+- [Terms](https://peptidelab.example/terms/): Terms of service governing site use and orders.

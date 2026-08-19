@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+import CategoryCard from '../components/CategoryCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Layout from '../layouts/Layout.astro';
+
+const categories = (await getCollection('categories')).sort((a, b) => a.data.order - b.data.order);
+const products = (await getCollection('products'))
+  .filter((product) => product.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 6);
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title="PeptideLab — Forschungspeptide & Laborbedarf">
+  <section class="home-hero">
+    <div class="home-hero__copy">
+      <h1>Hochreine Verbindungen für kontrollierte Forschung</h1>
+      <p>
+        Lyophilisierte Forschungspeptide für qualifizierte Laboratorien – mit unabhängiger
+        Reinheitsprüfung und klarer Chargendokumentation.
+      </p>
+      <div class="button-row">
+        <a href="#featured" class="button button--primary">Verbindungen ansehen</a>
+        <a href="/peptide-purity-guide/" class="button button--secondary">Qualitätsstandards prüfen</a>
+      </div>
+      <dl class="home-hero__facts">
+        <div><dt>Reinheit</dt><dd>&gt;99% bei gelisteten Verbindungen</dd></div>
+        <div><dt>Verifizierung</dt><dd>Unabhängige HPLC-Prüfung</dd></div>
+        <div><dt>Dokumentation</dt><dd>CoA pro Charge im Lieferumfang</dd></div>
+      </dl>
+    </div>
+    <figure class="home-hero__media">
+      <img
+        src="/images/hero-home.png"
+        alt="Unbeschriftete Laborfläschchen auf einer dunklen Arbeitsfläche"
+        width="1693"
+        height="929"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption><span>Kontrollierte Materialien</span><span>Repräsentative Laborbilder</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="home-section" aria-labelledby="categories-title">
+    <SectionHeading
+      id="categories-title"
+      title="Forschungskategorien"
+      description="Durchsuchen Sie Verbindungen nach den Laborverfahren und Forschungsbereichen, in denen sie üblicherweise untersucht werden."
+      href="/research-peptides/"
+      linkLabel="Forschungsübersicht ansehen"
+    />
+    <div class="category-grid">
+      {categories.map((category, index) => <CategoryCard category={category} featured={index === 0 || index === 3} />)}
+    </div>
+  </section>
+
+  <section id="featured" class="home-section" aria-labelledby="featured-title">
+    <SectionHeading
+      id="featured-title"
+      title="Ausgewählte Verbindungen"
+      description="Aktuelle Auswahl aus dem Forschungskatalog mit den wichtigsten Spezifikationen – sichtbar, bevor Sie den vollständigen Datensatz öffnen."
+      href="/research-peptides/"
+      linkLabel="Alle Verbindungen durchsuchen"
+    />
+    <div class="product-grid">
+      {products.map((product, index) => <ProductCard product={product} priority={index < 2} />)}
+    </div>
+  </section>
+
+  <section class="quality-ledger" aria-labelledby="quality-title">
+    <div>
+      <h2 id="quality-title">Dokumentation vor Dekoration</h2>
+      <p>Jeder Produktdatensatz stellt die Angaben in den Vordergrund, die Forschende zur Bewertung eines Materials benötigen.</p>
+    </div>
+    <dl>
+      <div><dt>Identität</dt><dd>Chargenspezifischer Verbindungsdatensatz</dd></div>
+      <div><dt>Reinheit</dt><dd>Offengelegte HPLC-Verifizierung</dd></div>
+      <div><dt>Handhabung</dt><dd>Hinweise zu Lagerung und Rekonstitution</dd></div>
+      <div><dt>Einschränkung</dt><dd>Nur für Forschungszwecke im Labor</dd></div>
+    </dl>
+  </section>
+
+  <section class="home-section journal-preview" aria-labelledby="journal-title">
+    <SectionHeading
+      id="journal-title"
+      title="Forschungsjournal"
+      description="Praxisnahe Hinweise zu Identität, Lagerung, Handhabung und Verbindungsvergleich."
+      href="/blog/"
+      linkLabel="Alle Beiträge lesen"
+    />
+    <div class="journal-list">
+      {
+        posts.map((post) => (
+          <article>
+            <a href={`/blog/${post.id}/`}>
+              <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+              <div><h3>{post.data.title}</h3><p>{post.data.description}</p></div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="research-notice">
+    <h2>Nur für Forschungszwecke im Labor</h2>
+    <p>
+      Die Produkte sind nicht für den menschlichen oder tierärztlichen Verzehr bestimmt und nicht
+      für diagnostische, therapeutische oder klinische Zwecke zugelassen. Käuferinnen und Käufer
+      müssen mindestens 18 Jahre alt sein.
+    </p>
+    <a href="/disclaimer/" class="text-link">Vollständigen Haftungsausschluss lesen</a>
+  </section>
+</Layout>

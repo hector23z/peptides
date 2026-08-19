@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Research Journal — PeptideLab" description="Guides and research notes on peptides, purity, storage and reconstitution. For research use only.">
+  <section class="page-intro">
+    <h1>Research journal</h1>
+    <p>Practical guides and research notes covering identity, purity, storage and reconstitution.</p>
+  </section>
+
+  <section class="journal-index" aria-label="Research articles">
+    {
+      posts.map((post) => (
+        <article>
+          <a href={`/blog/${post.id}/`}>
+            <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time>
+            <div><h2>{post.data.title}</h2><p>{post.data.description}</p></div>
+            <span>Read note</span>
+          </a>
+        </article>
+      ))
+    }
+  </section>
+</Layout>

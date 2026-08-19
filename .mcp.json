@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mempalace": {
+      "type": "stdio",
+      "command": "python",
+      "args": [
+        "-m",
+        "mempalace.mcp_server",
+        "--palace",
+        "C:/Proyectos/peptides/.mempalace/palace"
+      ],
+      "env": {}
+    }
+  }
+}

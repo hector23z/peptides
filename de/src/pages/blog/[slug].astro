@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  ...(post.data.updatedDate ? { dateModified: post.data.updatedDate.toISOString() } : {}),
+  author: { '@type': 'Person', name: post.data.author },
+  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
+---
+
+<Layout title={`${post.data.title} — PeptideLab`} description={post.data.description}>
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Research journal</a></nav>
+  <header class="article-header">
+    <h1>{post.data.title}</h1>
+    <p>{post.data.description}</p>
+    <div><time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toISOString().slice(0, 10)}</time><span>{post.data.author}</span></div>
+  </header>
+  <article class="article-layout">
+    <aside><p>Research note</p><a href="/blog/">All journal entries</a></aside>
+    <div class="md-content article-content"><Content /></div>
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} />
+</Layout>

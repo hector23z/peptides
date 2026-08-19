@@ -1,0 +1,192 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import fs from 'node:fs';
+import eligibleSlugs from '../../config/commerceEligible.json';
+
+const productImages = new Set(
+  fs.existsSync('public/images/products')
+    ? fs.readdirSync('public/images/products').map((f) => f.replace(/\.(png|jpg|webp)$/, ''))
+    : []
+);
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const products = await getCollection('products');
+  return products.map((product) => ({
+    params: { category: product.data.category, product: product.id },
+    props: {
+      product,
+      relatedProducts: products
+        .filter((candidate) => candidate.data.category === product.data.category && candidate.id !== product.id)
+        .sort((a, b) => a.data.order - b.data.order)
+        .slice(0, 3),
+    },
+  }));
+}
+
+const { product, relatedProducts } = Astro.props;
+const { Content } = await render(product);
+const category = product.data.category;
+const isEligible = eligibleSlugs.includes(product.id);
+
+const categoryImages: Record<string, string> = {
+  recovery: '/images/recovery.png',
+  'glp-1': '/images/glp1.png',
+  longevity: '/images/longevity.png',
+  hgh: '/images/hgh.png',
+};
+
+const productImage = productImages.has(product.id)
+  ? `/images/products/${product.id}.png`
+  : (categoryImages[category] ?? '/images/hero-home.png');
+
+const categoryLabels: Record<string, string> = {
+  recovery: 'Recovery',
+  'glp-1': 'GLP-1-Forschung',
+  longevity: 'Longevity',
+  hgh: 'HGH-Forschung',
+};
+
+const productJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.data.title,
+  description: `${product.data.description} Nur für Laborforschung. Nicht für den menschlichen oder tierischen Verzehr.`,
+  category,
+  ...(product.data.price ? { offers: { '@type': 'Offer', price: product.data.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' } } : {}),
+  ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Reinheit', value: product.data.purity } } : {}),
+  brand: { '@type': 'Brand', name: 'PeptideLab' },
+};
+
+const stripMarkdown = (value: string) => value
+  .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  .replace(/[*_`>#]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const definition = product.body
+  .split(/\r?\n\r?\n/)
+  .map(stripMarkdown)
+  .find((block) => block && !block.startsWith('|') && !block.startsWith('import '))
+  ?? product.data.description;
+
+const faqItems = [
+  {
+    question: `Was ist ${product.data.title}?`,
+    answer: definition,
+  },
+  {
+    question: `Wie sollten Forschende ${product.data.title} verifizieren?`,
+    answer: `Bestätigen Sie die exakte Molekülform anhand des Chargenzertifikats und kombinieren Sie die chromatographische Reinheit mit einer orthogonalen Identitätsmethode wie Massenspektrometrie oder NMR. Verwenden Sie bei der Berechnung der Molarität das Molekulargewicht, das Gegenion und den Gehalt der verifizierten Form.`,
+  },
+  {
+    question: `Ist ${product.data.title} für den menschlichen Gebrauch bestimmt?`,
+    answer: `${product.data.title} ist ausschließlich für kontrollierte Laborforschung vorgesehen. Es ist nicht für den menschlichen oder tierischen Gebrauch bestimmt.`,
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
+---
+
+<Layout title={`${product.data.title}: Forschungsdaten & Handhabung | PeptideLab`} description={product.data.description}>
+  <nav class="breadcrumbs pt-8" aria-label="Brotkrümelnavigation">
+    <a href="/">Startseite</a><span>/</span><a href={`/${category}/`}>{categoryLabels[category] ?? category}</a><span>/</span><span>{product.data.title}</span>
+  </nav>
+
+  <section class="product-hero mt-6">
+    <figure>
+      <img src={productImage} alt={`${product.data.title} Forschungsvial`} width="1254" height="1254" loading="eager" decoding="async" />
+    </figure>
+    <div class="product-hero__content">
+      <h1>{product.data.title}</h1>
+      <p>{product.data.description}</p>
+      <dl>
+        <div><dt>Reinheit</dt><dd>{product.data.purity ?? 'Siehe Chargendokumentation'}</dd></div>
+        <div><dt>Format</dt><dd>{product.data.size ?? 'Siehe Angebot'}</dd></div>
+        <div><dt>Kategorie</dt><dd>{categoryLabels[category] ?? category}</dd></div>
+        <div><dt>Verwendung</dt><dd>Nur Laborforschung</dd></div>
+      </dl>
+      <div class="product-hero__purchase">
+        <div><span>Listenpreis</span><strong>{product.data.price ? `$${product.data.price}` : 'Auf Anfrage'}</strong></div>
+        <div class="flex flex-wrap gap-3">
+          {isEligible && product.data.price && (
+            <button
+              type="button"
+              class="button button--primary"
+              data-add-to-cart
+              data-slug={product.id}
+              data-title={product.data.title}
+              data-price={product.data.price}
+              data-size={product.data.size ?? ''}
+            >In den Warenkorb</button>
+          )}
+          <a href="/contact/" class="button button--secondary">Chargendokumentation anfragen</a>
+        </div>
+      </div>
+      <p class="product-hero__notice">Nicht für den menschlichen oder tierischen Verzehr.</p>
+    </div>
+  </section>
+
+  <article class="product-article gap-10">
+    <aside class="pb-5">
+      <p>Produktdatenblatt</p>
+      <a href={`/${category}/`}>Zurück zu {categoryLabels[category] ?? category}</a>
+      <a href="/peptide-purity-guide/">Reinheitsratgeber</a>
+      <a href="/how-to-store-peptides/">Peptide lagern</a>
+    </aside>
+    <div class="md-content product-content">
+      <Content />
+
+      <section class="product-faq mt-20" aria-labelledby="product-faq-title">
+        <h2 id="product-faq-title">Häufige Fragen zu {product.data.title}</h2>
+        {faqItems.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </section>
+
+      <section class="related-research mt-24" aria-labelledby="related-research-title">
+        <h2 id="related-research-title">Verwandte Forschungseinträge in der Kategorie {categoryLabels[category] ?? category}</h2>
+        <p>
+          Weiter zur <a href={`/${category}/`}>Kategorie {categoryLabels[category] ?? category}</a>
+          {' '}oder vergleichen Sie verwandte Forschungseinträge:
+        </p>
+        <ul>
+          {relatedProducts.map((related) => (
+            <li><a href={`/${related.data.category}/${related.id}/`}>{related.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </article>
+  <script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  <script>
+    import { addToCart } from '../../scripts/cart';
+    document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        addToCart({
+          slug: btn.dataset.slug,
+          title: btn.dataset.title,
+          price: Number(btn.dataset.price),
+          size: btn.dataset.size || undefined,
+        });
+        const original = btn.textContent;
+        btn.textContent = 'In den Warenkorb gelegt';
+        setTimeout(() => { btn.textContent = original; }, 1400);
+      });
+    });
+  </script>
+</Layout>
