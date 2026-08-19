@@ -88,3 +88,9 @@ Cada página: responde la intención de búsqueda + CTA
 - Contenido original, no copiar de otros sitios
 - Cada página: meta title único, H1 único, 800-1500 palabras
 - Astro: imports inline (NO usar alias ~/*), como en CMC Holding
+
+## Dominios (decididos 2026-08-18)
+- EN: **peptidux.com** — DISPONIBLE $6.79/año (promo NEWCOM679) en Namecheap. Pendiente compra (requiere login Hector).
+- Alternativas: peptidome.co $5.98, peptidome.net $12.48, peptidome.io $34.98. peptidome.com = $4,575 PREMIUM descartado.
+- DE/NL: verificar peptidux.de y peptidux.nl cuando se compre el .com.
+- Web EN = "Peptidux" (rebrand desde PeptideLab para no chocar con peptidelab.com tomado).
