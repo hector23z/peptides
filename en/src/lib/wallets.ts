@@ -15,6 +15,11 @@ const WALLETS: Record<string, WalletConfig> = {
     network: 'TRON (TRC-20)',
     confirmations: 19,
   },
+  USDT_ERC20: {
+    address: env.WALLET_USDT_ERC20 ?? '',
+    network: 'Ethereum (ERC-20)',
+    confirmations: 12,
+  },
   USDC: {
     address: env.WALLET_USDC ?? '',
     network: 'Ethereum (ERC-20)',

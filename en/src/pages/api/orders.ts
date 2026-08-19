@@ -21,7 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (!Number.isFinite(numericTotal) || numericTotal <= 0) {
     return new Response(JSON.stringify({ error: 'Invalid total' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
   }
-  const allowedCrypto = ['USDT_TRC20', 'USDC', 'BTC', 'LTC', 'XMR'];
+  const allowedCrypto = ['USDT_TRC20', 'USDT_ERC20', 'USDC', 'BTC', 'LTC', 'XMR'];
   if (!allowedCrypto.includes(cryptoMethod)) {
     return new Response(JSON.stringify({ error: 'Unsupported crypto method' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
   }

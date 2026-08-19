@@ -29,7 +29,7 @@ import Layout from '../../layouts/Layout.astro';
         <div>
           <span class="mb-1 block text-sm text-lab-muted">Payment method (direct crypto)</span>
           <div class="grid gap-2 sm:grid-cols-2">
-            {['USDT_TRC20','USDC','BTC','LTC','XMR'].map((m) => (
+            {['USDT_TRC20','USDT_ERC20','USDC','BTC','LTC','XMR'].map((m) => (
               <label class="flex items-center gap-2 rounded-md border border-lab-rule bg-lab-panel px-3 py-2 text-sm text-lab-text">
                 <input type="radio" name="crypto" value={m} required class="accent-lab-cyan" />
                 {m.replace('_',' ')}
