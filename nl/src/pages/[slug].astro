@@ -17,7 +17,7 @@ const { Content } = await render(page);
 
 // FAQ-items uit de markdownbody parsen ("**Vraag**\nAntwoord"-blokken)
 function parseFaq(body) {
-  const faqSection = body.split(/##\s*(Frequently Asked Questions|Veelgestelde vragen)/i)[1] ?? '';
+  const faqSection = body.split(/##\s*(Frequently Asked Questions|Veelgestelde vragen)/i)[2] ?? '';
   const section = faqSection.split(/##\s*/)[0];
   const qa = [];
   const re = /\*\*(.+?)\*\*\s*\n([\s\S]*?)(?=\n\*\*|$)/g;

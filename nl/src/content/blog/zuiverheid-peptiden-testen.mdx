@@ -1,0 +1,85 @@
+---
+title: "Peptidezuiverheid testen: HPLC, massaspectrometrie en COAs uitgelegd"
+description: "Hoe peptidezuiverheid wordt getest: RP-HPLC, massaspectrometrie, netto peptidegehalte en het lezen van een certificaat van analyse. Gids voor onderzoekers."
+pubDate: 2026-08-22
+author: "Peptidux Onderzoeksteam"
+tags: ["peptiden", "onderzoek", "zuiverheid", "hplc", "kwaliteitscontrole"]
+---
+
+# Peptidezuiverheid testen: HPLC, massaspectrometrie en COAs uitgelegd
+
+De zuiverheid van een researchpeptide bepaalt de reproduceerbaarheid van elk experiment dat erop volgt. Maar wat betekent "≥99% zuiver" eigenlijk, en hoe wordt dat gemeten? Dit artikel legt de analytische methoden uit die laboratoria gebruiken — RP-HPLC, massaspectrometrie en aanvullende bepalingen — en laat zien hoe u een certificaat van analyse (CoA) systematisch leest.
+
+## Waarom zuiverheid ertoe doet
+
+Een synthetisch peptide is nooit één molecuul: het product bevat bijproducten van de vastefasesynthese, afgeknotte sequenties (deletiepeptiden), geoxideerde varianten en resten van zuivering. Elke onzuiverheid is een extra variabele in het experiment. Voor receptorbindingsstudies of dosis-responscurves kan zelfs 2% van een actief bijproduct de uitkomst verstoren.
+
+## RP-HPLC: de standaard voor zuiverheidsbepaling
+
+Reverse-phase HPLC (RP-HPLC) scheidt moleculen op hydrofobiciteit. Het peptide wordt op een C18- of C8-kolom gebracht en met een gradiënt van water en acetonitril (meestal met 0,1% trifluorazijnzuur als ionenpaarreagens) geëlueerd. Elke verbinding verschijnt als een piek in het chromatogram; de zuiverheid wordt berekend als de fractie van het piekoppervlak die toebehoort aan de hoofdpiek.
+
+Bij de interpretatie horen enkele kanttekeningen:
+
+- **Piekoppervlak ≠ massa.** Verschillende verbindingen absorberen UV-licht (doorgaans gemeten bij 214 of 220 nm) met verschillende efficiëntie. Kleine onzuiverheden kunnen daardoor onder- of oververtegenwoordigd zijn.
+- **Co-elutie.** Twee verbindingen met vrijwel identieke hydrofobiciteit kunnen als één piek elueren. Orthogonale methoden — andere kolommen of andere scheidingsprincipes — verkleinen dat risico.
+- **Monstersampling.** De gerapporteerde zuiverheid geldt voor het geteste monster; batchhomogeniteit is een aparte kwaliteitsvraag.
+
+De beknopte versie van deze methodeuitleg staat in de [zuiverheidsgids](/purity/); dit artikel behandelt de diepere achtergrond.
+
+## Massaspectrometrie: identiteit, geen zuiverheid
+
+Massaspectrometrie (MS) bevestigt dát het molecuul het verwachte peptide is. Bij ESI-MS worden de gemeten m/z-waarden van de meervoudig geladen ionen teruggerekend naar het neutrale molecuulgewicht. Komt dat overeen met de theoretische massa — inclusief eventuele modificaties zoals acetilering, amidatie of een vetzuurzijketen — dan is de identiteit bevestigd.
+
+Belangrijk: **MS is geen zuiverheidsmethode.** Een chromatografisch onzuiver monster kan in MS één dominante massa tonen als de onzuiverheden ioniseren slecht of samenvallen. Zuiverheid en identiteit zijn complementaire, niet onderling vervangbare metingen.
+
+## Wat het CoA verder zou moeten documenteren
+
+Een bruikbaar certificaat van analyse bevat minimaal:
+
+| Component | Wat het vertelt |
+|---|---|
+| Batchnummer en testdatum | Traceerbaarheid naar het geteste materiaal |
+| HPLC-zuiverheid met methodevermelding | Fractie hoofdpiek, incl. kolom- en eluentinformatie |
+| MS-resultaat (waargenomen vs. theoretisch molecuulgewicht) | Identiteitsbevestiging |
+| Netto peptidegehalte (indien gerapporteerd) | Fractie werkelijk peptide ten opzichte van zouten, vocht en tegenionen |
+| Uiterlijk en hygroscopiciteit | Fysieke kwaliteitsindicatoren |
+
+### Zuiverheid versus netto peptidegehalte
+
+Deze twee getallen worden vaak verward. HPLC-zuiverheid meet de fractie van de hoofdpiek in het chromatogram; het netto peptidegehalte corrigeert daarnaast voor tegenionen (zoals trifluoracetaat of acetaat), geabsorbeerd vocht en anorganische zouten. Voor doseringsberekeningen in kritieke protocollen is het netto peptidegehalte de nauwkeurigste basis — wanneer het niet is gerapporteerd, documenteren laboratoria de aanname expliciet in hun protocol.
+
+## Onafhankelijke verificatie
+
+Leveranciersrapporten zijn het startpunt, maar gevestigde laboratoria verifiëren kritieke batches onafhankelijk. Opties zijn:
+
+- Heranalyse door een extern laboratorium met eigen kolommen en standaarden;
+- Orthogonale zuiverheidsmethoden (bijvoorbeeld SEC voor aggregaten of CE);
+- Aminozuuranalyse voor een absolute kwantificering van het peptidegehalte.
+
+Peptidux laat batches onafhankelijk verifiëren en levert per batch een CoA mee; de resultaten staan bij elk productrecord, bijvoorbeeld bij [semaglutide](/glp-1/semaglutide/) en [BPC-157](/recovery/bpc-157/).
+
+## Rode vlaggen bij de inkoop
+
+- Een CoA zonder methodevermelding of zonder batchnummer;
+- Zuiverheidsclaims die niet door een chromatogram worden ondersteund;
+- Ontbrekende MS-bevestiging bij peptides met modificaties;
+- Geen vermelding van tegenion of zoutvorm, terwijl die de dosering beïnvloedt.
+
+## Welke zuiverheid heeft onderzoek nodig?
+
+Het antwoord hangt af van het experimenttype. Voor kwalitatieve screeningsexperimenten volstaat doorgaans een zuiverheid boven 95%. Voor kwantitatief werk — dosis-responscurves, receptorbindingsstudies en farmacokinetische modellen — is ≥98–99% de praktijkstandaard, omdat onzuiverheden anders als systematische fout door de uitkomsten lopen. Voor peptiden die als referentieverbinding dienen, geldt de strengste eis: de kwaliteit van het ijkpunt bepaalt de kwaliteit van alle vergelijkingen die erop volgen.
+
+## Veelgestelde vragen
+
+**Wat betekent een TFA-tegenion voor mijn experiment?**
+Bij RP-HPLC met trifluorazijnzuur eindigen de meeste peptiden als TFA-zout. Het TFA-ion draagt massa zonder biologische activiteit en verlaagt daarmee het netto peptidegehalte. Voor de meeste in vitro-toepassingen is dit irrelevant; voor nauwkeurige dosering of specifieke assays kan een acetaatvorm de voorkeur hebben.
+
+**Is 99% zuiverheid altijd betrouwbaar?**
+Alleen als de methode deugdelijk is gerapporteerd. Vraag naar het chromatogram en de methodevermelding, en beschouw een zuiverheidsclaim zonder onderbouwing als onvolledige documentatie.
+
+**Kan een batch na ontvangst alsnog degraderen?**
+Ja. Onjuiste opslag — vocht, warmte, licht, herhaalde vries-ontdooicycli — verlaagt de effectieve zuiverheid na ontvangst. Zie de [bewaargids](/storage/) en het blogartikel over [opslag en hantering](/blog/peptide-opslag-handhaving/).
+
+## Conclusie
+
+Peptidezuiverheid is een meetbare, documenteerbare eigenschap: RP-HPLC kwantificeert de hoofdpiek, massaspectrometrie bevestigt de identiteit en het netto peptidegehalte corrigeert voor zouten en vocht. Een volledig CoA maakt die drie zichtbaar per batch. Voor onderzoekers is het systeemeenvoudig: verifieer vóór gebruik, documenteer per experiment en beschouw zuiverheid als experimentele variabele, niet als vanzelfsprekendheid. Alle materialen van Peptidux zijn uitsluitend bestemd voor onderzoeksgebruik.

@@ -27,6 +27,17 @@ const pages = defineCollection({
   }),
 });
 
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    author: z.string(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
 const categories = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/categories' }),
   schema: z.object({
@@ -38,4 +49,4 @@ const categories = defineCollection({
   }),
 });
 
-export const collections = { products, pages, categories };
+export const collections = { products, pages, categories, blog };
