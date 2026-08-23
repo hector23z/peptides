@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Dr. Adrian Cole",
+  "jobTitle": "Onderzoeksdirecteur",
+  "description": "Onderzoeksdirecteur bij Peptidux met een achtergrond in analytische biochemie en peptidekarakterisering. Coördineert de zuiverheidsverificatie door derde partijen en de batchdocumentatie voor de researchcatalogus.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Peptidux",
+    "url": "https://peptidux.example"
+  },
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Applied Sciences"
+  },
+  "knowsAbout": [
+    "peptidechemie",
+    "analytische biochemie",
+    "HPLC-zuiverheidsverificatie",
+    "massaspectrometrie",
+    "GLP-1-receptoronderzoek",
+    "lyofilisatie"
+  ],
+  "sameAs": []
+}
