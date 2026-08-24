@@ -151,8 +151,14 @@ const footerCompany = [
               <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>{item.label}</a>
             ))
           }
-          <a href="/cart/" class="nav-cart" aria-label="Winkelwagen">
-            Winkelwagen <span id="cart-count" class="nav-cart__count">0</span>
+          <a href="/cart/" class="nav-cart" aria-label="Winkelwagen" id="nav-cart-link">
+            <svg class="nav-cart__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span id="cart-count" class="nav-cart__count">0</span>
+            <span class="nav-cart__label">Winkelwagen</span>
           </a>
           <a href="/contact/" class="nav-contact">Documentatie aanvragen</a>
         </nav>
@@ -239,7 +245,18 @@ const footerCompany = [
     <script>
       import { cartCount, getCart, cartTotal } from '../scripts/cart';
       const countEl = document.getElementById('cart-count');
-      const update = () => { if (countEl) countEl.textContent = String(cartCount()); };
+      const update = () => {
+        if (!countEl) return;
+        const n = cartCount();
+        countEl.textContent = String(n);
+        countEl.dataset.empty = n === 0 ? 'true' : 'false';
+        // bump animation
+        if (n > 0) {
+          countEl.classList.remove('bump');
+          void countEl.offsetWidth;
+          countEl.classList.add('bump');
+        }
+      };
       update();
       window.addEventListener('storage', update);
       document.addEventListener('cart-updated', update);
