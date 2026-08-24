@@ -118,6 +118,25 @@ const footerCompany = [
     <meta name="theme-color" content="#fafaf8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
+    <!-- International targeting (hreflang reciproco) -->
+    <link rel="alternate" hreflang="nl" href="https://nl.peptidux.com{Astro.url.pathname}" />
+    <link rel="alternate" hreflang="en" href="https://peptidux.com{Astro.url.pathname}" />
+    <link rel="alternate" hreflang="de" href="https://de.peptidux.com{Astro.url.pathname}" />
+    <link rel="alternate" hreflang="nl" href="https://nl.peptidux.com{Astro.url.pathname}" />
+    <link rel="alternate" hreflang="x-default" href="https://peptidux.com{Astro.url.pathname}" />
+
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:title" content="{title}" />
+    <meta property="og:description" content="{description}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical.toString()} />
+    <meta property="og:image" content="https://nl.peptidux.com/images/hero-lab.png" />
+    <meta property="og:site_name" content="Peptidux" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{title}" />
+    <meta name="twitter:description" content="{description}" />
+    <meta name="twitter:image" content="https://nl.peptidux.com/images/hero-lab.png" />
+
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} />
     <script type="application/ld+json" set:html={JSON.stringify(webJsonLd)} />

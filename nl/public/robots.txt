@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /api/
 Disallow: /checkout/success/
 
-Sitemap: https://peptidux.example/sitemap-index.xml
+Sitemap: https://nl.peptidux.com/sitemap-index.xml

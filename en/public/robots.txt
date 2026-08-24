@@ -34,6 +34,8 @@ Allow: /
 # Default: allow all other crawlers
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 # Content signals (IETF draft-romm-aipref-contentsignals)
 Content-Signal: ai-train=yes, search=yes, ai-personalization=no, ai-retrieval=yes

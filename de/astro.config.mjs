@@ -10,6 +10,10 @@ import sitemap from '@astrojs/sitemap';
 import node from '@astrojs/node';
 
 // https://astro.build/config
+function isAdmin(path) {
+  return path.includes('/admin') || path.includes('/api/');
+}
+
 export default defineConfig({
   site: 'https://de.peptidux.com',
 
@@ -21,5 +25,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [mdx(), sitemap()]
+  integrations: [mdx(), sitemap({filter: (page) => !isAdmin(new URL(page).pathname), changefreq: 'weekly', priority: 0.7, lastmod: new Date()})]
 });

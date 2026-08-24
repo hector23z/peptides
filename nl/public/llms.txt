@@ -9,14 +9,14 @@ of diergeneeskundige consumptie.
 
 ## Categorieën
 
-- GLP-1 onderzoek: https://peptidux.example/glp-1/
-- Herstel: https://peptidux.example/recovery/
-- Longevity: https://peptidux.example/longevity/
-- HGH-onderzoek: https://peptidux.example/hgh/
+- GLP-1 onderzoek: https://nl.peptidux.com/glp-1/
+- Herstel: https://nl.peptidux.com/recovery/
+- Longevity: https://nl.peptidux.com/longevity/
+- HGH-onderzoek: https://nl.peptidux.com/hgh/
 
 ## Kennisbank
 
-- Researchpeptiden: https://peptidux.example/research-peptides/
-- Zuiverheid: https://peptidux.example/purity/
-- Reconstitutie: https://peptidux.example/reconstitution/
-- Bewaring: https://peptidux.example/storage/
+- Researchpeptiden: https://nl.peptidux.com/research-peptides/
+- Zuiverheid: https://nl.peptidux.com/purity/
+- Reconstitutie: https://nl.peptidux.com/reconstitution/
+- Bewaring: https://nl.peptidux.com/storage/
