@@ -12,7 +12,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/research-peptides/" class="button button--primary mt-4 inline-block">Blader door de stoffen</a>
     </div>
 
-    <div id="cart-root" class="mt-8 hidden">
+    <div id="cart-root" class="cart-stack mt-8 hidden">
       <div class="overflow-x-auto rounded-[12px] border border-lab-rule">
         <table class="w-full border-collapse text-sm">
           <thead>
@@ -70,11 +70,11 @@ import Layout from '../../layouts/Layout.astro';
             <a href="${productHref(item)}" class="hover:text-lab-cyan">${item.title}</a>
           </td>
           <td class="px-4 py-3 font-mono text-xs text-lab-muted">${item.size ?? '\u2014'}</td>
-          <td class="px-4 py-3 font-mono text-lab-muted">${money(item.price)}</td>
+          <td data-label="Price" class="px-4 py-3 font-mono text-lab-muted">${money(item.price)}</td>
           <td class="px-4 py-3">
             <input type="number" min="1" value="${item.qty}" data-slug="${item.slug}" class="w-16 rounded border border-lab-rule bg-lab-panel px-2 py-1 text-lab-text" />
           </td>
-          <td class="px-4 py-3 font-mono text-lab-cyan">${money(item.price * item.qty)}</td>
+          <td data-label="Subtotal" class="px-4 py-3 font-mono text-lab-cyan">${money(item.price * item.qty)}</td>
           <td class="px-4 py-3">
             <button data-remove="${item.slug}" class="text-lab-faint hover:text-lab-error">Verwijderen</button>
           </td>

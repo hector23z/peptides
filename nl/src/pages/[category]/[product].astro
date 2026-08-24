@@ -178,6 +178,21 @@ const faqJsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   <script>
     import { addToCart } from '../../scripts/cart';
+    const buyBar = document.getElementById('mobile-buy-bar');
+    if (buyBar) document.body.classList.add('has-mobile-buy-bar');
+    const mobileBtns = document.querySelectorAll('[data-add-to-cart-mobile]');
+    mobileBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        addToCart({
+          slug: btn.dataset.slug,
+          title: btn.dataset.title,
+          price: Number(btn.dataset.price),
+          size: btn.dataset.size || undefined,
+        });
+        btn.textContent = 'ADDED ✓';
+        setTimeout(() => { btn.textContent = 'ADD'; }, 1400);
+      });
+    });
     document.querySelectorAll('[data-add-to-cart]').forEach((btn) => {
       btn.addEventListener('click', () => {
         addToCart({
@@ -193,4 +208,23 @@ const faqJsonLd = {
       });
     });
   </script>
+
+  <!-- Sticky mobile buy bar -->
+  <div class="mobile-buy-bar" id="mobile-buy-bar">
+    <div class="mobile-buy-bar__price">
+      <span>Lijstprijs</span>
+      <strong>{product.data.price ? `$${product.data.price}` : 'Enquire'}</strong>
+    </div>
+    {isEligible && product.data.price && (
+      <button
+        type="button"
+        class="button button--primary"
+        data-add-to-cart-mobile
+        data-slug={product.id}
+        data-title={product.data.title}
+        data-price={product.data.price}
+        data-size={product.data.size ?? ''}
+      >Toevoegen</button>
+    )}
+  </div>
 </Layout>
