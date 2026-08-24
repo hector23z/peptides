@@ -13,11 +13,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'PeptideLab',
-  alternateName: 'PeptideLab Research Peptides',
+  name: 'Peptidux',
+  alternateName: 'Peptidux Research Peptides',
   url: Astro.site.href,
   description: 'Anbieter hochreiner Forschungspeptide und Labormaterialien. Nur für Forschungszwecke.',
-  email: 'support@peptidelab.example',
+  email: 'support@peptidux.com',
   slogan: 'Nur für Forschungszwecke. Nicht für den menschlichen Verzehr.',
   areaServed: 'Worldwide',
   knowsAbout: [
@@ -32,10 +32,10 @@ const orgJsonLd = {
 const webJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'PeptideLab',
+  name: 'Peptidux',
   url: Astro.site.href,
   description: 'Forschungspeptide und Laborbedarf. Nur für Forschungszwecke.',
-  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+  publisher: { '@type': 'Organization', name: 'Peptidux' },
 };
 
 const personJsonLd = persona;
@@ -135,7 +135,7 @@ const footerCompany = [
 
     <header class="site-header">
       <div class="site-shell site-header__inner">
-        <a href="/" class="wordmark" aria-label="PeptideLab Startseite">
+        <a href="/" class="wordmark" aria-label="Peptidux Startseite">
           <span>PEPTIDE</span><span>LAB</span>
         </a>
 
@@ -165,7 +165,7 @@ const footerCompany = [
     <footer class="site-footer">
       <div class="site-shell site-footer__grid">
         <div class="site-footer__brand">
-          <a href="/" class="wordmark" aria-label="PeptideLab Startseite">
+          <a href="/" class="wordmark" aria-label="Peptidux Startseite">
             <span>PEPTIDE</span><span>LAB</span>
           </a>
           <p>Hochreine Materialien für kontrollierte Laborforschung, geliefert mit klarer Chargendokumentation.</p>
@@ -182,11 +182,11 @@ const footerCompany = [
         <div class="site-footer__contact">
           <h2>Labor-Support</h2>
           <p>Fragen zu Produkten, Bestellungen oder Analysenzertifikaten?</p>
-          <a href="mailto:support@peptidelab.example">support@peptidelab.example</a>
+          <a href="mailto:support@peptidux.com">support@peptidux.com</a>
         </div>
       </div>
       <div class="site-shell site-footer__bottom">
-        <p>&copy; {new Date().getFullYear()} PeptideLab</p>
+        <p>&copy; {new Date().getFullYear()} Peptidux</p>
         <nav aria-label="Rechtliche Links">
           <a href="/impressum/">Impressum</a>
           <a href="/privacy/">Datenschutz</a>

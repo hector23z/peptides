@@ -13,11 +13,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const orgJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'PeptideLab',
-  alternateName: 'PeptideLab Research Peptides',
+  name: 'Peptidux',
+  alternateName: 'Peptidux Research Peptides',
   url: Astro.site.href,
   description: 'Supplier of high-purity research peptides and laboratory materials. For research use only.',
-  email: 'support@peptidelab.example',
+  email: 'support@peptidux.com',
   slogan: 'Research use only. Not for human consumption.',
   areaServed: 'Worldwide',
   knowsAbout: [
@@ -32,10 +32,10 @@ const orgJsonLd = {
 const webJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'PeptideLab',
+  name: 'Peptidux',
   url: Astro.site.href,
   description: 'Research peptides and laboratory supplies. For research use only.',
-  publisher: { '@type': 'Organization', name: 'PeptideLab' },
+  publisher: { '@type': 'Organization', name: 'Peptidux' },
 };
 
 const personJsonLd = persona;
@@ -140,7 +140,7 @@ const footerCompany = [
 
     <header class="site-header">
       <div class="site-shell site-header__inner">
-        <a href="/" class="wordmark" aria-label="PeptideLab home">
+        <a href="/" class="wordmark" aria-label="Peptidux home">
           <span>PEPTIDE</span><span>LAB</span>
         </a>
 
@@ -170,7 +170,7 @@ const footerCompany = [
     <footer class="site-footer">
       <div class="site-shell site-footer__grid">
         <div class="site-footer__brand">
-          <a href="/" class="wordmark" aria-label="PeptideLab home">
+          <a href="/" class="wordmark" aria-label="Peptidux home">
             <span>PEPTIDE</span><span>LAB</span>
           </a>
           <p>High-purity materials for controlled laboratory research, supplied with clear batch documentation.</p>
@@ -187,11 +187,11 @@ const footerCompany = [
         <div class="site-footer__contact">
           <h2>Laboratory support</h2>
           <p>Questions about products, orders or certificates of analysis?</p>
-          <a href="mailto:support@peptidelab.example">support@peptidelab.example</a>
+          <a href="mailto:support@peptidux.com">support@peptidux.com</a>
         </div>
       </div>
       <div class="site-shell site-footer__bottom">
-        <p>&copy; {new Date().getFullYear()} PeptideLab</p>
+        <p>&copy; {new Date().getFullYear()} Peptidux</p>
         <nav aria-label="Legal links">
           <a href="/privacy/">Privacy</a>
           <a href="/terms/">Terms</a>

@@ -57,7 +57,7 @@ const productJsonLd = {
   category,
   ...(product.data.price ? { offers: { '@type': 'Offer', price: product.data.price, priceCurrency: 'USD', availability: 'https://schema.org/InStock' } } : {}),
   ...(product.data.purity ? { additionalProperty: { '@type': 'PropertyValue', name: 'Reinheit', value: product.data.purity } } : {}),
-  brand: { '@type': 'Brand', name: 'PeptideLab' },
+  brand: { '@type': 'Brand', name: 'Peptidux' },
 };
 
 const stripMarkdown = (value: string) => value

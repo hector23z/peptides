@@ -220,7 +220,7 @@
 ## Contact
 
 - Website: https://peptidelab.example
-- Email: support@peptidelab.example
+- Email: support@peptidux.com
 - About: https://peptidelab.example/about/
 
 ## Legal
