@@ -38,4 +38,4 @@ Allow: /
 # Content signals (IETF draft-romm-aipref-contentsignals)
 Content-Signal: ai-train=yes, search=yes, ai-personalization=no, ai-retrieval=yes
 
-Sitemap: https://peptidelab.example/sitemap-index.xml
+Sitemap: https://peptidux.com/sitemap-index.xml

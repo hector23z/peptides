@@ -11,7 +11,7 @@ import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://peptidelab.example',
+  site: 'https://de.peptidux.com',
 
   output: 'server',
 

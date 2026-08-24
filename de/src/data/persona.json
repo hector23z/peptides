@@ -3,11 +3,11 @@
   "@type": "Person",
   "name": "Dr. Adrian Cole",
   "jobTitle": "Research Director",
-  "description": "Research director at PeptideLab with a background in analytical biochemistry and peptide characterization. Coordinates third-party purity verification and batch documentation for the research catalog.",
+  "description": "Research director at Peptidux with a background in analytical biochemistry and peptide characterization. Coordinates third-party purity verification and batch documentation for the research catalog.",
   "worksFor": {
     "@type": "Organization",
-    "name": "PeptideLab",
-    "url": "https://peptidelab.example"
+    "name": "Peptidux",
+    "url": "https://de.peptidux.com"
   },
   "alumniOf": {
     "@type": "CollegeOrUniversity",
