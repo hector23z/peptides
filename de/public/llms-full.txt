@@ -1,214 +1,214 @@
-# PeptideLab — Full Site Guide
+# Peptidux — Full Site Guide
 
-> PeptideLab supplies high-purity lyophilized research peptides and laboratory materials to qualified researchers, with independent HPLC purity testing and batch certificates of analysis. This file documents the complete site structure for AI systems.
+> Peptidux supplies high-purity lyophilized research peptides and laboratory materials to qualified researchers, with independent HPLC purity testing and batch certificates of analysis. This file documents the complete site structure for AI systems.
 
 ## About
 
-- [Home](https://peptidelab.example/): Overview of PeptideLab, research categories, featured compounds and quality standards.
-- [About](https://peptidelab.example/about/): Who PeptideLab is and our research-only supply policy.
-- [Contact](https://peptidelab.example/contact/): Contact channels and response hours.
-- [Research Peptides](https://peptidelab.example/research-peptides/): Guide to research peptide classes and laboratory use.
-- [Research Blog](https://peptidelab.example/blog/): Guides and research notes on peptides, purity, storage and reconstitution.
+- [Home](https://peptidux.example/): Overview of Peptidux, research categories, featured compounds and quality standards.
+- [About](https://peptidux.example/about/): Who Peptidux is and our research-only supply policy.
+- [Contact](https://peptidux.example/contact/): Contact channels and response hours.
+- [Research Peptides](https://peptidux.example/research-peptides/): Guide to research peptide classes and laboratory use.
+- [Research Blog](https://peptidux.example/blog/): Guides and research notes on peptides, purity, storage and reconstitution.
 
 ## Categories
 
-- [Research Blends](https://peptidelab.example/blends/): Pre-mixed research peptide and compound blends for laboratory research use only.
-- [Cosmetic Research](https://peptidelab.example/cosmetic-research/): Research compounds studied in cosmetic and dermatological research for laboratory research use only.
-- [GLP-1 Peptides](https://peptidelab.example/glp-1/): Research peptides in the GLP-1 class, including semaglutide, tirzepatide and retatrutide, for laboratory and research applications.
-- [HGH & Secretagogues](https://peptidelab.example/hgh/): Research peptides related to growth hormone research, including HGH, ipamorelin and CJC-1295, for laboratory research use only.
-- [Longevity Peptides](https://peptidelab.example/longevity/): Research peptides and compounds studied in longevity and aging research, including NAD+, epitalon and MOTS-c, for laboratory research use only.
-- [Metabolic Peptides](https://peptidelab.example/metabolic/): Research peptides studied in metabolic and incretin research, including GLP-1 receptor agonists, for laboratory research use only.
-- [Miscellaneous Research Peptides](https://peptidelab.example/misc/): A range of research peptides and compounds for laboratory research use only.
-- [Recovery Peptides](https://peptidelab.example/recovery/): Research peptides studied for tissue repair and recovery applications, including BPC-157, TB-500, GHK-Cu and related compounds, for laboratory research use only.
-- [Steroids](https://peptidelab.example/steroids/): Research anabolic-androgenic compounds supplied for laboratory research use only.
-- [Laboratory Supplies](https://peptidelab.example/supplies/): Research-grade laboratory supplies and reagents for laboratory research use only.
+- [Research Blends](https://peptidux.example/blends/): Pre-mixed research peptide and compound blends for laboratory research use only.
+- [Cosmetic Research](https://peptidux.example/cosmetic-research/): Research compounds studied in cosmetic and dermatological research for laboratory research use only.
+- [GLP-1 Peptides](https://peptidux.example/glp-1/): Research peptides in the GLP-1 class, including semaglutide, tirzepatide and retatrutide, for laboratory and research applications.
+- [HGH & Secretagogues](https://peptidux.example/hgh/): Research peptides related to growth hormone research, including HGH, ipamorelin and CJC-1295, for laboratory research use only.
+- [Longevity Peptides](https://peptidux.example/longevity/): Research peptides and compounds studied in longevity and aging research, including NAD+, epitalon and MOTS-c, for laboratory research use only.
+- [Metabolic Peptides](https://peptidux.example/metabolic/): Research peptides studied in metabolic and incretin research, including GLP-1 receptor agonists, for laboratory research use only.
+- [Miscellaneous Research Peptides](https://peptidux.example/misc/): A range of research peptides and compounds for laboratory research use only.
+- [Recovery Peptides](https://peptidux.example/recovery/): Research peptides studied for tissue repair and recovery applications, including BPC-157, TB-500, GHK-Cu and related compounds, for laboratory research use only.
+- [Steroids](https://peptidux.example/steroids/): Research anabolic-androgenic compounds supplied for laboratory research use only.
+- [Laboratory Supplies](https://peptidux.example/supplies/): Research-grade laboratory supplies and reagents for laboratory research use only.
 
 ## Products
 
-- [5-Amino-1MQ](https://peptidelab.example/misc/5-amino-1mq/): 5-amino-1MQ research compound supplied for laboratory research use only.
-- [Adipotide](https://peptidelab.example/misc/adipotide/): Adipotide research peptide supplied for laboratory research use only.
-- [AHK-Cu](https://peptidelab.example/misc/ahk-cu/): AHK-Cu research peptide supplied for laboratory research use only.
-- [Anadrol](https://peptidelab.example/steroids/anadrol/): Anadrol (oxymetholone) research compound supplied for laboratory research use only.
-- [AOD](https://peptidelab.example/misc/aod/): AOD research peptide supplied for laboratory research use only.
-- [ARA-290](https://peptidelab.example/misc/ara-290/): ARA-290 research peptide supplied for laboratory research use only.
-- [Vitamin B12](https://peptidelab.example/supplies/b12/): Vitamin B12 research compound supplied for laboratory research use only.
-- [Bacteriostatic Water](https://peptidelab.example/supplies/bac-water/): Bacteriostatic water research-grade solvent supplied for laboratory research use only.
-- [Benzyl Alcohol](https://peptidelab.example/supplies/benzyl-alcohol/): Benzyl alcohol research-grade solvent supplied for laboratory research use only.
-- [Boldenone](https://peptidelab.example/steroids/boldenone/): Boldenone research compound supplied for laboratory research use only.
-- [Botulinum Toxin](https://peptidelab.example/cosmetic-research/botulinum-toxin/): Botulinum toxin research compound supplied for laboratory research use only.
-- [BPC-157](https://peptidelab.example/recovery/bpc-157/): BPC-157 research peptide supplied as lyophilized powder for laboratory research use only.
-- [BPC-157 + TB-500 Blend](https://peptidelab.example/blends/bpc-tb-blend/): BPC-157 and TB-500 research blend supplied for laboratory research use only.
-- [Bronchogen](https://peptidelab.example/misc/bronchogen/): Bronchogen research peptide supplied for laboratory research use only.
-- [Cagrilintide](https://peptidelab.example/metabolic/cagrilintide/): Cagrilintide research peptide supplied for laboratory research use only.
-- [Cardiogen](https://peptidelab.example/misc/cardiogen/): Cardiogen research peptide supplied for laboratory research use only.
-- [Cartalax](https://peptidelab.example/misc/cartalax/): Cartalax research peptide supplied for laboratory research use only.
-- [Cerebrolysin](https://peptidelab.example/misc/cerebrolysin/): Cerebrolysin research peptide preparation supplied for laboratory research use only.
-- [Chonluten](https://peptidelab.example/misc/chonluten/): Chonluten research peptide supplied for laboratory research use only.
-- [CJC-1295](https://peptidelab.example/hgh/cjc-1295/): CJC-1295 research peptide supplied as lyophilized powder for laboratory research use only.
-- [Cortagen](https://peptidelab.example/misc/cortagen/): Cortagen research peptide supplied for laboratory research use only.
-- [Crystagen](https://peptidelab.example/misc/crystagen/): Crystagen research peptide supplied for laboratory research use only.
-- [Dianabol](https://peptidelab.example/steroids/dianabol/): Dianabol (methandrostenolone) research compound supplied for laboratory research use only.
-- [DSIP](https://peptidelab.example/misc/dsip/): DSIP research peptide supplied for laboratory research use only.
-- [Epitalon](https://peptidelab.example/longevity/epitalon/): Epitalon research peptide supplied as lyophilized powder for laboratory research use only.
-- [EPO](https://peptidelab.example/misc/epo/): EPO research protein supplied for laboratory research use only.
-- [Estradiol Cypionate](https://peptidelab.example/steroids/estradiol-cypionate/): Estradiol cypionate research compound supplied for laboratory research use only.
-- [Fat Blaster](https://peptidelab.example/blends/fat-blaster/): Fat Blaster research blend supplied for laboratory research use only.
-- [FOXO4](https://peptidelab.example/longevity/foxo4/): FOXO4 research peptide supplied for laboratory research use only.
-- [FST344](https://peptidelab.example/misc/fst344/): FST344 research peptide supplied for laboratory research use only.
-- [GHK-Cu](https://peptidelab.example/recovery/ghk-cu/): GHK-Cu research peptide supplied as lyophilized powder for laboratory research use only.
-- [GHRP-2](https://peptidelab.example/misc/ghrp-2/): GHRP-2 research peptide supplied for laboratory research use only.
-- [GHRP-6](https://peptidelab.example/misc/ghrp-6/): GHRP-6 research peptide supplied for laboratory research use only.
-- [Glow Blend](https://peptidelab.example/blends/glow-blend/): Glow research blend supplied for laboratory research use only.
-- [Glutathione](https://peptidelab.example/misc/glutathione/): Glutathione research compound supplied for laboratory research use only.
-- [Gonadorelin](https://peptidelab.example/misc/gonadorelin/): Gonadorelin research peptide supplied for laboratory research use only.
-- [Hair Skin Nails](https://peptidelab.example/cosmetic-research/hair-skin-nails/): Hair Skin Nails research blend supplied for laboratory research use only.
-- [HCG](https://peptidelab.example/misc/hcg/): HCG research protein supplied for laboratory research use only.
-- [Hexarelin](https://peptidelab.example/misc/hexarelin/): Hexarelin research peptide supplied for laboratory research use only.
-- [HGH 10IU](https://peptidelab.example/hgh/hgh-10iu/): HGH research peptide supplied as lyophilized powder for laboratory research use only.
-- [HGH 24IU](https://peptidelab.example/hgh/hgh-24iu/): HGH 24IU research peptide supplied as lyophilized powder for laboratory research use only.
-- [HGH Fragment 176-191](https://peptidelab.example/misc/hgh-fragment-176-191/): HGH fragment 176-191 research peptide supplied for laboratory research use only.
-- [Humanin](https://peptidelab.example/longevity/humanin/): Humanin research peptide supplied for laboratory research use only.
-- [Hyaluronic Acid](https://peptidelab.example/misc/hyaluronic-acid/): Hyaluronic acid research compound supplied for laboratory research use only.
-- [IGF-1 LR3](https://peptidelab.example/misc/igf-1-lr3/): IGF-1 LR3 research peptide supplied for laboratory research use only.
-- [Insulin](https://peptidelab.example/misc/insulin/): Insulin research protein supplied for laboratory research use only.
-- [Ipamorelin](https://peptidelab.example/hgh/ipamorelin/): Ipamorelin research peptide supplied as lyophilized powder for laboratory research use only.
-- [Kisspeptin-10](https://peptidelab.example/misc/kisspeptin-10/): Kisspeptin-10 research peptide supplied for laboratory research use only.
-- [KPV](https://peptidelab.example/misc/kpv/): KPV research peptide supplied for laboratory research use only.
-- [L-Carnitine](https://peptidelab.example/metabolic/l-carnitine/): L-carnitine research compound supplied for laboratory research use only.
-- [Lemon Bottle](https://peptidelab.example/cosmetic-research/lemon-bottle/): Lemon Bottle research blend supplied for laboratory research use only.
-- [Lipo-B](https://peptidelab.example/blends/lipo-b/): Lipo-B research blend supplied for laboratory research use only.
-- [Lipo-C Focus](https://peptidelab.example/blends/lipo-c-focus/): Lipo-C Focus research blend supplied for laboratory research use only.
-- [Lipo-C](https://peptidelab.example/blends/lipo-c/): Lipo-C research blend supplied for laboratory research use only.
-- [Lipo-Mino Mix](https://peptidelab.example/blends/lipo-mino-mix/): Lipo-Mino Mix research blend supplied for laboratory research use only.
-- [Liraglutide](https://peptidelab.example/metabolic/liraglutide/): Liraglutide research peptide supplied for laboratory research use only.
-- [Livagen](https://peptidelab.example/misc/livagen/): Livagen research peptide supplied for laboratory research use only.
-- [LL-37](https://peptidelab.example/misc/ll-37/): LL-37 research peptide supplied for laboratory research use only.
-- [Masteron](https://peptidelab.example/steroids/masteron/): Masteron (drostanolone) research compound supplied for laboratory research use only.
-- [Mazdutide](https://peptidelab.example/metabolic/mazdutide/): Mazdutide research peptide supplied for laboratory research use only.
-- [Melanotan-2](https://peptidelab.example/recovery/melanotan-2/): Melanotan-2 research peptide supplied as lyophilized powder for laboratory research use only.
-- [Methenolone](https://peptidelab.example/steroids/methenolone/): Methenolone research compound supplied for laboratory research use only.
-- [Metribolone](https://peptidelab.example/steroids/metribolone/): Metribolone research compound supplied for laboratory research use only.
-- [MOTS-c](https://peptidelab.example/longevity/mots-c/): MOTS-c research peptide supplied as lyophilized powder for laboratory research use only.
-- [MT1](https://peptidelab.example/misc/mt1/): MT1 research peptide supplied for laboratory research use only.
-- [NAD+](https://peptidelab.example/longevity/nad-plus/): NAD+ research compound supplied as lyophilized powder for laboratory research use only.
-- [Nandrolone Decanoate](https://peptidelab.example/steroids/nandrolone-decanoate/): Nandrolone decanoate research compound supplied for laboratory research use only.
-- [Nandrolone Mix](https://peptidelab.example/steroids/nandromix/): Nandrolone mix research compound supplied for laboratory research use only.
-- [NPP](https://peptidelab.example/steroids/npp/): NPP (nandrolone phenylpropionate) research compound supplied for laboratory research use only.
-- [Oxytocin](https://peptidelab.example/misc/oxytocin/): Oxytocin research peptide supplied for laboratory research use only.
-- [P21](https://peptidelab.example/misc/p21/): P21 research peptide supplied for laboratory research use only.
-- [Pancragen](https://peptidelab.example/misc/pancragen/): Pancragen research peptide supplied for laboratory research use only.
-- [Pinealon](https://peptidelab.example/misc/pinealon/): Pinealon research peptide supplied for laboratory research use only.
-- [Prostamax](https://peptidelab.example/misc/prostamax/): Prostamax research peptide supplied for laboratory research use only.
-- [PT-141](https://peptidelab.example/recovery/pt-141/): PT-141 research peptide supplied as lyophilized powder for laboratory research use only.
-- [Relaxation PM](https://peptidelab.example/blends/relaxation-pm/): Relaxation PM research blend supplied for laboratory research use only.
-- [Retatrutide](https://peptidelab.example/glp-1/retatrutide/): Retatrutide research peptide supplied as lyophilized powder for laboratory research use only.
-- [Selank](https://peptidelab.example/misc/selank/): Selank research peptide supplied for laboratory research use only.
-- [Semaglutide](https://peptidelab.example/glp-1/semaglutide/): Semaglutide research peptide supplied as lyophilized powder for laboratory research use only.
-- [Semax](https://peptidelab.example/misc/semax/): Semax research peptide supplied for laboratory research use only.
-- [Sermorelin](https://peptidelab.example/misc/sermorelin/): Sermorelin research peptide supplied for laboratory research use only.
-- [Shred Blend](https://peptidelab.example/blends/shred-blend/): Shred Blend research blend supplied for laboratory research use only.
-- [SLU-PP-332](https://peptidelab.example/misc/slu-pp-322/): SLU-PP-332 research compound supplied for laboratory research use only.
-- [SNAP-8](https://peptidelab.example/misc/snap-8/): SNAP-8 research peptide supplied for laboratory research use only.
-- [SS-31](https://peptidelab.example/longevity/ss-31/): SS-31 research peptide supplied for laboratory research use only.
-- [Super Human Blend](https://peptidelab.example/blends/super-human-blend/): Super Human Blend research blend supplied for laboratory research use only.
-- [Super Shred](https://peptidelab.example/blends/super-shred/): Super Shred research blend supplied for laboratory research use only.
-- [Superdrol](https://peptidelab.example/steroids/superdrol/): Superdrol (methasterone) research compound supplied for laboratory research use only.
-- [Survodutide](https://peptidelab.example/metabolic/survodutide/): Survodutide research peptide supplied for laboratory research use only.
-- [Sustanon](https://peptidelab.example/steroids/sustanon/): Sustanon research compound supplied for laboratory research use only.
-- [TB-500](https://peptidelab.example/recovery/tb-500/): TB-500 research peptide supplied as lyophilized powder for laboratory research use only.
-- [Teriparatide](https://peptidelab.example/misc/teriparatide/): Teriparatide research peptide supplied for laboratory research use only.
-- [Tesamorelin](https://peptidelab.example/misc/tesamorelin/): Tesamorelin research peptide supplied for laboratory research use only.
-- [Testosterone Base](https://peptidelab.example/steroids/test-base/): Testosterone base research compound supplied for laboratory research use only.
-- [Testagen](https://peptidelab.example/misc/testagen/): Testagen research peptide supplied for laboratory research use only.
-- [Testosterone Cypionate](https://peptidelab.example/steroids/testosterone-cypionate/): Testosterone cypionate research compound supplied for laboratory research use only.
-- [Testosterone Propionate](https://peptidelab.example/steroids/testosterone-propionate/): Testosterone propionate research compound supplied for laboratory research use only.
-- [Testosterone Suspension](https://peptidelab.example/steroids/testosterone-suspension/): Testosterone suspension research compound supplied for laboratory research use only.
-- [Testosterone Undecanoate](https://peptidelab.example/steroids/testosterone-undecanoate/): Testosterone undecanoate research compound supplied for laboratory research use only.
-- [Thymalin](https://peptidelab.example/misc/thymalin/): Thymalin research peptide supplied for laboratory research use only.
-- [Thymosin Alpha-1](https://peptidelab.example/misc/thymosin-alpha-1/): Thymosin alpha-1 research peptide supplied for laboratory research use only.
-- [Tirzepatide](https://peptidelab.example/glp-1/tirzepatide/): Tirzepatide research peptide supplied as lyophilized powder for laboratory research use only.
-- [Trenbolone Acetate](https://peptidelab.example/steroids/trenbolone-acetate/): Trenbolone acetate research compound supplied for laboratory research use only.
-- [Trenbolone Enanthate](https://peptidelab.example/steroids/trenbolone-enanthate/): Trenbolone enanthate research compound supplied for laboratory research use only.
-- [Tren Mix](https://peptidelab.example/steroids/trenmix/): Tren mix research compound supplied for laboratory research use only.
-- [Trestolone](https://peptidelab.example/steroids/trestolone/): Trestolone research compound supplied for laboratory research use only.
-- [Tri-Tren](https://peptidelab.example/steroids/tritren/): Tri-tren research compound supplied for laboratory research use only.
-- [Vilon](https://peptidelab.example/misc/vilon/): Vilon research peptide supplied for laboratory research use only.
-- [VIP](https://peptidelab.example/misc/vip/): VIP research peptide supplied for laboratory research use only.
-- [Vitamin D3](https://peptidelab.example/supplies/vitamin-d3/): Vitamin D3 research compound supplied for laboratory research use only.
-- [Winstrol](https://peptidelab.example/steroids/winstrol/): Winstrol (stanozolol) research compound supplied for laboratory research use only.
+- [5-Amino-1MQ](https://peptidux.example/misc/5-amino-1mq/): 5-amino-1MQ research compound supplied for laboratory research use only.
+- [Adipotide](https://peptidux.example/misc/adipotide/): Adipotide research peptide supplied for laboratory research use only.
+- [AHK-Cu](https://peptidux.example/misc/ahk-cu/): AHK-Cu research peptide supplied for laboratory research use only.
+- [Anadrol](https://peptidux.example/steroids/anadrol/): Anadrol (oxymetholone) research compound supplied for laboratory research use only.
+- [AOD](https://peptidux.example/misc/aod/): AOD research peptide supplied for laboratory research use only.
+- [ARA-290](https://peptidux.example/misc/ara-290/): ARA-290 research peptide supplied for laboratory research use only.
+- [Vitamin B12](https://peptidux.example/supplies/b12/): Vitamin B12 research compound supplied for laboratory research use only.
+- [Bacteriostatic Water](https://peptidux.example/supplies/bac-water/): Bacteriostatic water research-grade solvent supplied for laboratory research use only.
+- [Benzyl Alcohol](https://peptidux.example/supplies/benzyl-alcohol/): Benzyl alcohol research-grade solvent supplied for laboratory research use only.
+- [Boldenone](https://peptidux.example/steroids/boldenone/): Boldenone research compound supplied for laboratory research use only.
+- [Botulinum Toxin](https://peptidux.example/cosmetic-research/botulinum-toxin/): Botulinum toxin research compound supplied for laboratory research use only.
+- [BPC-157](https://peptidux.example/recovery/bpc-157/): BPC-157 research peptide supplied as lyophilized powder for laboratory research use only.
+- [BPC-157 + TB-500 Blend](https://peptidux.example/blends/bpc-tb-blend/): BPC-157 and TB-500 research blend supplied for laboratory research use only.
+- [Bronchogen](https://peptidux.example/misc/bronchogen/): Bronchogen research peptide supplied for laboratory research use only.
+- [Cagrilintide](https://peptidux.example/metabolic/cagrilintide/): Cagrilintide research peptide supplied for laboratory research use only.
+- [Cardiogen](https://peptidux.example/misc/cardiogen/): Cardiogen research peptide supplied for laboratory research use only.
+- [Cartalax](https://peptidux.example/misc/cartalax/): Cartalax research peptide supplied for laboratory research use only.
+- [Cerebrolysin](https://peptidux.example/misc/cerebrolysin/): Cerebrolysin research peptide preparation supplied for laboratory research use only.
+- [Chonluten](https://peptidux.example/misc/chonluten/): Chonluten research peptide supplied for laboratory research use only.
+- [CJC-1295](https://peptidux.example/hgh/cjc-1295/): CJC-1295 research peptide supplied as lyophilized powder for laboratory research use only.
+- [Cortagen](https://peptidux.example/misc/cortagen/): Cortagen research peptide supplied for laboratory research use only.
+- [Crystagen](https://peptidux.example/misc/crystagen/): Crystagen research peptide supplied for laboratory research use only.
+- [Dianabol](https://peptidux.example/steroids/dianabol/): Dianabol (methandrostenolone) research compound supplied for laboratory research use only.
+- [DSIP](https://peptidux.example/misc/dsip/): DSIP research peptide supplied for laboratory research use only.
+- [Epitalon](https://peptidux.example/longevity/epitalon/): Epitalon research peptide supplied as lyophilized powder for laboratory research use only.
+- [EPO](https://peptidux.example/misc/epo/): EPO research protein supplied for laboratory research use only.
+- [Estradiol Cypionate](https://peptidux.example/steroids/estradiol-cypionate/): Estradiol cypionate research compound supplied for laboratory research use only.
+- [Fat Blaster](https://peptidux.example/blends/fat-blaster/): Fat Blaster research blend supplied for laboratory research use only.
+- [FOXO4](https://peptidux.example/longevity/foxo4/): FOXO4 research peptide supplied for laboratory research use only.
+- [FST344](https://peptidux.example/misc/fst344/): FST344 research peptide supplied for laboratory research use only.
+- [GHK-Cu](https://peptidux.example/recovery/ghk-cu/): GHK-Cu research peptide supplied as lyophilized powder for laboratory research use only.
+- [GHRP-2](https://peptidux.example/misc/ghrp-2/): GHRP-2 research peptide supplied for laboratory research use only.
+- [GHRP-6](https://peptidux.example/misc/ghrp-6/): GHRP-6 research peptide supplied for laboratory research use only.
+- [Glow Blend](https://peptidux.example/blends/glow-blend/): Glow research blend supplied for laboratory research use only.
+- [Glutathione](https://peptidux.example/misc/glutathione/): Glutathione research compound supplied for laboratory research use only.
+- [Gonadorelin](https://peptidux.example/misc/gonadorelin/): Gonadorelin research peptide supplied for laboratory research use only.
+- [Hair Skin Nails](https://peptidux.example/cosmetic-research/hair-skin-nails/): Hair Skin Nails research blend supplied for laboratory research use only.
+- [HCG](https://peptidux.example/misc/hcg/): HCG research protein supplied for laboratory research use only.
+- [Hexarelin](https://peptidux.example/misc/hexarelin/): Hexarelin research peptide supplied for laboratory research use only.
+- [HGH 10IU](https://peptidux.example/hgh/hgh-10iu/): HGH research peptide supplied as lyophilized powder for laboratory research use only.
+- [HGH 24IU](https://peptidux.example/hgh/hgh-24iu/): HGH 24IU research peptide supplied as lyophilized powder for laboratory research use only.
+- [HGH Fragment 176-191](https://peptidux.example/misc/hgh-fragment-176-191/): HGH fragment 176-191 research peptide supplied for laboratory research use only.
+- [Humanin](https://peptidux.example/longevity/humanin/): Humanin research peptide supplied for laboratory research use only.
+- [Hyaluronic Acid](https://peptidux.example/misc/hyaluronic-acid/): Hyaluronic acid research compound supplied for laboratory research use only.
+- [IGF-1 LR3](https://peptidux.example/misc/igf-1-lr3/): IGF-1 LR3 research peptide supplied for laboratory research use only.
+- [Insulin](https://peptidux.example/misc/insulin/): Insulin research protein supplied for laboratory research use only.
+- [Ipamorelin](https://peptidux.example/hgh/ipamorelin/): Ipamorelin research peptide supplied as lyophilized powder for laboratory research use only.
+- [Kisspeptin-10](https://peptidux.example/misc/kisspeptin-10/): Kisspeptin-10 research peptide supplied for laboratory research use only.
+- [KPV](https://peptidux.example/misc/kpv/): KPV research peptide supplied for laboratory research use only.
+- [L-Carnitine](https://peptidux.example/metabolic/l-carnitine/): L-carnitine research compound supplied for laboratory research use only.
+- [Lemon Bottle](https://peptidux.example/cosmetic-research/lemon-bottle/): Lemon Bottle research blend supplied for laboratory research use only.
+- [Lipo-B](https://peptidux.example/blends/lipo-b/): Lipo-B research blend supplied for laboratory research use only.
+- [Lipo-C Focus](https://peptidux.example/blends/lipo-c-focus/): Lipo-C Focus research blend supplied for laboratory research use only.
+- [Lipo-C](https://peptidux.example/blends/lipo-c/): Lipo-C research blend supplied for laboratory research use only.
+- [Lipo-Mino Mix](https://peptidux.example/blends/lipo-mino-mix/): Lipo-Mino Mix research blend supplied for laboratory research use only.
+- [Liraglutide](https://peptidux.example/metabolic/liraglutide/): Liraglutide research peptide supplied for laboratory research use only.
+- [Livagen](https://peptidux.example/misc/livagen/): Livagen research peptide supplied for laboratory research use only.
+- [LL-37](https://peptidux.example/misc/ll-37/): LL-37 research peptide supplied for laboratory research use only.
+- [Masteron](https://peptidux.example/steroids/masteron/): Masteron (drostanolone) research compound supplied for laboratory research use only.
+- [Mazdutide](https://peptidux.example/metabolic/mazdutide/): Mazdutide research peptide supplied for laboratory research use only.
+- [Melanotan-2](https://peptidux.example/recovery/melanotan-2/): Melanotan-2 research peptide supplied as lyophilized powder for laboratory research use only.
+- [Methenolone](https://peptidux.example/steroids/methenolone/): Methenolone research compound supplied for laboratory research use only.
+- [Metribolone](https://peptidux.example/steroids/metribolone/): Metribolone research compound supplied for laboratory research use only.
+- [MOTS-c](https://peptidux.example/longevity/mots-c/): MOTS-c research peptide supplied as lyophilized powder for laboratory research use only.
+- [MT1](https://peptidux.example/misc/mt1/): MT1 research peptide supplied for laboratory research use only.
+- [NAD+](https://peptidux.example/longevity/nad-plus/): NAD+ research compound supplied as lyophilized powder for laboratory research use only.
+- [Nandrolone Decanoate](https://peptidux.example/steroids/nandrolone-decanoate/): Nandrolone decanoate research compound supplied for laboratory research use only.
+- [Nandrolone Mix](https://peptidux.example/steroids/nandromix/): Nandrolone mix research compound supplied for laboratory research use only.
+- [NPP](https://peptidux.example/steroids/npp/): NPP (nandrolone phenylpropionate) research compound supplied for laboratory research use only.
+- [Oxytocin](https://peptidux.example/misc/oxytocin/): Oxytocin research peptide supplied for laboratory research use only.
+- [P21](https://peptidux.example/misc/p21/): P21 research peptide supplied for laboratory research use only.
+- [Pancragen](https://peptidux.example/misc/pancragen/): Pancragen research peptide supplied for laboratory research use only.
+- [Pinealon](https://peptidux.example/misc/pinealon/): Pinealon research peptide supplied for laboratory research use only.
+- [Prostamax](https://peptidux.example/misc/prostamax/): Prostamax research peptide supplied for laboratory research use only.
+- [PT-141](https://peptidux.example/recovery/pt-141/): PT-141 research peptide supplied as lyophilized powder for laboratory research use only.
+- [Relaxation PM](https://peptidux.example/blends/relaxation-pm/): Relaxation PM research blend supplied for laboratory research use only.
+- [Retatrutide](https://peptidux.example/glp-1/retatrutide/): Retatrutide research peptide supplied as lyophilized powder for laboratory research use only.
+- [Selank](https://peptidux.example/misc/selank/): Selank research peptide supplied for laboratory research use only.
+- [Semaglutide](https://peptidux.example/glp-1/semaglutide/): Semaglutide research peptide supplied as lyophilized powder for laboratory research use only.
+- [Semax](https://peptidux.example/misc/semax/): Semax research peptide supplied for laboratory research use only.
+- [Sermorelin](https://peptidux.example/misc/sermorelin/): Sermorelin research peptide supplied for laboratory research use only.
+- [Shred Blend](https://peptidux.example/blends/shred-blend/): Shred Blend research blend supplied for laboratory research use only.
+- [SLU-PP-332](https://peptidux.example/misc/slu-pp-322/): SLU-PP-332 research compound supplied for laboratory research use only.
+- [SNAP-8](https://peptidux.example/misc/snap-8/): SNAP-8 research peptide supplied for laboratory research use only.
+- [SS-31](https://peptidux.example/longevity/ss-31/): SS-31 research peptide supplied for laboratory research use only.
+- [Super Human Blend](https://peptidux.example/blends/super-human-blend/): Super Human Blend research blend supplied for laboratory research use only.
+- [Super Shred](https://peptidux.example/blends/super-shred/): Super Shred research blend supplied for laboratory research use only.
+- [Superdrol](https://peptidux.example/steroids/superdrol/): Superdrol (methasterone) research compound supplied for laboratory research use only.
+- [Survodutide](https://peptidux.example/metabolic/survodutide/): Survodutide research peptide supplied for laboratory research use only.
+- [Sustanon](https://peptidux.example/steroids/sustanon/): Sustanon research compound supplied for laboratory research use only.
+- [TB-500](https://peptidux.example/recovery/tb-500/): TB-500 research peptide supplied as lyophilized powder for laboratory research use only.
+- [Teriparatide](https://peptidux.example/misc/teriparatide/): Teriparatide research peptide supplied for laboratory research use only.
+- [Tesamorelin](https://peptidux.example/misc/tesamorelin/): Tesamorelin research peptide supplied for laboratory research use only.
+- [Testosterone Base](https://peptidux.example/steroids/test-base/): Testosterone base research compound supplied for laboratory research use only.
+- [Testagen](https://peptidux.example/misc/testagen/): Testagen research peptide supplied for laboratory research use only.
+- [Testosterone Cypionate](https://peptidux.example/steroids/testosterone-cypionate/): Testosterone cypionate research compound supplied for laboratory research use only.
+- [Testosterone Propionate](https://peptidux.example/steroids/testosterone-propionate/): Testosterone propionate research compound supplied for laboratory research use only.
+- [Testosterone Suspension](https://peptidux.example/steroids/testosterone-suspension/): Testosterone suspension research compound supplied for laboratory research use only.
+- [Testosterone Undecanoate](https://peptidux.example/steroids/testosterone-undecanoate/): Testosterone undecanoate research compound supplied for laboratory research use only.
+- [Thymalin](https://peptidux.example/misc/thymalin/): Thymalin research peptide supplied for laboratory research use only.
+- [Thymosin Alpha-1](https://peptidux.example/misc/thymosin-alpha-1/): Thymosin alpha-1 research peptide supplied for laboratory research use only.
+- [Tirzepatide](https://peptidux.example/glp-1/tirzepatide/): Tirzepatide research peptide supplied as lyophilized powder for laboratory research use only.
+- [Trenbolone Acetate](https://peptidux.example/steroids/trenbolone-acetate/): Trenbolone acetate research compound supplied for laboratory research use only.
+- [Trenbolone Enanthate](https://peptidux.example/steroids/trenbolone-enanthate/): Trenbolone enanthate research compound supplied for laboratory research use only.
+- [Tren Mix](https://peptidux.example/steroids/trenmix/): Tren mix research compound supplied for laboratory research use only.
+- [Trestolone](https://peptidux.example/steroids/trestolone/): Trestolone research compound supplied for laboratory research use only.
+- [Tri-Tren](https://peptidux.example/steroids/tritren/): Tri-tren research compound supplied for laboratory research use only.
+- [Vilon](https://peptidux.example/misc/vilon/): Vilon research peptide supplied for laboratory research use only.
+- [VIP](https://peptidux.example/misc/vip/): VIP research peptide supplied for laboratory research use only.
+- [Vitamin D3](https://peptidux.example/supplies/vitamin-d3/): Vitamin D3 research compound supplied for laboratory research use only.
+- [Winstrol](https://peptidux.example/steroids/winstrol/): Winstrol (stanozolol) research compound supplied for laboratory research use only.
 
 ## Keyword Pages
 
-- [Buy Anavar for Research](https://peptidelab.example/anavar-buy/): A guide to buying anavar for research purposes, covering quality, purity and supplier considerations, research use only.
-- [Best Research Peptides](https://peptidelab.example/best-research-peptides/): A guide to the most commonly studied research peptides across GLP-1, recovery, longevity and growth hormone classes, research use only.
-- [Blue Sky Peptides](https://peptidelab.example/blue-sky-peptides/): A comparison of blue sky peptides and other research peptide suppliers, covering quality and documentation. For research use only.
-- [BPC-157 for Sale](https://peptidelab.example/bpc-157-for-sale/): A guide to buying BPC-157 for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Buy HGH Online](https://peptidelab.example/buy-hgh-online/): A guide to buying HGH online for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Buy HGH for Research](https://peptidelab.example/buy-hgh/): A guide to buying HGH for research purposes, covering quality, purity and supplier considerations, research use only.
-- [Buy Peptides for Research](https://peptidelab.example/buy-peptides/): A practical guide to buying research peptides from reputable laboratory suppliers, covering quality, purity and supplier considerations.
-- [Buy Test E](https://peptidelab.example/buy-test-e/): A guide to buying testosterone enanthate for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Buy Testosterone for Research](https://peptidelab.example/buy-testosterone/): A guide to buying testosterone for research purposes, covering quality, purity and supplier considerations, research use only.
-- [Buying Mounjaro](https://peptidelab.example/buying-mounjaro/): A guide to buying mounjaro for research purposes, covering what it is and how it relates to research peptides. For research use only.
-- [Compound Semaglutide Dosing](https://peptidelab.example/compound-semaglutide-dosing/): A guide to compound semaglutide dosing for research purposes, covering what it is and how it relates to research protocols. For research use only.
-- [Compound Tirzepatide](https://peptidelab.example/compound-tirzepatide/): Compound tirzepatide explained for research purposes, covering what it is and how it relates to research peptides. For research use only.
-- [Compounded Semaglutide](https://peptidelab.example/compounded-semaglutide/): Compounded semaglutide explained for research purposes, covering what it is and how it relates to research peptides, for research use only.
-- [Compounded Tirzepatide](https://peptidelab.example/compounded-tirzepatide/): Compounded tirzepatide explained for research purposes, covering what it is and how it relates to research peptides, for research use only.
-- [Compounding Semaglutide](https://peptidelab.example/compounding-semaglutide/): Compounding semaglutide explained for research purposes, covering what it is and how it relates to research peptides. For research use only.
-- [Get Tirzepatide Online](https://peptidelab.example/get-tirzepatide-online/): A guide to getting tirzepatide online for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [GHRP-6 Peptide](https://peptidelab.example/ghrp-6-peptide/): A guide to GHRP-6 peptide for research purposes, covering what it is and how it is used in research. For research use only.
-- [GLP-1 Compounding Pharmacy](https://peptidelab.example/glp-1-compounding-pharmacy/): A guide to GLP-1 compounding pharmacy for research purposes, covering what it is and how it relates to research peptides. For research use only.
-- [GLP-1 for Research](https://peptidelab.example/glp-1-for-research/): A guide to GLP-1 receptor agonists for research, covering semaglutide, tirzepatide and retatrutide, research use only.
-- [HGH for Sale Online](https://peptidelab.example/hgh-for-sale-online/): A guide to buying HGH online for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [HGH for Sale](https://peptidelab.example/hgh-for-sale/): HGH for sale for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
-- [How to Store Peptides](https://peptidelab.example/how-to-store-peptides/): A guide to storing research peptides correctly, covering lyophilized and reconstituted material, research use only.
-- [MK-677 for Sale](https://peptidelab.example/mk-677-for-sale/): MK-677 for sale for research purposes, supplied as a research compound with a certificate of analysis, research use only.
-- [MOTS-c Peptide Buy](https://peptidelab.example/mots-c-peptide-buy/): A guide to buying MOTS-c peptide for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Oligopeptide](https://peptidelab.example/oligopeptide/): A guide to oligopeptides for research purposes, covering what they are and how they are used in research. For research use only.
-- [Online Testosterone Prescription](https://peptidelab.example/online-testosterone-prescription/): A guide to online testosterone prescription for research purposes, covering what it is and how it relates to research compounds. For research use only.
-- [Ozempic Online](https://peptidelab.example/ozempic-online/): A guide to buying ozempic online for research purposes, covering what it is and how it relates to research peptides. For research use only.
-- [Peptide in Food](https://peptidelab.example/peptide-in-food/): A guide to peptides in food for research purposes, covering what they are and how they are studied. For research use only.
-- [Peptide Purity Guide](https://peptidelab.example/peptide-purity-guide/): A guide to understanding research peptide purity, certificates of analysis and quality testing, research use only.
-- [Peptide Reconstitution Guide](https://peptidelab.example/peptide-reconstitution-guide/): A guide to reconstituting research peptides correctly, covering solvents, protocols and handling, research use only.
-- [Peptide Shop](https://peptidelab.example/peptide-shop/): A research peptide shop offering high-purity peptides with certificates of analysis for laboratory research use only.
-- [Peptide Supplier](https://peptidelab.example/peptide-supplier/): A trusted research peptide supplier providing high-purity peptides with certificates of analysis for laboratory research use only.
-- [Peptides vs SARMs](https://peptidelab.example/peptide-vs-sarms/): A comparison of research peptides and SARMs for laboratory research, covering their differences and applications, research use only.
-- [Peptides for Sale](https://peptidelab.example/peptides-for-sale/): Research peptides for sale, supplied as lyophilized powders for laboratory research use only.
-- [Peptides Online](https://peptidelab.example/peptides-online/): Buy research peptides online from a reputable laboratory supplier, with certificates of analysis and research use only.
-- [Peptides UK](https://peptidelab.example/peptides-uk/): A guide to sourcing research peptides in the UK, covering quality, purity and supplier considerations. For research use only.
-- [Research Peptides for Sale](https://peptidelab.example/research-peptides-for-sale/): A guide to buying research peptides for sale, covering quality, purity and supplier considerations. For research use only.
-- [Research Peptides](https://peptidelab.example/research-peptides/): A guide to research peptides, their classes and how they are used in laboratory research, for research use only.
-- [Retatrutide Online](https://peptidelab.example/retatrutide-online/): Buy retatrutide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
-- [SARMs for Sale](https://peptidelab.example/sarms-for-sale/): SARMs for sale for research purposes, supplied as research compounds with certificates of analysis, research use only.
-- [Semaglutide Online](https://peptidelab.example/semaglutide-online/): Buy semaglutide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
-- [Sports Research Multi Collagen](https://peptidelab.example/sports-research-multi-collagen/): A guide to sports research multi collagen for research purposes, covering what it is and how it is studied. For research use only.
-- [SS-31 Peptide Buy](https://peptidelab.example/ss-31-peptide-buy/): A guide to buying SS-31 peptide for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Testosterone Cypionate for Sale](https://peptidelab.example/testosterone-cypionate-for-sale/): A guide to buying testosterone cypionate for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Testosterone Enanthate Buy](https://peptidelab.example/testosterone-enanthate-buy/): A guide to buying testosterone enanthate for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Testosterone for Sale](https://peptidelab.example/testosterone-for-sale/): Testosterone for sale for research purposes, supplied as a research compound with a certificate of analysis, research use only.
-- [Tirzepatide for Sale](https://peptidelab.example/tirzepatide-for-sale/): A guide to buying tirzepatide for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Tirzepatide Online](https://peptidelab.example/tirzepatide-online/): Buy tirzepatide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
-- [Tirzepatide Price](https://peptidelab.example/tirzepatide-price/): A guide to tirzepatide pricing for research purposes, covering what affects price and how to compare research-grade material.
-- [Tren for Sale](https://peptidelab.example/tren-for-sale/): A guide to buying trenbolone for research purposes, covering quality, purity and supplier considerations. For research use only.
-- [Buy Trenbolone for Research](https://peptidelab.example/trenbolone-buy/): A guide to buying trenbolone for research purposes, covering quality, purity and supplier considerations, research use only.
+- [Buy Anavar for Research](https://peptidux.example/anavar-buy/): A guide to buying anavar for research purposes, covering quality, purity and supplier considerations, research use only.
+- [Best Research Peptides](https://peptidux.example/best-research-peptides/): A guide to the most commonly studied research peptides across GLP-1, recovery, longevity and growth hormone classes, research use only.
+- [Blue Sky Peptides](https://peptidux.example/blue-sky-peptides/): A comparison of blue sky peptides and other research peptide suppliers, covering quality and documentation. For research use only.
+- [BPC-157 for Sale](https://peptidux.example/bpc-157-for-sale/): A guide to buying BPC-157 for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Buy HGH Online](https://peptidux.example/buy-hgh-online/): A guide to buying HGH online for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Buy HGH for Research](https://peptidux.example/buy-hgh/): A guide to buying HGH for research purposes, covering quality, purity and supplier considerations, research use only.
+- [Buy Peptides for Research](https://peptidux.example/buy-peptides/): A practical guide to buying research peptides from reputable laboratory suppliers, covering quality, purity and supplier considerations.
+- [Buy Test E](https://peptidux.example/buy-test-e/): A guide to buying testosterone enanthate for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Buy Testosterone for Research](https://peptidux.example/buy-testosterone/): A guide to buying testosterone for research purposes, covering quality, purity and supplier considerations, research use only.
+- [Buying Mounjaro](https://peptidux.example/buying-mounjaro/): A guide to buying mounjaro for research purposes, covering what it is and how it relates to research peptides. For research use only.
+- [Compound Semaglutide Dosing](https://peptidux.example/compound-semaglutide-dosing/): A guide to compound semaglutide dosing for research purposes, covering what it is and how it relates to research protocols. For research use only.
+- [Compound Tirzepatide](https://peptidux.example/compound-tirzepatide/): Compound tirzepatide explained for research purposes, covering what it is and how it relates to research peptides. For research use only.
+- [Compounded Semaglutide](https://peptidux.example/compounded-semaglutide/): Compounded semaglutide explained for research purposes, covering what it is and how it relates to research peptides, for research use only.
+- [Compounded Tirzepatide](https://peptidux.example/compounded-tirzepatide/): Compounded tirzepatide explained for research purposes, covering what it is and how it relates to research peptides, for research use only.
+- [Compounding Semaglutide](https://peptidux.example/compounding-semaglutide/): Compounding semaglutide explained for research purposes, covering what it is and how it relates to research peptides. For research use only.
+- [Get Tirzepatide Online](https://peptidux.example/get-tirzepatide-online/): A guide to getting tirzepatide online for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [GHRP-6 Peptide](https://peptidux.example/ghrp-6-peptide/): A guide to GHRP-6 peptide for research purposes, covering what it is and how it is used in research. For research use only.
+- [GLP-1 Compounding Pharmacy](https://peptidux.example/glp-1-compounding-pharmacy/): A guide to GLP-1 compounding pharmacy for research purposes, covering what it is and how it relates to research peptides. For research use only.
+- [GLP-1 for Research](https://peptidux.example/glp-1-for-research/): A guide to GLP-1 receptor agonists for research, covering semaglutide, tirzepatide and retatrutide, research use only.
+- [HGH for Sale Online](https://peptidux.example/hgh-for-sale-online/): A guide to buying HGH online for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [HGH for Sale](https://peptidux.example/hgh-for-sale/): HGH for sale for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
+- [How to Store Peptides](https://peptidux.example/how-to-store-peptides/): A guide to storing research peptides correctly, covering lyophilized and reconstituted material, research use only.
+- [MK-677 for Sale](https://peptidux.example/mk-677-for-sale/): MK-677 for sale for research purposes, supplied as a research compound with a certificate of analysis, research use only.
+- [MOTS-c Peptide Buy](https://peptidux.example/mots-c-peptide-buy/): A guide to buying MOTS-c peptide for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Oligopeptide](https://peptidux.example/oligopeptide/): A guide to oligopeptides for research purposes, covering what they are and how they are used in research. For research use only.
+- [Online Testosterone Prescription](https://peptidux.example/online-testosterone-prescription/): A guide to online testosterone prescription for research purposes, covering what it is and how it relates to research compounds. For research use only.
+- [Ozempic Online](https://peptidux.example/ozempic-online/): A guide to buying ozempic online for research purposes, covering what it is and how it relates to research peptides. For research use only.
+- [Peptide in Food](https://peptidux.example/peptide-in-food/): A guide to peptides in food for research purposes, covering what they are and how they are studied. For research use only.
+- [Peptide Purity Guide](https://peptidux.example/peptide-purity-guide/): A guide to understanding research peptide purity, certificates of analysis and quality testing, research use only.
+- [Peptide Reconstitution Guide](https://peptidux.example/peptide-reconstitution-guide/): A guide to reconstituting research peptides correctly, covering solvents, protocols and handling, research use only.
+- [Peptide Shop](https://peptidux.example/peptide-shop/): A research peptide shop offering high-purity peptides with certificates of analysis for laboratory research use only.
+- [Peptide Supplier](https://peptidux.example/peptide-supplier/): A trusted research peptide supplier providing high-purity peptides with certificates of analysis for laboratory research use only.
+- [Peptides vs SARMs](https://peptidux.example/peptide-vs-sarms/): A comparison of research peptides and SARMs for laboratory research, covering their differences and applications, research use only.
+- [Peptides for Sale](https://peptidux.example/peptides-for-sale/): Research peptides for sale, supplied as lyophilized powders for laboratory research use only.
+- [Peptides Online](https://peptidux.example/peptides-online/): Buy research peptides online from a reputable laboratory supplier, with certificates of analysis and research use only.
+- [Peptides UK](https://peptidux.example/peptides-uk/): A guide to sourcing research peptides in the UK, covering quality, purity and supplier considerations. For research use only.
+- [Research Peptides for Sale](https://peptidux.example/research-peptides-for-sale/): A guide to buying research peptides for sale, covering quality, purity and supplier considerations. For research use only.
+- [Research Peptides](https://peptidux.example/research-peptides/): A guide to research peptides, their classes and how they are used in laboratory research, for research use only.
+- [Retatrutide Online](https://peptidux.example/retatrutide-online/): Buy retatrutide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
+- [SARMs for Sale](https://peptidux.example/sarms-for-sale/): SARMs for sale for research purposes, supplied as research compounds with certificates of analysis, research use only.
+- [Semaglutide Online](https://peptidux.example/semaglutide-online/): Buy semaglutide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
+- [Sports Research Multi Collagen](https://peptidux.example/sports-research-multi-collagen/): A guide to sports research multi collagen for research purposes, covering what it is and how it is studied. For research use only.
+- [SS-31 Peptide Buy](https://peptidux.example/ss-31-peptide-buy/): A guide to buying SS-31 peptide for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Testosterone Cypionate for Sale](https://peptidux.example/testosterone-cypionate-for-sale/): A guide to buying testosterone cypionate for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Testosterone Enanthate Buy](https://peptidux.example/testosterone-enanthate-buy/): A guide to buying testosterone enanthate for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Testosterone for Sale](https://peptidux.example/testosterone-for-sale/): Testosterone for sale for research purposes, supplied as a research compound with a certificate of analysis, research use only.
+- [Tirzepatide for Sale](https://peptidux.example/tirzepatide-for-sale/): A guide to buying tirzepatide for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Tirzepatide Online](https://peptidux.example/tirzepatide-online/): Buy tirzepatide online for research purposes, supplied as lyophilized powder with a certificate of analysis, research use only.
+- [Tirzepatide Price](https://peptidux.example/tirzepatide-price/): A guide to tirzepatide pricing for research purposes, covering what affects price and how to compare research-grade material.
+- [Tren for Sale](https://peptidux.example/tren-for-sale/): A guide to buying trenbolone for research purposes, covering quality, purity and supplier considerations. For research use only.
+- [Buy Trenbolone for Research](https://peptidux.example/trenbolone-buy/): A guide to buying trenbolone for research purposes, covering quality, purity and supplier considerations, research use only.
 
 ## Blog
 
-- [BPC-157 Research Guide](https://peptidelab.example/blog/bpc-157-research-guide/): A guide to BPC-157 research, covering what it is, how it is studied and its research applications.
-- [GLP-1 Peptides: Key Differences Explained](https://peptidelab.example/blog/glp-1-peptide-differences/): A comparison of GLP-1 receptor agonists used in research, including semaglutide, tirzepatide and retatrutide.
-- [HGH Research Guide](https://peptidelab.example/blog/hgh-research-guide/): A guide to human growth hormone research, covering its role, applications and related peptides.
-- [How to Verify Peptide Purity and Certificates of Analysis](https://peptidelab.example/blog/how-to-verify-peptide-purity/): A practical guide to reading certificates of analysis and verifying the purity of research peptides.
-- [Peptide Reconstitution Guide](https://peptidelab.example/blog/peptide-reconstitution-guide/): A step-by-step guide to reconstituting lyophilized research peptides correctly for laboratory use.
-- [The State of Peptide Research in 2026](https://peptidelab.example/blog/peptide-research-2026/): An overview of the current landscape of peptide research in 2026, covering key classes and emerging areas of study.
-- [How to Store Research Peptides Correctly](https://peptidelab.example/blog/peptide-storage-guide/): A guide to storing lyophilized and reconstituted research peptides to preserve quality and stability.
-- [A Safe Guide to Buying Research Peptides](https://peptidelab.example/blog/safe-peptide-buying-guide/): How to buy research peptides safely and responsibly, covering quality, purity and supplier verification.
-- [Semaglutide vs Tirzepatide: A Research Comparison](https://peptidelab.example/blog/semaglutide-vs-tirzepatide/): A comparison of semaglutide and tirzepatide for research, covering their receptor profiles and applications.
-- [What Is a Peptide? A Research Primer](https://peptidelab.example/blog/what-is-a-peptide/): An introduction to peptides, their structure and how they are used in laboratory research.
+- [BPC-157 Research Guide](https://peptidux.example/blog/bpc-157-research-guide/): A guide to BPC-157 research, covering what it is, how it is studied and its research applications.
+- [GLP-1 Peptides: Key Differences Explained](https://peptidux.example/blog/glp-1-peptide-differences/): A comparison of GLP-1 receptor agonists used in research, including semaglutide, tirzepatide and retatrutide.
+- [HGH Research Guide](https://peptidux.example/blog/hgh-research-guide/): A guide to human growth hormone research, covering its role, applications and related peptides.
+- [How to Verify Peptide Purity and Certificates of Analysis](https://peptidux.example/blog/how-to-verify-peptide-purity/): A practical guide to reading certificates of analysis and verifying the purity of research peptides.
+- [Peptide Reconstitution Guide](https://peptidux.example/blog/peptide-reconstitution-guide/): A step-by-step guide to reconstituting lyophilized research peptides correctly for laboratory use.
+- [The State of Peptide Research in 2026](https://peptidux.example/blog/peptide-research-2026/): An overview of the current landscape of peptide research in 2026, covering key classes and emerging areas of study.
+- [How to Store Research Peptides Correctly](https://peptidux.example/blog/peptide-storage-guide/): A guide to storing lyophilized and reconstituted research peptides to preserve quality and stability.
+- [A Safe Guide to Buying Research Peptides](https://peptidux.example/blog/safe-peptide-buying-guide/): How to buy research peptides safely and responsibly, covering quality, purity and supplier verification.
+- [Semaglutide vs Tirzepatide: A Research Comparison](https://peptidux.example/blog/semaglutide-vs-tirzepatide/): A comparison of semaglutide and tirzepatide for research, covering their receptor profiles and applications.
+- [What Is a Peptide? A Research Primer](https://peptidux.example/blog/what-is-a-peptide/): An introduction to peptides, their structure and how they are used in laboratory research.
 
 ## Guides
 
-- [Peptide Purity Guide](https://peptidelab.example/peptide-purity-guide/): How purity is measured by HPLC and how to read a certificate of analysis.
-- [Peptide Reconstitution Guide](https://peptidelab.example/peptide-reconstitution-guide/): Step-by-step reconstitution protocol for lyophilized peptides.
-- [How to Store Peptides](https://peptidelab.example/how-to-store-peptides/): Correct storage of lyophilized and reconstituted research peptides.
+- [Peptide Purity Guide](https://peptidux.example/peptide-purity-guide/): How purity is measured by HPLC and how to read a certificate of analysis.
+- [Peptide Reconstitution Guide](https://peptidux.example/peptide-reconstitution-guide/): Step-by-step reconstitution protocol for lyophilized peptides.
+- [How to Store Peptides](https://peptidux.example/how-to-store-peptides/): Correct storage of lyophilized and reconstituted research peptides.
 
 ## Key Facts
 
@@ -219,13 +219,13 @@
 
 ## Contact
 
-- Website: https://peptidelab.example
+- Website: https://peptidux.example
 - Email: support@peptidux.com
-- About: https://peptidelab.example/about/
+- About: https://peptidux.example/about/
 
 ## Legal
 
-- [Disclaimer](https://peptidelab.example/disclaimer/): Research use only, no medical advice, 18+.
-- [Shipping](https://peptidelab.example/shipping/): Processing, delivery, tracking and reshipment.
-- [Privacy](https://peptidelab.example/privacy/): Data collection, use and rights.
-- [Terms](https://peptidelab.example/terms/): Terms of service.
+- [Disclaimer](https://peptidux.example/disclaimer/): Research use only, no medical advice, 18+.
+- [Shipping](https://peptidux.example/shipping/): Processing, delivery, tracking and reshipment.
+- [Privacy](https://peptidux.example/privacy/): Data collection, use and rights.
+- [Terms](https://peptidux.example/terms/): Terms of service.
