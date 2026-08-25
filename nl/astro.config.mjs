@@ -15,7 +15,7 @@ function isAdmin(path) {
 }
 
 export default defineConfig({
-  site: 'https://peptidux.example',
+  site: 'https://nl.peptidux.com',
 
   output: 'server',
 
