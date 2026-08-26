@@ -79,3 +79,37 @@ export function verifyPayment(id: string) {
 export function listOrders(): Order[] {
   return db.prepare('SELECT * FROM orders ORDER BY created_at DESC').all() as Order[];
 }
+
+// ---- Funnel events (add_to_cart, begin_checkout, order_placed, tx_submitted) ----
+export interface TrackEvent {
+  id: number;
+  name: string;
+  path: string;
+  meta: string;
+  created_at: string;
+}
+
+db.exec(`
+  CREATE TABLE IF NOT EXISTS events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    path TEXT,
+    meta TEXT,
+    created_at TEXT
+  );
+`);
+
+export function trackEvent(name: string, path: string, meta: string = '') {
+  db.prepare('INSERT INTO events (name, path, meta, created_at) VALUES (?, ?, ?, ?)')
+    .run(name, path, meta, new Date().toISOString());
+}
+
+export function getEventCounts(days: number = 30): Record<string, number> {
+  const cutoff = new Date(Date.now() - days * 86400_000).toISOString();
+  const rows = db.prepare(
+    "SELECT name, COUNT(*) AS c FROM events WHERE created_at >= ? GROUP BY name"
+  ).all(cutoff) as { name: string; c: number }[];
+  const out: Record<string, number> = {};
+  for (const r of rows) out[r.name] = r.c;
+  return out;
+}

@@ -2,7 +2,7 @@
 export const prerender = false;
 import Layout from '../../layouts/Layout.astro';
 import { isAdmin } from '../../lib/auth';
-import { listOrders } from '../../lib/db';
+import { listOrders, getEventCounts } from '../../lib/db';
 
 const authed = isAdmin(Astro.cookies.get('admin_session')?.value);
 const orders = authed ? listOrders() : [];
@@ -12,6 +12,16 @@ const totalRevenue = orders.filter((o) => o.status === 'paid' || o.status === 's
 const pendingCount = orders.filter((o) => o.status === 'pending' || o.status === 'awaiting_verification').length;
 const paidCount = orders.filter((o) => o.status === 'paid').length;
 const shippedCount = orders.filter((o) => o.status === 'shipped').length;
+const events = authed ? getEventCounts(30) : {};
+
+// Funnel (30 days)
+const addToCart = events['add_to_cart'] ?? 0;
+const viewCart = events['view_cart'] ?? 0;
+const beginCheckout = events['begin_checkout'] ?? 0;
+const placedCount = orders.length;
+const txSubmitted = events['tx_submitted'] ?? 0;
+const cartToCheckoutPct = addToCart > 0 ? ((beginCheckout / addToCart) * 100).toFixed(1) : '0.0';
+const checkoutToPaidPct = beginCheckout > 0 ? ((paidCount / beginCheckout) * 100).toFixed(1) : '0.0';
 
 // Parse items for display
 const parsedOrders = orders.map((o) => ({
@@ -72,7 +82,44 @@ const statusClass = (s: string) =>
           </div>
         </div>
 
-        <div class="mt-8 flex items-center justify-between">
+        <!-- Funnel dashboard -->
+                <div class="mt-8 rounded-[12px] border border-lab-rule bg-lab-panel p-5">
+                  <h2 class="font-display text-lg text-lab-heading">Conversion funnel (last 30 days)</h2>
+                  <p class="mt-1 text-xs text-lab-faint">Views + add-to-cart come from /api/track; orders from the SQLite store.</p>
+                  <div class="mt-4 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">Add to cart</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-heading">{addToCart}</strong>
+                    </div>
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">View cart</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-heading">{viewCart}</strong>
+                    </div>
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">Begin checkout</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-warning">{beginCheckout}</strong>
+                    </div>
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">Orders placed</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-heading">{placedCount}</strong>
+                    </div>
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">Tx submitted</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-heading">{txSubmitted}</strong>
+                    </div>
+                    <div>
+                      <span class="text-xs uppercase tracking-wide text-lab-faint">Paid</span>
+                      <strong class="mt-1 block font-mono text-2xl text-lab-cyan">{paidCount}</strong>
+                    </div>
+                  </div>
+                  <div class="mt-4 flex flex-wrap gap-6 text-sm">
+                    <span class="text-lab-muted">Cart → Checkout: <strong class="font-mono text-lab-text">{cartToCheckoutPct}%</strong></span>
+                    <span class="text-lab-muted">Checkout → Paid: <strong class="font-mono text-lab-text">{checkoutToPaidPct}%</strong></span>
+                    <span class="text-lab-muted">Overall: <strong class="font-mono text-lab-text">{addToCart > 0 ? ((paidCount / addToCart) * 100).toFixed(1) : '0.0'}%</strong></span>
+                  </div>
+                </div>
+
+                <div class="mt-8 flex items-center justify-between">
           <p class="text-lab-muted">{orders.length} bestelling(en)</p>
           <a href="/api/admin/logout" class="text-sm text-lab-faint hover:text-lab-cyan">Uitloggen</a>
         </div>

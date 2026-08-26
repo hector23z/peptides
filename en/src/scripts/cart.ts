@@ -28,6 +28,7 @@ export function addToCart(item: Omit<CartItem, 'qty'>) {
   if (existing) existing.qty += 1;
   else cart.push({ ...item, qty: 1 });
   saveCart(cart, true);
+  track('add_to_cart', `${item.slug}|${item.price}`);
   return cart;
 }
 

@@ -98,8 +98,9 @@ import Layout from '../../layouts/Layout.astro';
   </section>
 
   <script>
-    import { getCart, cartTotal, clearCart } from '../../scripts/cart';
-    import qrcode from 'qrcode-generator';
+      import { getCart, cartTotal, clearCart } from '../../scripts/cart';
+      import { track } from '../../scripts/track';
+      import qrcode from 'qrcode-generator';
 
     const root = document.getElementById('checkout-root');
     const empty = document.getElementById('checkout-empty');
@@ -118,13 +119,14 @@ import Layout from '../../layouts/Layout.astro';
     function money(n: number) { return '$' + n.toFixed(2); }
 
     function render() {
-      const cart = getCart();
-      if (cart.length === 0) {
-        root?.classList.add('hidden');
-        empty?.classList.remove('hidden');
-        return;
-      }
-      root?.classList.remove('hidden');
+          const cart = getCart();
+          if (cart.length === 0) {
+            root?.classList.add('hidden');
+            empty?.classList.remove('hidden');
+            return;
+          }
+          track('begin_checkout', cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2));
+          root?.classList.remove('hidden');
       empty?.classList.add('hidden');
       itemsEl!.innerHTML = cart.map((i) => `
         <div class="flex justify-between gap-4">
@@ -162,7 +164,8 @@ import Layout from '../../layouts/Layout.astro';
           return;
         }
         clearCart();
-        currentOrderId = data.orderId;
+                currentOrderId = data.orderId;
+                track('order_placed', `${data.orderId}|${data.payment.method}|${data.payment.amountUsd}`);
         // Hide form, show payment panel
         root?.classList.add('hidden');
         paymentPanel?.classList.remove('hidden');
@@ -215,7 +218,8 @@ import Layout from '../../layouts/Layout.astro';
           return;
         }
         txSuccess?.classList.remove('hidden');
-        txForm.querySelector('button')!.setAttribute('disabled', 'true');
+                txForm.querySelector('button')!.setAttribute('disabled', 'true');
+                track('tx_submitted', currentOrderId);
       } catch (err) {
         txError!.textContent = 'Network error. Please try again.';
         txError?.classList.remove('hidden');

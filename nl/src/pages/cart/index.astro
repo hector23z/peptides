@@ -41,11 +41,13 @@ import Layout from '../../layouts/Layout.astro';
 
   <script>
     import { getCart, updateQty, removeItem, clearCart, cartTotal } from '../../scripts/cart';
+    import { track } from '../../scripts/track';
 
     const root = document.getElementById('cart-root');
     const empty = document.getElementById('cart-empty');
     const body = document.getElementById('cart-body');
     const totalEl = document.getElementById('cart-total');
+    track('view_cart');
 
     function money(n: number) {
       return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(n);

@@ -99,6 +99,7 @@ import Layout from '../../layouts/Layout.astro';
 
   <script>
     import { getCart, cartTotal, clearCart } from '../../scripts/cart';
+    import { track } from '../../scripts/track';
     import qrcode from 'qrcode-generator';
 
     const root = document.getElementById('checkout-root');
@@ -126,6 +127,7 @@ import Layout from '../../layouts/Layout.astro';
         empty?.classList.remove('hidden');
         return;
       }
+      track('begin_checkout', cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2));
       root?.classList.remove('hidden');
       empty?.classList.add('hidden');
       itemsEl!.innerHTML = cart.map((i) => `
@@ -165,6 +167,7 @@ import Layout from '../../layouts/Layout.astro';
         }
         clearCart();
         currentOrderId = data.orderId;
+        track('order_placed', `${data.orderId}|${data.payment.method}|${data.payment.amountUsd}`);
         // Formulier verbergen, betaalpaneel tonen
         root?.classList.add('hidden');
         paymentPanel?.classList.remove('hidden');
@@ -218,6 +221,7 @@ import Layout from '../../layouts/Layout.astro';
         }
         txSuccess?.classList.remove('hidden');
         txForm.querySelector('button')!.setAttribute('disabled', 'true');
+        track('tx_submitted', currentOrderId);
       } catch (err) {
         txError!.textContent = 'Netwerkfout. Probeer het opnieuw.';
         txError?.classList.remove('hidden');
